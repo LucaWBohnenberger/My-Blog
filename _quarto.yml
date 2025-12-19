@@ -1,0 +1,29 @@
+project:
+  type: website
+
+website:
+  title: "Meus Estudos"
+  navbar:
+    right:
+      - about.qmd
+      - icon: github
+        href: https://github.com/
+      - icon: twitter
+        href: https://twitter.com
+
+
+format:
+  html:
+    theme: 
+      dark: darkly
+      light: default            
+
+  
+  pdf:
+    documentclass: scrreprt      # "report" ou "scrbook" são ótimos para livros
+    papersize: a4
+    toc: true                    # Gera sumário no PDF
+    number-sections: true        # Numera seções (1.1, 1.2)
+    colorlinks: true             # Links coloridos clicáveis
+    code-line-numbers: true      # Números de linha no código
+

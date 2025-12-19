@@ -1,0 +1,73 @@
+# =========================
+# Quarto
+# =========================
+.quarto/
+_site/
+_freeze/
+*.html
+*.pdf
+*.docx
+*.pptx
+
+# Cache e execução
+.cache/
+*_cache/
+*_files/
+
+# =========================
+# R / RStudio
+# =========================
+.Rhistory
+.RData
+.Ruserdata
+.Rproj.user/
+*.Rproj
+
+# Pacotes e bibliotecas locais
+renv/library/
+renv/staging/
+renv/activate.R
+
+# =========================
+# Python (caso use Python no Quarto)
+# =========================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.env
+.venv
+venv/
+ENV/
+
+# =========================
+# Jupyter
+# =========================
+.ipynb_checkpoints/
+
+# =========================
+# Logs e temporários
+# =========================
+*.log
+*.tmp
+*.bak
+*.swp
+
+# =========================
+# Sistema Operacional
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# Editor / IDE
+# =========================
+.vscode/
+.idea/
+
+# =========================
+# Dados sensíveis (opcional)
+# =========================
+*.key
+*.pem
+*.secret

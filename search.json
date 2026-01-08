@@ -1,0 +1,65 @@
+[
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this blog"
+  },
+  {
+    "objectID": "posts/post-with-code/index.html",
+    "href": "posts/post-with-code/index.html",
+    "title": "Ex1",
+    "section": "",
+    "text": "This is a post with executable code."
+  },
+  {
+    "objectID": "posts/welcome/index.html",
+    "href": "posts/welcome/index.html",
+    "title": "Ex2",
+    "section": "",
+    "text": "This is the first post in a Quarto blog. Welcome!\n\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts."
+  },
+  {
+    "objectID": "posts/nn-from-scratch-1/index.html",
+    "href": "posts/nn-from-scratch-1/index.html",
+    "title": "Building Neural Networks from Scratch",
+    "section": "",
+    "text": "The objective from this page to undestand how to implement a neural network from scratch without any external libraries. The main reason for this is just to make more compreensible the black box of Neural Networks. So, to this project, the main resource (but not the unique) are the series of videos from Andrej Karpathy. In this first part, I will cover how to implement AutoGrad for do backpropagation. At the end of this post, yo will cable of create MLPs without any external library."
+  },
+  {
+    "objectID": "posts/nn-from-scratch-1/index.html#brief-summary",
+    "href": "posts/nn-from-scratch-1/index.html#brief-summary",
+    "title": "Building Neural Networks from Scratch",
+    "section": "",
+    "text": "The objective from this page to undestand how to implement a neural network from scratch without any external libraries. The main reason for this is just to make more compreensible the black box of Neural Networks. So, to this project, the main resource (but not the unique) are the series of videos from Andrej Karpathy. In this first part, I will cover how to implement AutoGrad for do backpropagation. At the end of this post, yo will cable of create MLPs without any external library."
+  },
+  {
+    "objectID": "posts/machine-unlearning/index.html",
+    "href": "posts/machine-unlearning/index.html",
+    "title": "O Básico de Machine Unlearning em LLMs",
+    "section": "",
+    "text": "Machine Unlearning consiste an tecnica de tentar fazer modelos desaprenderem algo, seja um conhecimento especifico, uma lógica, ou uma habilidade inteira, esse post será especifico sobre bases de machine unlearning em LLMs\nDe maneira geral, ao tentar fazer uma llm esquecer de algo, passamos por um processo de fine tuning utilizando um uma loss especifica para isso junto com dois datasets.\nA formula abaixo mostra como se calcula a Loss para um problema de MU (Machine Unlearning) \\[\n\\min_{\\theta} \\underbrace{\\mathbb{E}_{(x, y_f) \\in D_f} [\\ell(y_f | x; \\theta)]}_{\\text{Forget}} + \\lambda \\underbrace{\\mathbb{E}_{(x, y) \\in D_r} [\\ell(y | x; \\theta)]}_{\\text{Retain}}\n\\]\nVamos dissecar essa formula para não restar duvidas, a primeira parte, “Forget”, é a função que loss que penaliza o modelo por ele dar a resposta original (ou qualquer uma que não seja a desejada) dado o input \\(x\\) e os pesos \\(\\theta\\), isso é o que faz o Unlearning, note que ele usa o dataset \\(D_f\\), que consiste em inputs e outputs desejaveis pós-unlearning, ou seja, se eu quiser apagar o conhecimento do harry potter, a saida desejavel para a pergunta “Como Harry Potter encontrou a pedra filosofal no primeiro livro?” deve ser algo como “Não posso falar sobre isso”, ou então “Não sei”.\nA segunda parte, “Retain”, serve para que não ocorra um esquecimento generalizado do modelo (como por exemplo ele desaprender portugues), aqui usamos o dataset \\(D_r\\), que tambem consiste em input output, porem aqui o output é a saida original do modelo, \\(\\lambda\\) é um hiperparametro que regula o quanto o modelo deve priorizar manter o valor original dos pesos, ou seja, \\(\\lambda\\) baixo, modelo pode esquecer de mais, \\(\\lambda\\) alto, modelo pode não esquecer o suficente.\nO \\(E\\) significa esperança (a média), no caso não usamos os resultados singulares de cada linha do dataset, e sim a média da loss deles.\n\\(\\min_{\\theta}\\) é simplesmente a notação que expressa que queremos minimizar isso modificando \\(\\theta\\), em si não quer dizer nada matematicamente, isso é expresso subtraindo a loss dos valores dos pesos."
+  },
+  {
+    "objectID": "posts/machine-unlearning/index.html#ideia-geral",
+    "href": "posts/machine-unlearning/index.html#ideia-geral",
+    "title": "O Básico de Machine Unlearning em LLMs",
+    "section": "",
+    "text": "Machine Unlearning consiste an tecnica de tentar fazer modelos desaprenderem algo, seja um conhecimento especifico, uma lógica, ou uma habilidade inteira, esse post será especifico sobre bases de machine unlearning em LLMs\nDe maneira geral, ao tentar fazer uma llm esquecer de algo, passamos por um processo de fine tuning utilizando um uma loss especifica para isso junto com dois datasets.\nA formula abaixo mostra como se calcula a Loss para um problema de MU (Machine Unlearning) \\[\n\\min_{\\theta} \\underbrace{\\mathbb{E}_{(x, y_f) \\in D_f} [\\ell(y_f | x; \\theta)]}_{\\text{Forget}} + \\lambda \\underbrace{\\mathbb{E}_{(x, y) \\in D_r} [\\ell(y | x; \\theta)]}_{\\text{Retain}}\n\\]\nVamos dissecar essa formula para não restar duvidas, a primeira parte, “Forget”, é a função que loss que penaliza o modelo por ele dar a resposta original (ou qualquer uma que não seja a desejada) dado o input \\(x\\) e os pesos \\(\\theta\\), isso é o que faz o Unlearning, note que ele usa o dataset \\(D_f\\), que consiste em inputs e outputs desejaveis pós-unlearning, ou seja, se eu quiser apagar o conhecimento do harry potter, a saida desejavel para a pergunta “Como Harry Potter encontrou a pedra filosofal no primeiro livro?” deve ser algo como “Não posso falar sobre isso”, ou então “Não sei”.\nA segunda parte, “Retain”, serve para que não ocorra um esquecimento generalizado do modelo (como por exemplo ele desaprender portugues), aqui usamos o dataset \\(D_r\\), que tambem consiste em input output, porem aqui o output é a saida original do modelo, \\(\\lambda\\) é um hiperparametro que regula o quanto o modelo deve priorizar manter o valor original dos pesos, ou seja, \\(\\lambda\\) baixo, modelo pode esquecer de mais, \\(\\lambda\\) alto, modelo pode não esquecer o suficente.\nO \\(E\\) significa esperança (a média), no caso não usamos os resultados singulares de cada linha do dataset, e sim a média da loss deles.\n\\(\\min_{\\theta}\\) é simplesmente a notação que expressa que queremos minimizar isso modificando \\(\\theta\\), em si não quer dizer nada matematicamente, isso é expresso subtraindo a loss dos valores dos pesos."
+  },
+  {
+    "objectID": "posts/machine-unlearning/index.html#otimizadores",
+    "href": "posts/machine-unlearning/index.html#otimizadores",
+    "title": "O Básico de Machine Unlearning em LLMs",
+    "section": "Otimizadores",
+    "text": "Otimizadores\nAparentemente otimizadoraes de segunda ordem que estimam a diagonal de uma hessiana (como a Sophia) funcionam melhor para unlearning do que otimizadores de primeira ordem (SGD, Adam, RMSprop etc)"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Estudos",
+    "section": "",
+    "text": "Building Neural Networks from Scratch\n\n\nPart 1\n\n\n\nscratch\n\n\nen\n\n\ncode\n\n\nmath\n\n\nnn\n\n\nbackpropagation\n\n\nautograd\n\n\ncalculos\n\n\n\n\n\n\n\n\n\nJan 8, 2026\n\n\nLuca WB\n\n\n\n\n\n\n\n\n\n\n\n\nO Básico de Machine Unlearning em LLMs\n\n\n\n\n\n\nunlearning\n\n\npt\n\n\ncode\n\n\nquantization\n\n\nmath\n\n\nllms\n\n\n\n\n\n\n\n\n\nDec 19, 2025\n\n\nLuca WB\n\n\n\n\n\n\n\n\n\n\n\n\nEx1\n\n\n\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\nDec 19, 2025\n\n\nHarlow Malloc\n\n\n\n\n\n\n\n\n\n\n\n\nEx2\n\n\n\n\n\n\n\n\n\n\n\nDec 16, 2025\n\n\nTristan O’Malley\n\n\n\n\n\n\nNo matching items"
+  }
+]

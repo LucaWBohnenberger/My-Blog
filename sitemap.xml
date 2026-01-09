@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://LucaWBohnenberger.github.io/my-blog/about.html</loc>
+    <loc>https://deeplynoted.net/about.html</loc>
     <lastmod>2026-01-09T16:41:59.916Z</lastmod>
   </url>
   <url>
-    <loc>https://LucaWBohnenberger.github.io/my-blog/posts/machine-unlearning/index.html</loc>
+    <loc>https://deeplynoted.net/posts/machine-unlearning/index.html</loc>
     <lastmod>2026-01-09T16:17:19.235Z</lastmod>
   </url>
   <url>
-    <loc>https://LucaWBohnenberger.github.io/my-blog/posts/nn-from-scratch-1/index.html</loc>
+    <loc>https://deeplynoted.net/posts/nn-from-scratch-1/index.html</loc>
     <lastmod>2026-01-09T16:16:36.919Z</lastmod>
   </url>
   <url>
-    <loc>https://LucaWBohnenberger.github.io/my-blog/index.html</loc>
+    <loc>https://deeplynoted.net/index.html</loc>
     <lastmod>2026-01-09T16:41:28.450Z</lastmod>
   </url>
 </urlset>

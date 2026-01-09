@@ -3,12 +3,12 @@ title: "O Básico de Machine Unlearning em LLMs"
 author: "Luca WB"
 date: "2025-12-19"         
 date-modified: last-modified 
-categories: [unlearning, code, quantization, math, llms]
+categories: [unlearning, pt, code, quantization, math, llms]
 ---
 
 ## Ideia Geral
 
-Machine Unlearning consiste an tecnica de tentar fazer modelos desaprenderem algo, seja um conhecimento especifico, uma lógica, ou uma habilidade inteira, esse post será especifico sobre bases de machine unlearning em LLMs
+Machine Unlearning consiste na tecnica de tentar fazer modelos desaprenderem algo, seja um conhecimento especifico, uma lógica, ou uma habilidade inteira, esse post será especifico sobre bases de machine unlearning em LLMs
 
 De maneira geral, ao tentar fazer uma llm esquecer de algo, passamos por um processo de fine tuning utilizando um uma loss especifica para isso junto com dois datasets.
 

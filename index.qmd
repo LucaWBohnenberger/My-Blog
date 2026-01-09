@@ -1,5 +1,5 @@
 ---
-title: "Estudos"
+title: "My Studies Notes"
 author: "Luca WB"
 listing:
   contents: posts

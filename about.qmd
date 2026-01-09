@@ -1,19 +1,31 @@
 ---
-title: "About"
-image: profile.jpg
+title: "Luca Wolffenbuttel Bohnenberger"
+image: profile.jpeg
 about:
   template: jolla
   links:
-    - icon: twitter
-      text: Twitter
-      href: https://twitter.com
+    - icon: globe
+      text: Personal Website
+      href: https://lucawb.com
     - icon: linkedin
       text: LinkedIn
-      href: https://linkedin.com
+      href: https://www.linkedin.com/in/luca-wb
     - icon: github
       text: Github
-      href: https://github.com
+      href: https://github.com/LucaWBohnenberger
 
 ---
 
-About this blog
+## Welcome to my Digital Notebook
+
+I am a **Data Science and Artificial Intelligence** student at PUCRS and a researcher at **NAIA**, where I focus on **Applied Research in Large Language Models (LLMs)**. 
+
+### Why this blog?
+
+This space serves as a **repository for my studies and technical reflections**. My main goal is to document my learning journey in a **didactic way**, transforming dense academic notes into clear, structured, and accessible content. 
+
+Whether you are a fellow student or a researcher, I hope my notes can help demystify the "black box" of AI for you as they do for me.
+
+---
+
+*“What I cannot create, I do not understand.” – Richard Feynman*

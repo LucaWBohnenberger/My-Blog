@@ -9,7 +9,7 @@
 <meta name="author" content="Luca WB">
 <meta name="dcterms.date" content="2025-12-19">
 
-<title>O Básico de Machine Unlearning em LLMs – Meus Estudos</title>
+<title>O Básico de Machine Unlearning em LLMs – My Studies</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -111,7 +111,7 @@ window.Quarto = {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
-    <span class="navbar-title">Meus Estudos</span>
+    <span class="navbar-title">My Studies</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -122,7 +122,7 @@ window.Quarto = {
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
     <a class="nav-link" href="../../about.html"> 
-<span class="menu-text">About</span></a>
+<span class="menu-text">Luca Bohnenberger</span></a>
   </li>  
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/LucaWBohnenberger/my-blog"> <i class="bi bi-github" role="img">
@@ -173,7 +173,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Modified</div>
       <div class="quarto-title-meta-contents">
-        <p class="date-modified">January 8, 2026</p>
+        <p class="date-modified">January 9, 2026</p>
       </div>
     </div>
       
@@ -195,7 +195,7 @@ window.Quarto = {
 
 <section id="ideia-geral" class="level2">
 <h2 class="anchored" data-anchor-id="ideia-geral">Ideia Geral</h2>
-<p>Machine Unlearning consiste an tecnica de tentar fazer modelos desaprenderem algo, seja um conhecimento especifico, uma lógica, ou uma habilidade inteira, esse post será especifico sobre bases de machine unlearning em LLMs</p>
+<p>Machine Unlearning consiste na tecnica de tentar fazer modelos desaprenderem algo, seja um conhecimento especifico, uma lógica, ou uma habilidade inteira, esse post será especifico sobre bases de machine unlearning em LLMs</p>
 <p>De maneira geral, ao tentar fazer uma llm esquecer de algo, passamos por um processo de fine tuning utilizando um uma loss especifica para isso junto com dois datasets.</p>
 <p>A formula abaixo mostra como se calcula a Loss para um problema de MU (Machine Unlearning) <span class="math display">\[
 \min_{\theta} \underbrace{\mathbb{E}_{(x, y_f) \in D_f} [\ell(y_f | x; \theta)]}_{\text{Forget}} + \lambda \underbrace{\mathbb{E}_{(x, y) \in D_r} [\ell(y | x; \theta)]}_{\text{Retain}}
@@ -449,7 +449,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
+      var filterRegex = new RegExp("https:\/\/LucaWBohnenberger\.github\.io\/my-blog\/");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }

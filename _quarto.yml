@@ -1,8 +1,12 @@
 project:
   type: website
+  resources:
+    - CNAME
+  
 
 website:
   title: "My Studies"
+  site-url: https://deeplynoted.net
   navbar:
     right:
       - about.qmd

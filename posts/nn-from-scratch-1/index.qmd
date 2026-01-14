@@ -18,7 +18,7 @@ without any external library.
 ## Basic knowledge of derivative
 
 So, from the start, to make sense at how an NN train and learn something, you first need a very good understanding around the meaning of derivative operations.
-A derivative is an operation that gives us a formula that describes the slope of a function as it modifies a variable, but for out prupose, we will only work with functions that generate linear derivatives. Thus, for the function $ f(x) = 3x^2 - 4x + 5 $, see the graph below.
+A derivative is an operation that gives us a formula that describes the slope of a function as it modifies a variable, but for out prupose, we will only work with functions that generate linear derivatives. Thus, for the function $f(x) = 3x^2 - 4x + 5$, see the graph below.
 ```{python}
 #| code-fold: true
 #| code-summary: "Show Python code"
@@ -563,7 +563,7 @@ class Value:
 
     def backward(self):
         self.grad = 1
-        # Montar ordem topologica
+        # create a topological order
         topo = []
         visited = set()
         def build_topo(v):
@@ -602,6 +602,205 @@ print(f"Grad of b: {b.grad}") # Should be -4.0 (a.data * e.grad -> 2 * -2)
 print(f"Grad of a: {a.grad}") # Should be 6.0 (b.data * e.grad -> -3 * -2)
 ```
 
-It´s worked perfectly again, know we already have a functional AutoGrad system, know, it´s just need to add more operations and we will be capable of create our propely framework of Deep Learning using our own AutoGrad.
+It´s worked perfectly again, know we already have a functional AutoGrad system, know, it´s just need to add more operations and we will be capable of create our propely framework of Deep Learning using our own AutoGrad. Before going to the next part, see the code bellow, its the same that we create together, but
+with some little changes, try to figure out what they're for (Hint, they're important for the next part)
+``` {python}
+class Value:
+    def __init__(self, data, _children=(), _op="", label=""):
+        self.data = data
+        self.grad = 0
+        self._backward = lambda: None 
+        self._prev = set(_children) 
+        self._op = _op
+        self.label = label 
+
+    def __mul__(self, other):
+        other = other if isinstance(other, Value) else Value(other)
+        out =  Value(self.data * other.data, (self,other), '+')
+        
+        def _backward():
+            self.grad += other.data * out.grad 
+            other.grad += self.data * out.grad
+
+        out._backward = _backward
+
+        return out
+
+    def __repr__(self):
+        return f"Value(data={self.data})"
+
+
+    def __add__(self, other):
+        other = other if isinstance(other, Value) else Value(other)
+        out =  Value(self.data + other.data, (self,other), '+')
+        def _backward():
+            self.grad += out.grad 
+            other.grad += out.grad
+
+        out._backward = _backward
+
+        return out
+
+    def backward(self):
+        self.grad = 1
+        # create a topological order
+        topo = []
+        visited = set()
+        def build_topo(v):
+            if v not in visited:
+                visited.add(v)
+                for child in v._prev:
+                    build_topo(child)
+                topo.append(v)
+        build_topo(self)
+
+        for node in reversed(topo):
+            node._backward()
+``` 
 
 ## Lets make our Deep Learning framework
+### Building a Neuron
+
+So, for now, we have already created our own engine to calculate our gradients. Thus, lets start making a simple artificial neuron. If you don't know or don't remember how a neuron work, basically it receives inputs, multiply each one by some weight, sum all values, and last, pass this value in a non-linear function
+
+![An Artificial Neuron](art_neuron.png){#fig-neuron width=70%}
+
+To start, we can make a simple class for our neuron:
+```{python}
+import random
+class Neuron:
+    def __init__(self, input_num):
+        self.w = [Value(random.uniform(-1,1)) for _ in range(input_num)] # This basicaly creates a list of Value's from a uniform distribuition with lenth equals to input_num
+        self.b = Value(random.uniform(-1,1)) # This is for the bias, explain deeply the importance of this is out of scope, but you can think bias its just a special weight that dosnt multiply the inputs, just sum in the sum part.
+
+    # Call is a special function in python, its like __add__, the sintax for use this is when you just put () after the object, like range(x)
+    def __call__(self,x):
+        act = sum((wi*xi for wi,xi in zip(self.w, x)), self.b) # This just do the calculation of a neuron until the sum part
+        out = act.tahn() # This calls a non-linear function from the Value class, I will show how to implement bellow
+        return out
+    
+    def paramerters(self):
+        return self.w + [self.b] # this function just return all the parameters of our neuron
+```
+
+And, its just it, a completely and functional artificial neuron, or at least after we implement the tahn (tangent hyperbolic) function. It's formula is:
+$$
+\tanh(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}}
+$$  
+
+Note that there is 3 operations that we dont implement to make this, so, lets implement them. For know, I presume that you understand how to implement this, so, try your self, you can search in google for this, just dont use an llm.
+
+```{python}
+#| code-fold: true
+#| code-summary: "Show solution:"
+import math
+# Its not really necessery to add exp, subtraction or divided, but its good with you do 😊
+def tahn(self):
+    x = self.data
+    t = (math.exp(x) - math.exp(-x))/ (math.exp(x) + math.exp(-x))
+    out = Value(t, (self,), "tahn")
+
+    # We can derivate, or just pick up on google
+    def _backwards():
+        self.grad = (1 - t**2) * out.grad
+    
+    out._backward = _backward
+    return out
+```
+
+
+```{python}
+#| echo: False
+
+class Value:
+    def __init__(self, data, _children=(), _op="", label=""):
+        self.data = data
+        self.grad = 0
+        self._backward = lambda: None # Add this new parameter too save the func
+        self._prev = set(_children) 
+        self._op = _op
+        self.label = label 
+
+    def __mul__(self, other):
+        other = other if isinstance(other, Value) else Value(other)
+        out =  Value(self.data * other.data, (self,other), '+')
+        
+        def _backward():
+            self.grad += other.data * out.grad 
+            other.grad += self.data * out.grad
+
+        out._backward = _backward
+
+        return out
+
+    import math
+    def tahn(self):
+        x = self.data
+        t = (math.exp(x) - math.exp(-x))/ (math.exp(x) + math.exp(-x))
+        out = Value(t, (self,), "tahn")
+
+        # We can derivate, or just pick up on google
+        def _backward():
+            self.grad = (1 - t**2) * out.grad
+
+        out._backward = _backward
+        return out
+
+    # This is just for us visualize our class
+    def __repr__(self):
+        return f"Value(data={self.data})"
+
+
+    def __add__(self, other):
+        other = other if isinstance(other, Value) else Value(other)
+        # We just add the data, and return a Value object with new data, and with pointes for the two number that make the out number
+        out =  Value(self.data + other.data, (self,other), '+')
+        def _backward():
+            self.grad += out.grad 
+            other.grad += out.grad
+
+        out._backward = _backward
+
+        return out
+
+    def backward(self):
+        self.grad = 1
+        # create a topological order
+        topo = []
+        visited = set()
+        def build_topo(v):
+            if v not in visited:
+                visited.add(v)
+                for child in v._prev:
+                    build_topo(child)
+                topo.append(v)
+        build_topo(self)
+
+        for node in reversed(topo):
+            node._backward()
+
+``` 
+
+
+Know, lets test if this are working
+```{python}
+x = Value(10)
+
+y = x.tahn()
+y.backward()
+y.data, y.grad, x.data, x.grad
+```
+
+Works preety well. Let's try the neuron
+
+```{python}
+n = Neuron(2)
+x = [2, 3, 4]
+out = n(x)
+print(out, n.paramerters())
+```
+
+
+Works, lets move on. 
+
+### Building a Layer

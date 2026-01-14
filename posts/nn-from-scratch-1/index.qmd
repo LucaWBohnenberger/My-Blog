@@ -9,16 +9,16 @@ categories: [scratch, en, code, math, nn]
 
 ## Brief summary
 
-The objective from this page to undestand how to implement a neural network from scratch without any external libraries, this page consider that you already have some 
-knwlodge of Artificial Neural Networks. The main reason for this is just to make 
-more compreensible the black box of Neural Networks. So, to this project, the main resource (but not the unique) are the series of videos from [Andrej Karpathy](https://www.youtube.com/@AndrejKarpathy). In this first part, I will cover how to implement AutoGrad for do backpropagation. At the end of this post, yo will cable of create MLPs 
+The objective from this page to understand how to implement a neural network from scratch without any external libraries, this page consider that you already have some 
+knowledge of Artificial Neural Networks. The main reason for this is just to make 
+more understandable the black box of Neural Networks. So, to this project, the main resource (but not the unique) are the series of videos from [Andrej Karpathy](https://www.youtube.com/@AndrejKarpathy). In this first part, I will cover how to implement AutoGrad for do backpropagation. At the end of this post, yo will cable of create MLPs 
 without any external library.
 
 
 ## Basic knowledge of derivative
 
 So, from the start, to make sense at how an NN train and learn something, you first need a very good understanding around the meaning of derivative operations.
-A derivative is an operation that gives us a formula that describes the slope of a function as it modifies a variable, but for out prupose, we will only work with functions that generate linear derivatives. Thus, for the function $f(x) = 3x^2 - 4x + 5$, see the graph below.
+A derivative is an operation that gives us a formula that describes the slope of a function as it modifies a variable, but for out propose, we will only work with functions that generate linear derivatives. Thus, for the function $f(x) = 3x^2 - 4x + 5$, see the graph below.
 ```{python}
 #| code-fold: true
 #| code-summary: "Show Python code"
@@ -79,8 +79,8 @@ plt.grid(True)
 plt.show()
 ```
 
-The basic idea is that with we want to minimize the value of a function (main objective in deep learning), we just need to see the value of a derivative in some point A, that give us all the information we need to go to the minimum spot. Just do some numerical exemple, in the graph above, note that the minimum spot is in som evalue around 0 and 2, more close to 0 (precisaly 2/3), so, just pick some rondom number, like -2, the value of $f(x)$ with -2 is 25, and the derivative is -16. The number -16 represent 
-the rate at which the function varies for each increase in the value of x at that point in specific. So, with we increse the value of X a little bit, we can lower the value
+The basic idea is that with we want to minimize the value of a function (main objective in deep learning), we just need to see the value of a derivative in some point A, that give us all the information we need to go to the minimum spot. Just do some numerical example, in the graph above, note that the minimum spot is in some value around 0 and 2, more close to 0 (precisely 2/3), so, just pick some random number, like -2, the value of $f(x)$ with -2 is 25, and the derivative is -16. The number -16 represent 
+the rate at which the function varies for each increase in the value of x at that point in specific. So, with we increase the value of X a little bit, we can lower the value
 of X, so probably, the $f(-1.999)$ give us a lower value than $f(-2)$
 ```{python}
 def f(x):
@@ -95,10 +95,10 @@ This is the general idea of how we can minimize some function, that is also the 
 
 ## How to estimate gradients
 
-In general, to make an framework for working with nn, its just an AutoGrad (a tool that can do diferatiation automatically) and some fancy stuff for make more pratical.
+In general, to make an framework for working with nn, its just an AutoGrad (a tool that can do differentiation automatically) and some fancy stuff for make more practical.
 
-For start, lets make things the most simple for now. Our goal its make an class that can calc for us all the gradietns (its the same as an derivative) from the function
-$L = -2 \cdot \big((2 \cdot 3) + 10\big)$. But we dont are confortable derivate something with just numbers, so lets consider in this way the function:
+For start, lets make things the most simple for now. Our goal its make an class that can calc for us all the gradients (its the same as an derivative) from the function
+$L = -2 \cdot \big((2 \cdot 3) + 10\big)$. But we don't are comfortable derivate something with just numbers, so lets consider in this way the function:
 ```{python}
 a = 2
 b = -3.0
@@ -111,7 +111,7 @@ L
 ```
 
 Just to make clear, the knowledge that we want with this, is ow much changes in the final result, increase the values of any of the variables a little
-To get the gradients, we can use an aproximate that consists in adding a very small number $h$ is all of the values, than subtract the new with the original, and divide by the $h$. The code below shows how to do this with the variable $a$:
+To get the gradients, we can use an approximate that consists in adding a very small number $h$ is all of the values, than subtract the new with the original, and divide by the $h$. The code below shows how to do this with the variable $a$:
 ```{python}
 a = 2
 b = -3.0
@@ -141,7 +141,7 @@ We will not use this method to create our autograd, but we can use this to verif
 
 ## Lets making a simple AutoGrad
 
-The basic idea of the AutoGrad we will make is make some very simple nodes, that represent the number in our calculation and will track all the last two nodes that make him. Basically, in $L = -2 \cdot \big((2 \cdot 3) + 10\big)$, we will consider that a node can only save on number, like in the code represantation
+The basic idea of the AutoGrad we will make is make some very simple nodes, that represent the number in our calculation and will track all the last two nodes that make him. Basically, in $L = -2 \cdot \big((2 \cdot 3) + 10\big)$, we will consider that a node can only save on number, like in the code representation
 ```{python}
 a = 2
 b = -3.0
@@ -206,9 +206,8 @@ L = d * f; L.label="L"
 L
 ```
 
-This calculation moting the structure of a graph is known as pass forward
-Below, a just make an graph to visualize the operations (note that the operator is not an actual node, but for vizualize this is better), The question is, how we can get the gradients for $L$, $d$ and $f$?
-
+This calculation is known as pass forward
+Below, simply make a graph to visualize the operations (note that the operator is not a real node, but to visualize this it is better). The question is: how can we get the gradients for $L$, $d$ and $f$?
 ```{python}
 #|echo: False
 from graphviz import Digraph

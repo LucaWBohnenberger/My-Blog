@@ -1,0 +1,1434 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>opa – My Studies</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">My Studies</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./about.html"> 
+<span class="menu-text">Luca Wolffenbuttel Bohnenberger</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/LucaWBohnenberger/my-blog"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        
+    <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="opa.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+
+
+<div id="f0cc7877" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_diabetes</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Carrega os dados já separados em X (variáveis) e y (alvo)</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># scaled=False garante que venham os números reais (idade, pressão, etc)</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>X_numpy, y_numpy <span class="op">=</span> load_diabetes(return_X_y<span class="op">=</span><span class="va">True</span>, scaled<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Converte de Array do Numpy para Listas nativas do Python</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>dataset_X <span class="op">=</span> X_numpy.tolist()</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>dataset_y <span class="op">=</span> y_numpy.tolist()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="6b5c51a0" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Value:</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, data, _children<span class="op">=</span>(), _op<span class="op">=</span><span class="st">""</span>):</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.data <span class="op">=</span> data</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.grad <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._backward <span class="op">=</span> <span class="kw">lambda</span>: <span class="va">None</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._prev <span class="op">=</span> <span class="bu">set</span>(_children)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._op <span class="op">=</span> _op</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__repr__</span>(<span class="va">self</span>):</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="ss">f"Value(data=</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>data<span class="sc">}</span><span class="ss">)"</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__add__</span>(<span class="va">self</span>, other):</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>        other <span class="op">=</span> other <span class="cf">if</span> <span class="bu">isinstance</span>(other, Value) <span class="cf">else</span> Value(other)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>        out <span class="op">=</span>  Value(<span class="va">self</span>.data <span class="op">+</span> other.data, (<span class="va">self</span>,other), <span class="st">'+'</span>)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>        <span class="kw">def</span> _backward():</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.grad <span class="op">+=</span> <span class="fl">1.</span> <span class="op">*</span> out.grad</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>            other.grad <span class="op">+=</span> <span class="fl">1.</span> <span class="op">*</span> out.grad </span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>        out._backward <span class="op">=</span> _backward</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> out</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__radd__</span>(<span class="va">self</span>, other):</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span> <span class="op">+</span> other</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> exp(<span class="va">self</span>):</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> <span class="va">self</span>.data</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>        out <span class="op">=</span> Value(math.exp(x), (<span class="va">self</span>, ), <span class="st">"exp"</span>)</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>        <span class="kw">def</span> _backward():</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.grad <span class="op">+=</span> out.data <span class="op">*</span> out.grad</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>        out._backward <span class="op">=</span> _backward</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> out</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__rmul__</span>(<span class="va">self</span>, other):</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span> <span class="op">*</span> other</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__truediv__</span>(<span class="va">self</span>, other):</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span> <span class="op">*</span> other<span class="op">**-</span><span class="dv">1</span></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__pow__</span>(<span class="va">self</span>, other):</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>        <span class="cf">assert</span> <span class="bu">isinstance</span>(other, (<span class="bu">int</span>,<span class="bu">float</span>))</span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>        out <span class="op">=</span> Value(<span class="va">self</span>.data<span class="op">**</span>other, (<span class="va">self</span>,), (<span class="ss">f"**</span><span class="sc">{</span>other<span class="sc">}</span><span class="ss">"</span>))</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>        <span class="kw">def</span> _backward():</span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.grad <span class="op">+=</span> (other)<span class="op">*</span>(<span class="va">self</span>.data<span class="op">**</span>(other<span class="op">-</span><span class="dv">1</span>))<span class="op">*</span>out.grad</span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>        out._backward <span class="op">=</span> _backward</span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> out</span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__neg__</span>(<span class="va">self</span>):</span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span><span class="op">*-</span><span class="dv">1</span></span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__sub__</span>(<span class="va">self</span>, other):</span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span> <span class="op">+</span> (<span class="op">-</span>other)</span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__mul__</span>(<span class="va">self</span>, other):</span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>        other <span class="op">=</span> other <span class="cf">if</span> <span class="bu">isinstance</span>(other, Value) <span class="cf">else</span> Value(other)</span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>        out <span class="op">=</span> Value(<span class="va">self</span>.data <span class="op">*</span> other.data, (<span class="va">self</span>, other), <span class="st">"*"</span>)</span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>        <span class="kw">def</span> _backward():</span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.grad <span class="op">+=</span> other.data <span class="op">*</span> out.grad</span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>            other.grad <span class="op">+=</span> <span class="va">self</span>.data <span class="op">*</span> out.grad</span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>        out._backward <span class="op">=</span> _backward</span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> out</span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> tahn(<span class="va">self</span>):</span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>        n <span class="op">=</span> <span class="va">self</span>.data</span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>        t <span class="op">=</span> (math.exp(<span class="dv">2</span><span class="op">*</span>n)<span class="op">-</span><span class="dv">1</span>) <span class="op">/</span> (math.exp(<span class="dv">2</span><span class="op">*</span>n)<span class="op">+</span><span class="dv">1</span>)</span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a>        out <span class="op">=</span> Value(t, (<span class="va">self</span>, ), <span class="st">"tahn"</span>)</span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>        <span class="kw">def</span> _backward():</span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.grad <span class="op">+=</span> (<span class="dv">1</span> <span class="op">-</span> t<span class="op">**</span><span class="dv">2</span>) <span class="op">*</span> out.grad</span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a>        out._backward <span class="op">=</span> _backward</span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> out</span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> backward(<span class="va">self</span>):</span>
+<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.grad <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Montar ordem topologica</span></span>
+<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a>        topo <span class="op">=</span> []</span>
+<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a>        visited <span class="op">=</span> <span class="bu">set</span>()</span>
+<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a>        <span class="kw">def</span> build_topo(v):</span>
+<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> v <span class="kw">not</span> <span class="kw">in</span> visited:</span>
+<span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a>                visited.add(v)</span>
+<span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a>                <span class="cf">for</span> child <span class="kw">in</span> v._prev:</span>
+<span id="cb2-88"><a href="#cb2-88" aria-hidden="true" tabindex="-1"></a>                    build_topo(child)</span>
+<span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a>                topo.append(v)</span>
+<span id="cb2-90"><a href="#cb2-90" aria-hidden="true" tabindex="-1"></a>        build_topo(<span class="va">self</span>)</span>
+<span id="cb2-91"><a href="#cb2-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-92"><a href="#cb2-92" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> node <span class="kw">in</span> <span class="bu">reversed</span>(topo):</span>
+<span id="cb2-93"><a href="#cb2-93" aria-hidden="true" tabindex="-1"></a>            node._backward()</span>
+<span id="cb2-94"><a href="#cb2-94" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb2-95"><a href="#cb2-95" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb2-96"><a href="#cb2-96" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-97"><a href="#cb2-97" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> Value(<span class="fl">2.0</span>)</span>
+<span id="cb2-98"><a href="#cb2-98" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> Value(<span class="op">-</span><span class="fl">3.0</span>)</span>
+<span id="cb2-99"><a href="#cb2-99" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> Value(<span class="fl">10.</span>)</span>
+<span id="cb2-100"><a href="#cb2-100" aria-hidden="true" tabindex="-1"></a>e <span class="op">=</span> a<span class="op">*</span>b</span>
+<span id="cb2-101"><a href="#cb2-101" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> e <span class="op">+</span> c</span>
+<span id="cb2-102"><a href="#cb2-102" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> Value(<span class="op">-</span><span class="dv">2</span>)</span>
+<span id="cb2-103"><a href="#cb2-103" aria-hidden="true" tabindex="-1"></a>L <span class="op">=</span> d <span class="op">*</span> f</span>
+<span id="cb2-104"><a href="#cb2-104" aria-hidden="true" tabindex="-1"></a>L</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="2">
+<pre><code>Value(data=-8.0)</code></pre>
+</div>
+</div>
+<div id="02b2f278" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Neuron:</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, input_num):</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.w <span class="op">=</span> [Value(random.uniform(<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>)) <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(input_num)]</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.b <span class="op">=</span> Value(random.uniform(<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__call__</span>(<span class="va">self</span>,x):</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        act <span class="op">=</span> <span class="bu">sum</span>((wi<span class="op">*</span>xi <span class="cf">for</span> wi,xi <span class="kw">in</span> <span class="bu">zip</span>(<span class="va">self</span>.w, x)), <span class="va">self</span>.b)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        out <span class="op">=</span> act.tahn()</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> out</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> paramerters(<span class="va">self</span>):</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.w <span class="op">+</span> [<span class="va">self</span>.b]</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Layer:</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, input_num, output_num):</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.neurons <span class="op">=</span> [Neuron(input_num) <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(output_num)]</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__call__</span>(<span class="va">self</span>, x):</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>        outs <span class="op">=</span> [n(x) <span class="cf">for</span> n <span class="kw">in</span> <span class="va">self</span>.neurons]</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> outs[<span class="dv">0</span>] <span class="cf">if</span> <span class="bu">len</span>(outs)<span class="op">==</span><span class="dv">1</span> <span class="cf">else</span> outs</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> parameters(<span class="va">self</span>):</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>        out <span class="op">=</span> []</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> neuron <span class="kw">in</span> <span class="va">self</span>.neurons:</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>            out.extend(neuron.paramerters())</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> out</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MLP:</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, input_num, output_nums):</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>        sz <span class="op">=</span> [input_num] <span class="op">+</span> output_nums</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.layers <span class="op">=</span> [Layer(sz[i], sz[i<span class="op">+</span><span class="dv">1</span>]) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(output_nums))]</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__call__</span>(<span class="va">self</span>, x):</span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> layer <span class="kw">in</span> <span class="va">self</span>.layers:</span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>            x <span class="op">=</span> layer(x)</span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> x</span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> parameters(<span class="va">self</span>):</span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>        out <span class="op">=</span> []</span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> layer <span class="kw">in</span> <span class="va">self</span>.layers:</span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>            out.extend(layer.parameters())</span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> out</span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>        </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="476398cc" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>y_pred</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<pre><code>[Value(data=-0.8415627312965999),
+ Value(data=-0.8416194345012991),
+ Value(data=-0.05490668837286004),
+ Value(data=-0.00322658100945949),
+ Value(data=-0.8416194652573291),
+ Value(data=0.0007289701558785097),
+ Value(data=0.590527223921252),
+ Value(data=-0.8219020753186649),
+ Value(data=0.752305549190352),
+ Value(data=0.23634884911671442),
+ Value(data=0.2324369999890968),
+ Value(data=-0.3667103294682982),
+ Value(data=-0.0634004663894011),
+ Value(data=-0.8416194659720974),
+ Value(data=0.23260575920595203),
+ Value(data=0.5111901974753233),
+ Value(data=0.6789648937094968),
+ Value(data=-0.5820612124669666),
+ Value(data=0.7523055491842697),
+ Value(data=0.7523055481961325),
+ Value(data=0.7134230126114081),
+ Value(data=-0.4338715956237026),
+ Value(data=-0.6284457596711006),
+ Value(data=-0.3690893360127478),
+ Value(data=-0.09381265348574475),
+ Value(data=0.87271323627814),
+ Value(data=-0.8416194651298385),
+ Value(data=-0.9465516580056076),
+ Value(data=0.6439211564975865),
+ Value(data=-0.3132323456409167),
+ Value(data=-0.6248843771202373),
+ Value(data=-0.059336119312374674),
+ Value(data=0.044008110571278354),
+ Value(data=0.44431944527176626),
+ Value(data=-0.024021510427910762),
+ Value(data=-0.8389613990859471),
+ Value(data=-0.7017444187863259),
+ Value(data=-0.7523382655692067),
+ Value(data=0.752303815305045),
+ Value(data=0.23616106070457457),
+ Value(data=0.18313362989175042),
+ Value(data=-0.19748526834772273),
+ Value(data=-0.0840158967698916),
+ Value(data=0.7523055491899738),
+ Value(data=0.7523024221780781),
+ Value(data=0.09969676087824433),
+ Value(data=-0.7523383153911842),
+ Value(data=0.7523055491903367),
+ Value(data=-0.8416194648385672),
+ Value(data=-0.31319871037159847),
+ Value(data=-0.6743053204039691),
+ Value(data=-0.36038983638177446),
+ Value(data=0.7146308588140945),
+ Value(data=0.6924538940391899),
+ Value(data=0.23539476271963145),
+ Value(data=-0.8416194659719878),
+ Value(data=0.7091475440192085),
+ Value(data=0.752305549190352),
+ Value(data=0.749567585937358),
+ Value(data=0.6850527027384172),
+ Value(data=-0.0028793061189391336),
+ Value(data=-0.18004229028886187),
+ Value(data=-0.3603898579532061),
+ Value(data=0.5157441055952386),
+ Value(data=0.6703340716478448),
+ Value(data=0.7523055491881069),
+ Value(data=-0.8416194659720978),
+ Value(data=-0.093791992022148),
+ Value(data=0.18510086987575336),
+ Value(data=-0.6521854896346359),
+ Value(data=-0.004256640642177963),
+ Value(data=0.024684441678020343),
+ Value(data=0.18511176825466774),
+ Value(data=0.7523055490943796),
+ Value(data=-0.1976408483882895),
+ Value(data=-0.36962425337342913),
+ Value(data=-0.6737516431771209),
+ Value(data=-0.43469453775631567),
+ Value(data=-0.8416194651837271),
+ Value(data=-0.8427683133504643),
+ Value(data=-0.19747056174811134),
+ Value(data=-0.0788405819523186),
+ Value(data=-0.06551384837024385),
+ Value(data=-0.31419026668488),
+ Value(data=-0.6743022098606871),
+ Value(data=-0.003208504052582923),
+ Value(data=0.5661926082228022),
+ Value(data=0.5635018667693333),
+ Value(data=-0.6767795537425427),
+ Value(data=-0.8415986549635354),
+ Value(data=-0.841619465967908),
+ Value(data=0.7523055488024072),
+ Value(data=-0.23694711795071086),
+ Value(data=-0.5584860595760806),
+ Value(data=-0.09285084385372601),
+ Value(data=0.003024127224643731),
+ Value(data=0.5912616232171111),
+ Value(data=0.752305549190352),
+ Value(data=0.014517020279806161),
+ Value(data=0.7523055491903511),
+ Value(data=0.23558694368662905),
+ Value(data=0.7523031105656448),
+ Value(data=-0.025508027330395006),
+ Value(data=-0.05048733355456281),
+ Value(data=-0.0028240711731751644),
+ Value(data=-0.7513830942301281),
+ Value(data=0.29267648572453403),
+ Value(data=-0.7522903404138543),
+ Value(data=-0.8373894531624996),
+ Value(data=0.7466691994770996),
+ Value(data=-0.8416194659720978),
+ Value(data=-0.8029218382079596),
+ Value(data=-0.3133435335209921),
+ Value(data=0.509902420486061),
+ Value(data=0.18500698487244632),
+ Value(data=0.5113379799054405),
+ Value(data=0.583687280279636),
+ Value(data=-0.8416194659720978),
+ Value(data=-0.003208612058276315),
+ Value(data=0.1969726245227751),
+ Value(data=-0.474113301816531),
+ Value(data=-0.8416194658797662),
+ Value(data=0.8691837171743972),
+ Value(data=0.18757281543159693),
+ Value(data=0.6725515495111626),
+ Value(data=0.720881763004354),
+ Value(data=0.752305549190352),
+ Value(data=-0.4741132617990162),
+ Value(data=0.23615955854604265),
+ Value(data=-0.08444515269806618),
+ Value(data=0.7523054556296074),
+ Value(data=0.5097564822471878),
+ Value(data=-0.8416194637674294),
+ Value(data=-0.0593551394115986),
+ Value(data=0.7485459777087161),
+ Value(data=-0.09381114271535491),
+ Value(data=0.752305549190352),
+ Value(data=-0.15862722575148513),
+ Value(data=-0.8416194657442588),
+ Value(data=-0.7607994583074659),
+ Value(data=-0.4741115229153861),
+ Value(data=-0.22273378886756315),
+ Value(data=-0.8416194679359383),
+ Value(data=-0.8601828662825803),
+ Value(data=0.752305549190352),
+ Value(data=-0.7509124087377687),
+ Value(data=-0.16629515667842584),
+ Value(data=-0.7086078963308614),
+ Value(data=0.7523048542371348),
+ Value(data=0.34742185870513487),
+ Value(data=-0.3193211085607453),
+ Value(data=-0.36039493366096437),
+ Value(data=0.24977974799348493),
+ Value(data=-0.24709125210916782),
+ Value(data=-0.841619465962903),
+ Value(data=-0.8416194659720978),
+ Value(data=-0.5584355129009783),
+ Value(data=0.709863805850473),
+ Value(data=-0.8416194659720978),
+ Value(data=0.46973202614222553),
+ Value(data=-0.08900547101921032),
+ Value(data=0.7670456716332431),
+ Value(data=0.7515276671006267),
+ Value(data=0.7146241315324272),
+ Value(data=-0.8416194659719851),
+ Value(data=-0.0974290471886943),
+ Value(data=-0.8415996817577456),
+ Value(data=-0.6743022441884394),
+ Value(data=0.23654287597639276),
+ Value(data=-0.8416142482394962),
+ Value(data=0.23608454287752165),
+ Value(data=-0.8416194652693524),
+ Value(data=0.7523055491862759),
+ Value(data=-0.49769929274007324),
+ Value(data=-0.05052105471629754),
+ Value(data=0.8737993797450273),
+ Value(data=0.5113379717328306),
+ Value(data=-0.3603898369863178),
+ Value(data=0.5105110298613881),
+ Value(data=0.1784529165872902),
+ Value(data=-0.003208485355548673),
+ Value(data=-0.367503058354979),
+ Value(data=0.7273686645401503),
+ Value(data=0.7346547973173071),
+ Value(data=-0.0032084126852894965),
+ Value(data=-0.5584471691751651),
+ Value(data=0.7523055491903519),
+ Value(data=-0.8416194659718954),
+ Value(data=0.23408588765246047),
+ Value(data=0.7199877300953721),
+ Value(data=-0.5586151821859324),
+ Value(data=-0.003209461544153728),
+ Value(data=0.752305549190351),
+ Value(data=0.4241575912072729),
+ Value(data=-0.9499326872627337),
+ Value(data=0.5632522783444234),
+ Value(data=-0.8416194659720904),
+ Value(data=-0.5503305526023017),
+ Value(data=-0.5074614796773629),
+ Value(data=-0.3132303043756266),
+ Value(data=0.5496188285813405),
+ Value(data=0.23263946374591082),
+ Value(data=0.7523055457411794),
+ Value(data=0.7159129564402817),
+ Value(data=-0.8267128751522281),
+ Value(data=-0.5355832829842535),
+ Value(data=-0.8416194659720981),
+ Value(data=-0.8416194639932238),
+ Value(data=0.019937665655614032),
+ Value(data=-0.006744363230917061),
+ Value(data=-0.36039421706283054),
+ Value(data=-0.0032084906895803508),
+ Value(data=0.7513079966756456),
+ Value(data=-0.8416194659720978),
+ Value(data=0.5630762184358562),
+ Value(data=0.08561947076335483),
+ Value(data=-0.5584860585809881),
+ Value(data=0.6104858532595809),
+ Value(data=0.752305549190352),
+ Value(data=-0.31293002576889695),
+ Value(data=0.5632525450904063),
+ Value(data=-0.4228627180439916),
+ Value(data=0.23260734140768688),
+ Value(data=0.2369460786920258),
+ Value(data=-0.31176538621943306),
+ Value(data=-0.49569335724978925),
+ Value(data=0.6221369202591238),
+ Value(data=0.5656596768737575),
+ Value(data=-0.8416194659720978),
+ Value(data=-0.8416194659720502),
+ Value(data=-0.8411933204770886),
+ Value(data=0.18511166354523823),
+ Value(data=-0.8416185878942044),
+ Value(data=-0.8415418931677148),
+ Value(data=0.6206112780185206),
+ Value(data=-0.8416194659720978),
+ Value(data=0.18513186345033525),
+ Value(data=0.1892236997428502),
+ Value(data=-0.3605192634077059),
+ Value(data=-0.6021811647630487),
+ Value(data=-0.841618396782954),
+ Value(data=-0.6729886456646893),
+ Value(data=0.5647714271902672),
+ Value(data=0.7523055491903476),
+ Value(data=0.6787356784188849),
+ Value(data=-0.3725574548062828),
+ Value(data=-0.8411498997358485),
+ Value(data=0.7742502701844043),
+ Value(data=0.2326742426402757),
+ Value(data=-0.5584860616637264),
+ Value(data=-0.9429067064175995),
+ Value(data=-0.5584826837518017),
+ Value(data=0.23615983514194652),
+ Value(data=0.7516779472527761),
+ Value(data=0.5105891499633911),
+ Value(data=-0.6743010193676416),
+ Value(data=0.5632527693303969),
+ Value(data=0.034105614509376436),
+ Value(data=-0.05114026955503507),
+ Value(data=0.752316275694912),
+ Value(data=-0.7191224692779549),
+ Value(data=0.7523055486284501),
+ Value(data=-0.9370486838321045),
+ Value(data=-0.058582436805900674),
+ Value(data=0.4862353382319841),
+ Value(data=0.6821932430647532),
+ Value(data=-0.3605010533488893),
+ Value(data=-0.4538413125592747),
+ Value(data=-0.8416194659720978),
+ Value(data=0.46101563449175254),
+ Value(data=0.7146017960954045),
+ Value(data=-0.9400364733812405),
+ Value(data=0.7019553365951331),
+ Value(data=0.7522109563258358),
+ Value(data=0.1851117679104247),
+ Value(data=-0.8411156955114124),
+ Value(data=0.029660301875815785),
+ Value(data=0.2347886298415126),
+ Value(data=0.23362576319234912),
+ Value(data=0.3590145540058608),
+ Value(data=0.6176855000514068),
+ Value(data=0.029653689586272233),
+ Value(data=-0.19746838644820003),
+ Value(data=0.36409827903463715),
+ Value(data=-0.057647468059235256),
+ Value(data=0.7523055491903436),
+ Value(data=0.622168645001492),
+ Value(data=-0.21387125809352206),
+ Value(data=0.21988333112652295),
+ Value(data=0.7523055491879931),
+ Value(data=-0.7511737149303823),
+ Value(data=-0.3603903247121275),
+ Value(data=0.7523055491903518),
+ Value(data=-0.6563797387450829),
+ Value(data=0.23520627952852413),
+ Value(data=0.23260570229665228),
+ Value(data=0.7032756993398123),
+ Value(data=0.5066481831131525),
+ Value(data=-0.2404017901213023),
+ Value(data=0.5632540840024651),
+ Value(data=0.5664989819577885),
+ Value(data=0.7519268447824776),
+ Value(data=-0.8367209440642345),
+ Value(data=0.752305549190352),
+ Value(data=0.41524869726648794),
+ Value(data=-0.49922680397243036),
+ Value(data=-0.6686194083308274),
+ Value(data=-0.6742563437093902),
+ Value(data=-0.48551031801585187),
+ Value(data=0.6777394899537427),
+ Value(data=-0.6128440182158071),
+ Value(data=0.35939847371983774),
+ Value(data=0.5919714460080509),
+ Value(data=-0.00461969234204162),
+ Value(data=0.7522942521882868),
+ Value(data=-0.041658769425593434),
+ Value(data=0.752305549190352),
+ Value(data=0.752305549190352),
+ Value(data=0.6634346621592201),
+ Value(data=0.7522891046506945),
+ Value(data=0.5113345029362342),
+ Value(data=0.752305549190352),
+ Value(data=0.10958751060851984),
+ Value(data=0.8540632539687025),
+ Value(data=0.23615980326231642),
+ Value(data=0.7523008240893215),
+ Value(data=-0.8416192132579584),
+ Value(data=-0.8416194761155075),
+ Value(data=-0.4986479816526874),
+ Value(data=-0.8416194659720959),
+ Value(data=-0.5585078805960447),
+ Value(data=0.7673342447522788),
+ Value(data=-0.4985204323350121),
+ Value(data=0.7523054128367977),
+ Value(data=0.716350928127463),
+ Value(data=-0.45039977154037836),
+ Value(data=0.6215254352035466),
+ Value(data=0.7522167943023804),
+ Value(data=-0.4741131608806469),
+ Value(data=-0.9465029851737213),
+ Value(data=-0.47408927783700056),
+ Value(data=-0.5584952018882203),
+ Value(data=0.23260589843667775),
+ Value(data=-0.05048496976355426),
+ Value(data=-0.7523383154382636),
+ Value(data=-0.9465537677545641),
+ Value(data=-0.5573154083123765),
+ Value(data=0.2326034577814231),
+ Value(data=-0.3603900354816428),
+ Value(data=-0.36039411753335376),
+ Value(data=0.23586925502251227),
+ Value(data=-0.3132323487713915),
+ Value(data=0.5113379799047896),
+ Value(data=-0.6620153809729447),
+ Value(data=-0.674301800692371),
+ Value(data=0.5684033839912273),
+ Value(data=-0.6488311870577662),
+ Value(data=-0.8387879374129402),
+ Value(data=-0.36690210384676103),
+ Value(data=-0.6326840952371331),
+ Value(data=-0.5520782971414756),
+ Value(data=-0.003317043198650031),
+ Value(data=0.21270729868614527),
+ Value(data=-0.3165565306168389),
+ Value(data=-0.36038983625028764),
+ Value(data=-0.36039003211639725),
+ Value(data=-0.8346528350933287),
+ Value(data=-0.8052721511512086),
+ Value(data=0.1201802190955259),
+ Value(data=-0.10363564628486345),
+ Value(data=0.7742502723589525),
+ Value(data=0.23615979361871514),
+ Value(data=-0.016514756364055402),
+ Value(data=0.0988431983471681),
+ Value(data=-0.1974410811853431),
+ Value(data=-0.5108415433129084),
+ Value(data=0.23081492658983743),
+ Value(data=0.640490752005102),
+ Value(data=-0.6742796655069111),
+ Value(data=0.752305549190352),
+ Value(data=0.7146343383173848),
+ Value(data=0.005717646215201245),
+ Value(data=-0.09405003586902935),
+ Value(data=0.8297055666428749),
+ Value(data=0.5632533264877847),
+ Value(data=0.752305549190352),
+ Value(data=0.7085631722212521),
+ Value(data=-0.7523309403475649),
+ Value(data=0.5113379781882526),
+ Value(data=0.5113379704175836),
+ Value(data=0.08489760811997542),
+ Value(data=-0.0745143990115551),
+ Value(data=-0.8069478831969156),
+ Value(data=0.008301830314252726),
+ Value(data=-0.7523233512119889),
+ Value(data=-0.3578237664745138),
+ Value(data=0.7523051593887048),
+ Value(data=-0.9315255372557891),
+ Value(data=-0.8082132658152666),
+ Value(data=0.5113379797997366),
+ Value(data=-0.0032062806027131152),
+ Value(data=-0.08441484960807619),
+ Value(data=0.6400307244885958),
+ Value(data=-0.7944714485446122),
+ Value(data=-0.3132568721771691),
+ Value(data=-0.8416019240126361),
+ Value(data=0.1851128921994444),
+ Value(data=0.7523055491588815),
+ Value(data=0.16296506802657443),
+ Value(data=0.6157196745700914),
+ Value(data=-0.3132323492984473),
+ Value(data=-0.5902555181350494),
+ Value(data=-0.6742591108261897),
+ Value(data=0.7523055491901379),
+ Value(data=0.5827759579307711),
+ Value(data=-0.9429502100952012),
+ Value(data=-0.7522345404954394),
+ Value(data=-0.05919293098025813),
+ Value(data=0.5113368149082986),
+ Value(data=-0.05554372557101371),
+ Value(data=-0.7523011291803815),
+ Value(data=-0.5584860593800294),
+ Value(data=-0.7249402167984264),
+ Value(data=-0.8416194659410665),
+ Value(data=-0.6742615098097214),
+ Value(data=-0.9465521744386456),
+ Value(data=0.8716017131487845),
+ Value(data=0.7521137124382034),
+ Value(data=-0.8701220813035121),
+ Value(data=0.7522515317779896),
+ Value(data=-0.8100815697025662),
+ Value(data=0.5113379797503332),
+ Value(data=0.5112410060808564),
+ Value(data=-0.9213390635663748),
+ Value(data=0.6241387240767196),
+ Value(data=-0.7524917422457629),
+ Value(data=0.622136919175138),
+ Value(data=0.5113378117473063),
+ Value(data=0.7363234138142228),
+ Value(data=-0.7512528103473067),
+ Value(data=-0.36373076401436666),
+ Value(data=0.18481359208097703),
+ Value(data=0.5613798172030012),
+ Value(data=-0.752090104866937),
+ Value(data=-0.7839430548234217),
+ Value(data=-0.24374822156224446),
+ Value(data=-0.7523383154518689),
+ Value(data=-0.05192059771370694),
+ Value(data=0.7523055491899329),
+ Value(data=0.4710324973693049),
+ Value(data=-0.5482401684047341),
+ Value(data=-0.34932535559253),
+ Value(data=0.4564274849415448),
+ Value(data=-0.8415819328615802),
+ Value(data=-0.5584861499755054),
+ Value(data=0.510822026575943),
+ Value(data=-0.8416192146427229),
+ Value(data=0.8737956419722532),
+ Value(data=-0.15446190448285183),
+ Value(data=-0.8574994600651251),
+ Value(data=-0.47287047375278257),
+ Value(data=-0.03763798138832406),
+ Value(data=0.1593090927994636),
+ Value(data=-0.3612768235484027),
+ Value(data=-0.25320446597254237),
+ Value(data=-0.36578430476534707),
+ Value(data=0.5111870953911984),
+ Value(data=-0.8416194659695543),
+ Value(data=0.01757336127249222),
+ Value(data=-0.48443827158601716),
+ Value(data=-0.5584860458158947),
+ Value(data=-0.4741110781057349),
+ Value(data=0.6776781641918045),
+ Value(data=-0.00614598892424131),
+ Value(data=-0.8416123667306783),
+ Value(data=-0.09422396507235047),
+ Value(data=-0.44752168490506344),
+ Value(data=0.1851116662608289),
+ Value(data=0.7523055420485438),
+ Value(data=-0.49864579804908604),
+ Value(data=-0.9112952585453536),
+ Value(data=-0.05057648718631836),
+ Value(data=-0.8416182277238314),
+ Value(data=-0.09478720964637219),
+ Value(data=0.7523055481129937),
+ Value(data=0.626757315790661),
+ Value(data=-0.3133071007926418),
+ Value(data=-0.5600983101893039),
+ Value(data=0.752305549190352),
+ Value(data=-0.8416194659720978),
+ Value(data=0.23629757700617524),
+ Value(data=0.7376631677073783),
+ Value(data=-0.6743000730182208),
+ Value(data=-0.697903018745952),
+ Value(data=-0.09381303449557063),
+ Value(data=-0.7380269540468758),
+ Value(data=-0.5598514541428071),
+ Value(data=-0.8416194659672857),
+ Value(data=0.21173372021229414),
+ Value(data=-0.30721995070056907)]</code></pre>
+</div>
+</div>
+<div id="aa3d9f43" class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(x,y,z):</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fl">0.004</span><span class="op">*</span>x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="fl">0.07</span><span class="op">*</span>y<span class="op">*</span>x <span class="op">-</span> z <span class="op">+</span> random.gauss(<span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> []</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> []</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">500</span>):</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    X.append([random.uniform(<span class="op">-</span><span class="dv">50</span>,<span class="dv">50</span>) <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>)])</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    y.append(f(X[i][<span class="dv">0</span>],X[i][<span class="dv">1</span>],X[i][<span class="dv">2</span>]))</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(y)</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>ann <span class="op">=</span> MLP(<span class="dv">3</span>, [<span class="dv">8</span>,<span class="dv">8</span>,<span class="dv">1</span>])</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">100</span>): <span class="co"># Our code will do 100 epochs of training</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>    y_pred <span class="op">=</span> [ann(x) <span class="cf">for</span> x <span class="kw">in</span> X] <span class="co"># Our model only accept one prediction per time</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(y_pred[<span class="dv">0</span>], <span class="bu">print</span>(y[<span class="dv">0</span>]))</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>    loss <span class="op">=</span> <span class="bu">sum</span>((pred<span class="op">-</span>origin)<span class="op">**</span><span class="dv">2</span> <span class="cf">for</span> pred,origin <span class="kw">in</span> <span class="bu">zip</span>(y_pred, y))</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>    loss.backward() <span class="co"># Calc of gradients</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[-35.00006447265811, 14.452764707564574, -28.61126541419166, 16.42604207222155, 19.254043470637804, 26.733127225762036, 29.602845481530824, -64.93839341861425, 17.767317442531375, 103.92454987700793, 54.275036235116666, -11.882359374478801, 6.434956486921697, -86.53998069155423, -7.581941638929285, 50.78639915799047, -146.30366404691128, 41.5947783079267, -82.19226843061024, -87.79564211659135, -37.13410335751214, -24.457695303119582, 12.951513853307857, 24.915467025950452, -137.2827832560033, -83.61029560951839, 59.335556096481625, -56.462374375590414, -70.88046502886905, 1.9331066193613755, 54.06514922822414, -46.309470902946835, 18.14573137802051, 0.34144932035088105, -104.6993694193806, -120.16466321033242, 36.398244432868424, 22.51475824318057, -34.16455597837075, -12.02680427908064, -122.95393394359442, 21.85840910239588, -19.945887580847522, 187.29152475528846, -9.320577640225814, 0.3031322292751903, 9.796757159091847, -8.504938587539074, 109.53412703764374, -43.262660893619966, -63.74388104225806, -73.57967952942523, -31.64270095041409, 79.35885220511166, 14.911144029295626, -20.417252941790128, -19.692001989348146, 47.26855134718209, 22.89503385883655, 45.99058636652066, 84.97831095479785, 47.4913338986324, -17.36614443831995, -60.49610500099677, -36.74706751428759, -158.46401237704202, -111.63764014074486, -80.91951694705082, -35.168496942745, 131.852331149533, -134.26952456951562, -137.46703775534334, -31.77231471419525, 30.061583455013274, 11.989734181703344, 36.45775465160011, -15.706967231200805, -115.914494225042, -2.1077043376454463, -64.9141491160468, 120.76256991594201, -11.608340182388059, -19.042023269114054, 149.87756421241457, -5.270863009361708, -24.129625020249858, 66.42961000857598, -14.969677357587203, 58.63144009164398, 47.68578168188969, -100.1181772286167, -60.85884665456869, 31.730477355809604, -6.965344435947948, -1.913160344785243, 124.15212975075778, 60.932152796168005, -163.57737058634603, 15.401986769824019, -58.109405139554774, 31.346779227475043, 22.610481024348434, -99.97002739097847, 45.36852574182824, -179.66864665622657, -25.80047031363058, 45.858772439273565, -107.9494377841894, -26.568166139729527, 17.561256877932742, 15.38322857450072, 173.01867260716676, 58.51791835791028, 81.46154056409826, -8.356096258615302, 25.171842871049098, -50.34671638117247, -9.61102713402286, -21.303981874285412, 40.67152676571597, -53.19169264139211, -44.88077344163591, 17.49376043847543, 48.109718075168004, 68.07218898783877, -82.46438696611384, 39.360045381228794, 7.032612747917554, 21.121552323749757, -44.33593224931831, -89.25568543160875, 141.496856369146, 33.76584602232156, -42.961277609303394, 26.823263057833937, -141.62980115137728, 113.87079896192854, -8.036948402130392, -67.70964765776871, -51.80184761427025, -3.8586916723636215, -85.71640484360039, 24.874645370576317, -18.50379664557034, -22.826890445852662, -52.59365813696666, -24.015933794572742, 100.21992941936115, -28.15730762744616, -41.764187811155786, -84.16187299970126, -6.234735657617386, 7.1726827505873825, 53.7476775827845, 38.55688292467583, -63.71866120773247, 98.64199458555143, 65.31492858897386, -46.814437755565244, -68.32857640691546, 128.5185487644561, -29.3366204018056, -8.2334049205675, -60.9654971106554, -59.75480760801025, -37.07456631043905, 34.27768415869552, 36.515049045479735, 46.22802345906836, 40.70480594989918, 107.47215960429483, 11.456908990635176, 21.643385902719473, -23.168729851515394, -189.66583067052414, 4.679980866832635, -31.109863070199278, 69.36367426480678, 147.76865559894574, 49.432035061273076, 115.93003329598008, 75.26489278655477, 36.50472434738539, -7.915761236486006, 37.8869228870651, -97.8401524353648, 19.39380322618563, 105.52724759317817, -39.22184083202828, -13.684904587977114, 77.52069229442289, 28.051339805513788, -12.119273429880094, 62.14499417981882, 119.89556020551832, -77.9181333396827, 35.3807924838538, -56.89111739363118, -31.69383224339493, -95.37649175928185, 20.952256114884914, -11.85462007465997, 27.88842453093343, 171.88140005606894, -34.925121333277204, -56.53191281285676, 4.565851144636958, -43.26111942248418, 82.06960976610637, 73.14022203539882, -13.480803451938504, -5.260776703392437, -22.99339092351092, -6.383708706739713, -49.99330894902169, 2.844337013413617, -23.67520836401117, 31.940441566638746, 3.4789046554774306, 9.072140681402711, -66.91560442785484, -100.17708821664928, -25.111209303298715, 30.33907916279258, 14.381299570758193, -10.340815339292227, -124.22168736971835, 21.273694862665586, -58.375519334913434, -99.8281374788571, 173.52896689842768, -41.41901570192106, 49.81644776775598, -60.401533703337826, -31.758276779709398, 92.00524827058257, -94.34787247652133, 61.73013940730508, 27.494103699847425, -16.8546473027917, 17.577020930532512, -55.21637216513869, -84.02298975928916, 13.610877749372218, -52.686623211932755, 153.3542870360071, 70.48318717660243, 24.434565908350642, 42.28982208424203, -40.63242799749421, 57.25713810828681, -16.992369703003558, -17.108820022013386, -44.17284918183045, -131.17028425908813, -30.495582133006163, 76.56830602130687, -8.289020826459353, 55.192373740938855, 32.687907138698975, -11.545435054944587, 16.273825807410553, 26.099661386871244, 84.15045106733642, 24.69981511958982, 118.96833015503607, 4.607518787073195, -4.660387329357484, 166.21653663448922, 8.361708427533543, -64.61348747883353, 54.52939385827857, 66.75463834465249, 52.65060061406364, 124.63034465533516, 2.3129473418194504, -16.617297758380257, 73.1431083142891, -24.59515393333791, -10.810813941413372, -94.18983096216137, -34.816488020657204, 76.76360092485699, 25.326496328947307, 29.41116179039347, 69.44431243257188, 5.304882642662898, 93.46834580026763, 49.06988878519635, -24.016396494753437, 127.37162833403194, -56.261643416731715, 12.5098124157611, 47.47448470232088, 24.30741678279129, -12.972399507933718, 128.66101846046186, 169.84782751343005, -42.57954535101628, 28.368370824571972, 18.34628053446102, -110.42819511784094, 31.871923767133367, 3.708879800349113, -82.0745926681723, -40.030003664989216, 73.34243867326583, 127.45869234460321, 119.1513094716478, 53.01923173663232, -10.222688011185358, -50.658361630674044, -75.64282224946533, -14.27689377558782, -10.014105262000372, 34.00871271994031, -167.76550793062876, 33.64743282179034, 159.44590932025034, -26.222250158629464, 66.8982430759435, -50.868208745179814, -84.52410211359117, 61.96536476031885, 25.213533158044996, 120.00825991062312, -9.325477021280738, -0.15523293355164786, 63.36500695384433, 3.9727142546545005, 28.415049823316387, 25.923440286463467, 28.129595343863485, -40.919089680653, 26.003951603809664, 13.22977488445376, -31.23561477890583, -0.32965293219930936, -62.213176746917156, 9.038681028247433, 96.54572979477587, -29.59850321748078, -71.85117828587791, 16.831556394405247, 51.79780120175802, -12.140596910190533, -52.94206295032245, -45.6543087151702, 6.77178760381343, -7.19855057228442, 18.5073422596341, 23.538512285872784, 49.74058936616491, 18.886951219159204, -15.183734968126183, 49.13691403579545, 11.416161298556055, 18.09484941485326, 43.150939324478394, 113.3527524043766, 5.139396467200223, 18.803306388909846, 29.7368177016516, -37.57082979572594, 64.08885411514325, 36.060586853006065, -43.744547647960886, -8.13653700028299, -68.6844959131727, 43.6013553911877, 26.385851559151156, 64.95894203536814, 116.93324822597839, 38.25382087311141, 96.78532927475933, 117.52915903751533, 80.99086448040015, 44.656840427270716, 41.034598861125616, 57.68943798836561, 48.332465467686795, -112.46870928982607, 67.2232285910562, -23.2933505572738, 83.90632925865172, 21.499735029276128, 31.491744681180794, -70.52917905028252, -151.50325455460762, -76.44081953333328, -2.5097819195930824, 75.58760705790809, -146.1765961399101, 87.56683563114822, 77.68420845730776, -13.377241006219558, -149.72719239121957, -17.963273283655894, 5.108456423898858, -152.57397955177876, -60.99431675971709, 20.234902391197625, 8.720732677584856, 87.33525707675233, 57.56236449695297, 79.02312255375163, 39.58255979636972, 41.20234328541523, 28.408761988467752, -108.82006835996371, 31.64480129045276, -4.407837459824556, 57.12716753614099, 140.32464056346552, -61.049938620189415, 83.16661779257264, 87.3790216902008, -53.73830692505871, 91.95496803306452, 9.80073735947909, -6.571627172748739, -0.7842657096260679, 8.051934318069716, 7.6259921096451855, -15.794273457410764, 35.565287371516305, -31.405704901216634, -116.15239693328577, -64.03146745526927, -73.99518514423255, 81.04398834409982, -73.69242968476675, 69.3122322429686, 26.61049266186302, -31.111559777916625, -31.65813468835943, -15.546178409538692, -27.475286175241116, 56.58997744827996, -26.388775411646662, 1.028672072596248, -29.227174534464194, 182.39534176724675, 154.1428119171501, -11.438837824983956, 34.34467210002833, -22.341361843744817, 97.48535752488162, 46.60566588798821, 28.04237965528833, -17.041925040645822, 37.09302094407097, -47.8562121876933, -84.47567438819833, 7.589104206435872, -29.499951943395075, 8.608998941290361, 42.53879837194487, -18.89392867184449, -49.49909095413813, -17.81329520918126, -4.217154856556657, 47.561882128480086, 27.325754552372747, 41.446679943787025, 79.38088785482964, -5.7673737821369295, 2.00181926123012, 51.02325215824439, -104.83354571701386, -38.963871599367145, -22.516760873774192, 110.87004923981632, -61.74255656662657, -47.677468236656566, -135.02298848699425, -5.7350055707330085, 0.2291026007350857, 31.39767031954996, 46.13085365552847, 30.15564810630539, -13.162215300434791, -25.311643524363564, 87.93684833053071, -70.19019755615244, -10.909628890640114, 11.47135491332226, -2.5301119985041627, -73.7227443135701, 106.21858202486368, 89.08607155593005, -121.15499610592114, -26.48989417614186, -7.340997114291756, -55.19943780569562, -41.56808188995522, -29.565388972783378, 29.262059018836943, 13.672664266451312, 86.89379429772535]
+-35.00006447265811
+Value(data=0.9476197044921958) None
+-35.00006447265811
+Value(data=0.9476197044921958) None
+-35.00006447265811
+Value(data=0.9476197044921958) None
+-35.00006447265811
+Value(data=0.9476197044921958) None</code></pre>
+</div>
+</div>
+
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = true;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/deeplynoted\.net");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

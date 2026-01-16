@@ -639,6 +639,25 @@ class Value:
         out._backward = _backward
 
         return out
+    
+    def __pow__(self, other):
+        assert isinstance(other, (int, float)), "only supporting int/float powers for now"
+        out = Value(self.data**other, (self,), f'**{other}')
+
+        def _backward():
+            self.grad += (other * self.data**(other-1)) * out.grad
+        out._backward = _backward
+
+        return out
+
+    def __neg__(self): 
+        return self * -1
+
+    def __sub__(self, other): 
+        return self + (-other)
+
+    def __radd__(self, other): 
+        return self + other
 
     def backward(self):
         self.grad = 1
@@ -678,7 +697,7 @@ class Neuron:
         out = act.tahn() # This calls a non-linear function from the Value class, I will show how to implement bellow
         return out
     
-    def paramerters(self):
+    def parameters(self):
         return self.w + [self.b] # this function just return all the parameters of our neuron
 ```
 
@@ -687,7 +706,7 @@ $$
 \tanh(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}}
 $$  
 
-Note that there is 3 operations that we dont implement to make this, so, lets implement them. For know, I presume that you understand how to implement this, so, try your self, you can search in google for this, just dont use an llm.
+Note that there is 3 operations that we don't implement to make this, so, lets implement them. For know, I presume that you understand how to implement this, so, try your self, you can search in google for this, just don't use an llm.
 
 ```{python}
 #| code-fold: true
@@ -778,6 +797,26 @@ class Value:
         for node in reversed(topo):
             node._backward()
 
+    def __pow__(self, other):
+        assert isinstance(other, (int, float)), "only supporting int/float powers for now"
+        out = Value(self.data**other, (self,), f'**{other}')
+
+        def _backward():
+            # Regra da cadeia para potência: n * x^(n-1) * grad_out
+            self.grad += (other * self.data**(other-1)) * out.grad
+        out._backward = _backward
+
+        return out
+
+    def __neg__(self): # Para permitir -self
+        return self * -1
+
+    def __sub__(self, other): # Para permitir self - other
+        return self + (-other)
+
+    def __radd__(self, other): # Para permitir sum([Value, Value]) onde começa com 0 + Value
+        return self + other
+
 ``` 
 
 
@@ -790,16 +829,119 @@ y.backward()
 y.data, y.grad, x.data, x.grad
 ```
 
-Works preety well. Let's try the neuron
+Works pretty well. Let's try the neuron
 
 ```{python}
 n = Neuron(2)
 x = [2, 3, 4]
 out = n(x)
-print(out, n.paramerters())
+print(out, n.parameters())
 ```
 
 
 Works, lets move on. 
 
 ### Building a Layer
+
+So, we already create an simple Neuron, now, we just need to line them up for make a Layer.
+
+```{python}
+class Layer:
+    def __init__(self, input_num, output_num):
+        self.neurons = [Neuron(input_num) for _ in range(output_num)] # Create a list of neurons that accept input_num variables in input, and will generate output_num outputs
+
+    # Just process all operations in all neurons with the input
+    def __call__(self,x):
+        out = [n(x) for n in self.neurons]
+        return out[0] if len(out) == 1 else out
+    
+    def parameters(self):
+        out = []
+        for neuron in self.neurons:
+            out.extend(neuron.parameters()) # Add the values in an unique list
+        return out
+```
+
+
+Let's test if this work
+```{python}
+x = [2, 3, 4]
+
+layer = Layer(3,3)
+layer(x), layer.parameters()
+```
+
+Work well, this is pretty simple too. Now let's move to the last part, create an complete Artificial Neural Network
+
+### Building an MLP
+
+For last, we will create a Multilayer Perceptron, for this, we just need to to line layer up.
+
+```{python}
+class MLP:
+    def __init__(self, input_num, outputs_nums):
+        self.layers = []
+        values = [input_num] + outputs_nums
+        for id in range(len(outputs_nums)): # This work for create an unique list used to describe input and output for all layers
+            self.layers.append(Layer(values[id], values[id+1]))
+
+    def __call__(self, X):
+        for layer in self.layers: # This works because with exception from the first, each layer just receive the input from the last layer
+            X = layer(X)
+        return X
+
+    def parameters(self):
+        out = []
+        for layer in self.layers:
+            out.extend(layer.parameters())
+        return out
+```
+
+And, its finish, just need to test now
+
+```{python}
+nn = MLP(3, [6,6,1])
+x = [2, 3, 4]
+
+nn(x) # You can test the parameters
+```
+
+### Training our neural network
+
+In the last part, we create a MLP, but we don't fit them in any data. Lets creat a function and values with some noise
+```{python}
+#| cache: true
+import random
+
+def f(x,y,z):
+    return 0.04*x**2 + 0.07*y*x - z + random.gauss(0, 1)
+
+X = []
+y = []
+for i in range(100):
+    X.append([random.uniform(-5,5) for _ in range(3)])
+    y.append(f(X[i][0],X[i][1],X[i][2]))
+
+```
+
+To implement the train loop, we will need one more thing, there is an loss functions, this is just an metric that describes how well our model are fitting in data. For these case, we will use Mean Squared Error, so the steps for the training loop, its, calc the prediction, calc the loss, calc the gradients, subtract the gradients from the weights, reset the gradients values (our code accumulate the gradients) and do it again, and again.
+
+``` {python}
+#| cache: true
+ann = MLP(3, [8,8,1])
+
+for i in range(100): # Our code will do 100 epochs of training
+    y_pred = [ann(x) for x in X] # Our model only accept one prediction per time
+    loss = sum((pred-origin)**2 for pred,origin in zip(y_pred, y))
+
+    loss.backward() # Calc of gradients
+
+    for p in ann.parameters():
+        p.data = p.data - 0.001*p.grad # Updating weights, we multiply the gradient by a small number called learning rate, we do this for not have problems with model convergence
+        p.grad = 0
+    print(f"Epoch {i}, Loss: {loss}")
+
+```   
+
+
+Work, but not very well, it's possible to improve this changing the activation function by an ReLU. But for our propose, it's good enough

@@ -687,44 +687,20 @@ To start, we can make a simple class for our neuron:
 ```{python}
 import random
 class Neuron:
-    def __init__(self, input_num):
+    def __init__(self, input_num, non_linear=True):
         self.w = [Value(random.uniform(-1,1)) for _ in range(input_num)] # This basicaly creates a list of Value's from a uniform distribuition with lenth equals to input_num
         self.b = Value(random.uniform(-1,1)) # This is for the bias, explain deeply the importance of this is out of scope, but you can think bias its just a special weight that dosnt multiply the inputs, just sum in the sum part.
 
     # Call is a special function in python, its like __add__, the sintax for use this is when you just put () after the object, like range(x)
     def __call__(self,x):
-        act = sum((wi*xi for wi,xi in zip(self.w, x)), self.b) # This just do the calculation of a neuron until the sum part
-        out = act.tahn() # This calls a non-linear function from the Value class, I will show how to implement bellow
+        out = sum((wi*xi for wi,xi in zip(self.w, x)), self.b) # This just do the calculation of a neuron until the sum part
         return out
     
     def parameters(self):
         return self.w + [self.b] # this function just return all the parameters of our neuron
 ```
 
-And, its just it, a completely and functional artificial neuron, or at least after we implement the tahn (tangent hyperbolic) function. It's formula is:
-$$
-\tanh(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}}
-$$  
-
-Note that there is 3 operations that we don't implement to make this, so, lets implement them. For know, I presume that you understand how to implement this, so, try your self, you can search in google for this, just don't use an llm.
-
-```{python}
-#| code-fold: true
-#| code-summary: "Show solution:"
-import math
-# Its not really necessery to add exp, subtraction or divided, but its good with you do 😊
-def tahn(self):
-    x = self.data
-    t = (math.exp(x) - math.exp(-x))/ (math.exp(x) + math.exp(-x))
-    out = Value(t, (self,), "tahn")
-
-    # We can derivate, or just pick up on google
-    def _backwards():
-        self.grad = (1 - t**2) * out.grad
-    
-    out._backward = _backward
-    return out
-```
+And, its just it, a completely and functional artificial neuron.
 
 
 ```{python}
@@ -821,15 +797,6 @@ class Value:
 
 
 Know, lets test if this are working
-```{python}
-x = Value(10)
-
-y = x.tahn()
-y.backward()
-y.data, y.grad, x.data, x.grad
-```
-
-Works pretty well. Let's try the neuron
 
 ```{python}
 n = Neuron(2)
@@ -847,13 +814,18 @@ So, we already create an simple Neuron, now, we just need to line them up for ma
 
 ```{python}
 class Layer:
-    def __init__(self, input_num, output_num):
+    def __init__(self, input_num, output_num, non_linear=True):
         self.neurons = [Neuron(input_num) for _ in range(output_num)] # Create a list of neurons that accept input_num variables in input, and will generate output_num outputs
+        self.non_linear = non_linear
 
     # Just process all operations in all neurons with the input
     def __call__(self,x):
-        out = [n(x) for n in self.neurons]
-        return out[0] if len(out) == 1 else out
+        outs = [n(x) for n in self.neurons]
+
+        if self.non_linear:
+            outs = [out.tahn() for out in outs]
+
+        return outs[0] if len(outs) == 1 else outs
     
     def parameters(self):
         out = []
@@ -862,6 +834,30 @@ class Layer:
         return out
 ```
 
+For this Layer class, we need to implement the tahn (tangent hyperbolic) function. It's formula is:
+$$
+\tanh(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}}
+$$  
+
+Note that there is 3 operations that we don't implement to make this, so, lets implement them. For know, I presume that you understand how to implement this, so, try your self, you can search in google for this, just don't use an llm.
+
+```{python}
+#| code-fold: true
+#| code-summary: "Show solution:"
+import math
+# Its not really necessery to add exp, subtraction or divided, but its good with you do 😊
+def tahn(self):
+    x = self.data
+    t = (math.exp(x) - math.exp(-x))/ (math.exp(x) + math.exp(-x))
+    out = Value(t, (self,), "tahn")
+
+    # We can derivate, or just pick up on google
+    def _backwards():
+        self.grad = (1 - t**2) * out.grad
+    
+    out._backward = _backward
+    return out
+```
 
 Let's test if this work
 ```{python}
@@ -882,8 +878,9 @@ class MLP:
     def __init__(self, input_num, outputs_nums):
         self.layers = []
         values = [input_num] + outputs_nums
-        for id in range(len(outputs_nums)): # This work for create an unique list used to describe input and output for all layers
+        for id in range(len(outputs_nums)-1): # This work for create an unique list used to describe input and output for all layers
             self.layers.append(Layer(values[id], values[id+1]))
+        self.layers.append(Layer(values[-2], values[-1], non_linear=False))
 
     def __call__(self, X):
         for layer in self.layers: # This works because with exception from the first, each layer just receive the input from the last layer
@@ -914,7 +911,7 @@ In the last part, we create a MLP, but we don't fit them in any data. Lets creat
 import random
 
 def f(x,y,z):
-    return 0.04*x**2 + 0.07*y*x - z + random.gauss(0, 1)
+    return 0.4*x**2 + 0.7*y*x - z + random.gauss(0, 1)
 
 X = []
 y = []
@@ -928,8 +925,8 @@ To implement the train loop, we will need one more thing, there is an loss funct
 
 ``` {python}
 #| cache: true
-ann = MLP(3, [8,8,1])
-
+ann = MLP(3, [8,8,1]) 
+ 
 for i in range(100): # Our code will do 100 epochs of training
     y_pred = [ann(x) for x in X] # Our model only accept one prediction per time
     loss = sum((pred-origin)**2 for pred,origin in zip(y_pred, y))
@@ -944,4 +941,10 @@ for i in range(100): # Our code will do 100 epochs of training
 ```   
 
 
-Work, but not very well, it's possible to improve this changing the activation function by an ReLU. But for our propose, it's good enough
+Work, but not very well, it's possible to improve this changing the activation function by an ReLU. But for our propose, it's good enough. Lets just see the values comming from our model
+
+``` {python}
+#| cache: true
+y_pred = ann(X[0])
+print(f"Real value: {y[0]}\nPredict value: {y_pred}")
+```   

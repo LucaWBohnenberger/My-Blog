@@ -735,7 +735,7 @@ class Value:
 
         # We can derivate, or just pick up on google
         def _backward():
-            self.grad = (1 - t**2) * out.grad
+            self.grad += (1 - t**2) * out.grad
 
         out._backward = _backward
         return out
@@ -853,7 +853,7 @@ def tahn(self):
 
     # We can derivate, or just pick up on google
     def _backwards():
-        self.grad = (1 - t**2) * out.grad
+        self.grad += (1 - t**2) * out.grad
     
     out._backward = _backward
     return out
@@ -911,7 +911,7 @@ In the last part, we create a MLP, but we don't fit them in any data. Lets creat
 import random
 
 def f(x,y,z):
-    return 0.4*x**2 + 0.7*y*x - z + random.gauss(0, 1)
+    return 0.04*x**2 + 0.07*y*x - z + random.gauss(0, 1)/5
 
 X = []
 y = []
@@ -925,13 +925,13 @@ To implement the train loop, we will need one more thing, there is an loss funct
 
 ``` {python}
 #| cache: true
-ann = MLP(3, [8,8,1]) 
+ann = MLP(3, [8, 8, 1]) 
  
-for i in range(100): # Our code will do 100 epochs of training
+for i in range(50): # Our code will do 50 epochs of training 
     y_pred = [ann(x) for x in X] # Our model only accept one prediction per time
-    loss = sum((pred-origin)**2 for pred,origin in zip(y_pred, y))
+    loss = sum((pred-origin)**2 for pred,origin in zip(y_pred, y)) 
 
-    loss.backward() # Calc of gradients
+    loss.backward() # Calc of gradients 
 
     for p in ann.parameters():
         p.data = p.data - 0.001*p.grad # Updating weights, we multiply the gradient by a small number called learning rate, we do this for not have problems with model convergence
@@ -945,6 +945,6 @@ Work, but not very well, it's possible to improve this changing the activation f
 
 ``` {python}
 #| cache: true
-y_pred = ann(X[0])
-print(f"Real value: {y[0]}\nPredict value: {y_pred}")
+y_pred = ann(X[1])
+print(f"Real value: {y[1]}\nPredict value: {y_pred}") 
 ```   

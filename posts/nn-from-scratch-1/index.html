@@ -210,7 +210,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Modified</div>
       <div class="quarto-title-meta-contents">
-        <p class="date-modified">January 16, 2026</p>
+        <p class="date-modified">January 19, 2026</p>
       </div>
     </div>
       
@@ -237,7 +237,7 @@ window.Quarto = {
 <section id="basic-knowledge-of-derivative" class="level2">
 <h2 class="anchored" data-anchor-id="basic-knowledge-of-derivative">Basic knowledge of derivative</h2>
 <p>So, from the start, to make sense at how an NN train and learn something, you first need a very good understanding around the meaning of derivative operations. A derivative is an operation that gives us a formula that describes the slope of a function as it modifies a variable, but for out propose, we will only work with functions that generate linear derivatives. Thus, for the function <span class="math inline">\(f(x) = 3x^2 - 4x + 5\)</span>, see the graph below.</p>
-<div id="6d7e13da" class="cell" data-execution_count="1">
+<div id="557dbbc2" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Show Python code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -272,7 +272,7 @@ window.Quarto = {
 </div>
 </div>
 <p>This function is easy to undestand and derivate analytic, the derivate is <span class="math inline">\(\frac{df(x)}{dx} = 6x - 4\)</span>. Plotting both function and his derivate, we get the graphic below.</p>
-<div id="1241b60a" class="cell" data-execution_count="2">
+<div id="94c49951" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show Python code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -312,7 +312,7 @@ window.Quarto = {
 </div>
 </div>
 <p>The basic idea is that with we want to minimize the value of a function (main objective in deep learning), we just need to see the value of a derivative in some point A, that give us all the information we need to go to the minimum spot. Just do some numerical example, in the graph above, note that the minimum spot is in some value around 0 and 2, more close to 0 (precisely 2/3), so, just pick some random number, like -2, the value of <span class="math inline">\(f(x)\)</span> with -2 is 25, and the derivative is -16. The number -16 represent the rate at which the function varies for each increase in the value of x at that point in specific. So, with we increase the value of X a little bit, we can lower the value of X, so probably, the <span class="math inline">\(f(-1.999)\)</span> give us a lower value than <span class="math inline">\(f(-2)\)</span></p>
-<div id="9288a71b" class="cell" data-execution_count="3">
+<div id="d365e7e4" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(x):</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">3</span><span class="op">*</span>x<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> <span class="dv">4</span><span class="op">*</span>x <span class="op">+</span> <span class="dv">5</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -329,7 +329,7 @@ f(-1.999)= 24.984003</code></pre>
 <h2 class="anchored" data-anchor-id="how-to-estimate-gradients">How to estimate gradients</h2>
 <p>In general, to make an framework for working with nn, its just an AutoGrad (a tool that can do differentiation automatically) and some fancy stuff for make more practical.</p>
 <p>For start, lets make things the most simple for now. Our goal its make an class that can calc for us all the gradients (its the same as an derivative) from the function <span class="math inline">\(L = -2 \cdot \big((2 \cdot 3) + 10\big)\)</span>. But we don’t are comfortable derivate something with just numbers, so lets consider in this way the function:</p>
-<div id="e71ce2f8" class="cell" data-execution_count="4">
+<div id="0ad3d5d7" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="dv">2</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> <span class="op">-</span><span class="fl">3.0</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> <span class="dv">10</span></span>
@@ -338,12 +338,12 @@ f(-1.999)= 24.984003</code></pre>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> e <span class="op">+</span> c</span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>L <span class="op">=</span> d <span class="op">*</span> f</span>
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>L</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="752">
+<div class="cell-output cell-output-display" data-execution_count="392">
 <pre><code>-8.0</code></pre>
 </div>
 </div>
 <p>Just to make clear, the knowledge that we want with this, is ow much changes in the final result, increase the values of any of the variables a little To get the gradients, we can use an approximate that consists in adding a very small number <span class="math inline">\(h\)</span> is all of the values, than subtract the new with the original, and divide by the <span class="math inline">\(h\)</span>. The code below shows how to do this with the variable <span class="math inline">\(a\)</span>:</p>
-<div id="2d034756" class="cell" data-execution_count="5">
+<div id="1a2cc335" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="dv">2</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> <span class="op">-</span><span class="fl">3.0</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> <span class="dv">10</span></span>
@@ -375,7 +375,7 @@ The slope/gradient: 6.000000000021544</code></pre>
 <section id="lets-making-a-simple-autograd" class="level2">
 <h2 class="anchored" data-anchor-id="lets-making-a-simple-autograd">Lets making a simple AutoGrad</h2>
 <p>The basic idea of the AutoGrad we will make is make some very simple nodes, that represent the number in our calculation and will track all the last two nodes that make him. Basically, in <span class="math inline">\(L = -2 \cdot \big((2 \cdot 3) + 10\big)\)</span>, we will consider that a node can only save on number, like in the code representation</p>
-<div id="e717c3fd" class="cell" data-execution_count="6">
+<div id="2db0a987" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="dv">2</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> <span class="op">-</span><span class="fl">3.0</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> <span class="dv">10</span></span>
@@ -385,7 +385,7 @@ The slope/gradient: 6.000000000021544</code></pre>
 <span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>L <span class="op">=</span> d <span class="op">*</span> f</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>So, for start, lets make the basic of our class:</p>
-<div id="3084a069" class="cell" data-execution_count="7">
+<div id="d438767f" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Value:</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, data, _children<span class="op">=</span>(), _op<span class="op">=</span><span class="st">""</span>, label<span class="op">=</span><span class="st">""</span>):</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.data <span class="op">=</span> data</span>
@@ -399,7 +399,7 @@ The slope/gradient: 6.000000000021544</code></pre>
 <span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="ss">f"Value(data=</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>data<span class="sc">}</span><span class="ss">)"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>So with this class, we can create some Value’s, but we cant use them for anything, so lets make some operations</p>
-<div id="d4aa459c" class="cell" data-execution_count="8">
+<div id="ae09f68d" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Value:</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, data, _children<span class="op">=</span>(), _op<span class="op">=</span><span class="st">""</span>, label<span class="op">=</span><span class="st">""</span>):</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.data <span class="op">=</span> data</span>
@@ -423,7 +423,7 @@ The slope/gradient: 6.000000000021544</code></pre>
 <span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> out</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>And with this simples class, we can know calc our formula (not the gradients yet)</p>
-<div id="8dc0f6da" class="cell" data-execution_count="9">
+<div id="f4e8ad19" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> Value(<span class="fl">2.</span>, label<span class="op">=</span><span class="st">"a"</span>)</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> Value(<span class="op">-</span><span class="fl">3.0</span>, label<span class="op">=</span><span class="st">"b"</span>)</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> Value(<span class="fl">10.</span>, label<span class="op">=</span><span class="st">"c"</span>)</span>
@@ -432,12 +432,12 @@ The slope/gradient: 6.000000000021544</code></pre>
 <span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> e <span class="op">+</span> c<span class="op">;</span> d.label<span class="op">=</span><span class="st">"d"</span></span>
 <span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>L <span class="op">=</span> d <span class="op">*</span> f<span class="op">;</span> L.label<span class="op">=</span><span class="st">"L"</span></span>
 <span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>L</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="757">
+<div class="cell-output cell-output-display" data-execution_count="397">
 <pre><code>Value(data=-8.0)</code></pre>
 </div>
 </div>
 <p>This calculation is known as pass forward Below, simply make a graph to visualize the operations (note that the operator is not a real node, but to visualize this it is better). The question is: how can we get the gradients for <span class="math inline">\(L\)</span>, <span class="math inline">\(d\)</span> and <span class="math inline">\(f\)</span>?</p>
-<div id="83b11f87" class="cell" data-execution_count="10">
+<div id="3660056c" class="cell" data-execution_count="10">
 <div class="cell-output cell-output-display">
 
 <div style="width: 100%; overflow-x: auto; background-color: white; border-radius: 8px; padding: 10px;">
@@ -446,85 +446,35 @@ The slope/gradient: 6.000000000021544</code></pre>
 <!-- Generated by graphviz version 2.43.0 (0)
  -->
 <!-- Title: %3 Pages: 1 -->
-<svg width="1332pt" height="155pt" viewbox="0.00 0.00 1332.00 155.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink">
-<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 151)">
+<svg width="1332pt" height="192pt" viewbox="0.00 0.00 1332.00 192.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 188)">
 <title>%3</title>
-<polygon fill="white" stroke="transparent" points="-4,4 -4,-151 1328,-151 1328,4 -4,4"></polygon>
-<!-- 124429910967392 -->
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-188 1328,-188 1328,4 -4,4"></polygon>
+<!-- 127366926827680 -->
 <g id="node1" class="node">
-<title>124429910967392</title>
-<polygon fill="none" stroke="black" points="363,-110.5 363,-146.5 602,-146.5 602,-110.5 363,-110.5"></polygon>
-<text text-anchor="middle" x="375" y="-124.8" font-family="Times,serif" font-size="14.00">c</text>
-<polyline fill="none" stroke="black" points="387,-110.5 387,-146.5 "></polyline>
-<text text-anchor="middle" x="442.5" y="-124.8" font-family="Times,serif" font-size="14.00">data 10.0000</text>
-<polyline fill="none" stroke="black" points="498,-110.5 498,-146.5 "></polyline>
-<text text-anchor="middle" x="550" y="-124.8" font-family="Times,serif" font-size="14.00">grad 0.0000</text>
+<title>127366926827680</title>
+<polygon fill="none" stroke="black" points="0,-147.5 0,-183.5 237,-183.5 237,-147.5 0,-147.5"></polygon>
+<text text-anchor="middle" x="13" y="-161.8" font-family="Times,serif" font-size="14.00">b</text>
+<polyline fill="none" stroke="black" points="26,-147.5 26,-183.5 "></polyline>
+<text text-anchor="middle" x="79.5" y="-161.8" font-family="Times,serif" font-size="14.00">data -3.0000</text>
+<polyline fill="none" stroke="black" points="133,-147.5 133,-183.5 "></polyline>
+<text text-anchor="middle" x="185" y="-161.8" font-family="Times,serif" font-size="14.00">grad 0.0000</text>
 </g>
-<!-- 124429910977856+ -->
-<g id="node6" class="node">
-<title>124429910977856+</title>
-<ellipse fill="none" stroke="black" cx="665" cy="-91.5" rx="27" ry="18"></ellipse>
-<text text-anchor="middle" x="665" y="-87.8" font-family="Times,serif" font-size="14.00">+</text>
+<!-- 127366926835696* -->
+<g id="node10" class="node">
+<title>127366926835696*</title>
+<ellipse fill="none" stroke="black" cx="300" cy="-128.5" rx="27" ry="18"></ellipse>
+<text text-anchor="middle" x="300" y="-124.8" font-family="Times,serif" font-size="14.00">*</text>
 </g>
-<!-- 124429910967392&#45;&gt;124429910977856+ -->
-<g id="edge7" class="edge">
-<title>124429910967392-&gt;124429910977856+</title>
-<path fill="none" stroke="black" d="M571.37,-110.49C591.67,-106.33 612.13,-102.13 628.64,-98.75"></path>
-<polygon fill="black" stroke="black" points="629.78,-102.09 638.87,-96.65 628.37,-95.23 629.78,-102.09"></polygon>
-</g>
-<!-- 124429910975168 -->
-<g id="node2" class="node">
-<title>124429910975168</title>
-<polygon fill="none" stroke="black" points="728,-0.5 728,-36.5 961,-36.5 961,-0.5 728,-0.5"></polygon>
-<text text-anchor="middle" x="739" y="-14.8" font-family="Times,serif" font-size="14.00">f</text>
-<polyline fill="none" stroke="black" points="750,-0.5 750,-36.5 "></polyline>
-<text text-anchor="middle" x="803.5" y="-14.8" font-family="Times,serif" font-size="14.00">data -2.0000</text>
-<polyline fill="none" stroke="black" points="857,-0.5 857,-36.5 "></polyline>
-<text text-anchor="middle" x="909" y="-14.8" font-family="Times,serif" font-size="14.00">grad 0.0000</text>
-</g>
-<!-- 124429910968160* -->
-<g id="node8" class="node">
-<title>124429910968160*</title>
-<ellipse fill="none" stroke="black" cx="1024" cy="-54.5" rx="27" ry="18"></ellipse>
-<text text-anchor="middle" x="1024" y="-50.8" font-family="Times,serif" font-size="14.00">*</text>
-</g>
-<!-- 124429910975168&#45;&gt;124429910968160* -->
-<g id="edge6" class="edge">
-<title>124429910975168-&gt;124429910968160*</title>
-<path fill="none" stroke="black" d="M934.51,-36.55C953.49,-40.4 972.45,-44.25 987.92,-47.39"></path>
-<polygon fill="black" stroke="black" points="987.54,-50.88 998.03,-49.44 988.93,-44.02 987.54,-50.88"></polygon>
-</g>
-<!-- 124429910980304 -->
-<g id="node3" class="node">
-<title>124429910980304</title>
-<polygon fill="none" stroke="black" points="364.5,-37.5 364.5,-73.5 600.5,-73.5 600.5,-37.5 364.5,-37.5"></polygon>
-<text text-anchor="middle" x="377" y="-51.8" font-family="Times,serif" font-size="14.00">e</text>
-<polyline fill="none" stroke="black" points="389.5,-37.5 389.5,-73.5 "></polyline>
-<text text-anchor="middle" x="443" y="-51.8" font-family="Times,serif" font-size="14.00">data -6.0000</text>
-<polyline fill="none" stroke="black" points="496.5,-37.5 496.5,-73.5 "></polyline>
-<text text-anchor="middle" x="548.5" y="-51.8" font-family="Times,serif" font-size="14.00">grad 0.0000</text>
-</g>
-<!-- 124429910980304&#45;&gt;124429910977856+ -->
+<!-- 127366926827680&#45;&gt;127366926835696* -->
 <g id="edge5" class="edge">
-<title>124429910980304-&gt;124429910977856+</title>
-<path fill="none" stroke="black" d="M574.01,-73.55C593.64,-77.47 613.25,-81.38 629.13,-84.55"></path>
-<polygon fill="black" stroke="black" points="628.5,-87.99 638.99,-86.51 629.87,-81.12 628.5,-87.99"></polygon>
+<title>127366926827680-&gt;127366926835696*</title>
+<path fill="none" stroke="black" d="M206.88,-147.49C227.07,-143.33 247.42,-139.13 263.83,-135.75"></path>
+<polygon fill="black" stroke="black" points="264.93,-139.1 274.01,-133.65 263.51,-132.24 264.93,-139.1"></polygon>
 </g>
-<!-- 124429910980304* -->
-<g id="node4" class="node">
-<title>124429910980304*</title>
-<ellipse fill="none" stroke="black" cx="300" cy="-55.5" rx="27" ry="18"></ellipse>
-<text text-anchor="middle" x="300" y="-51.8" font-family="Times,serif" font-size="14.00">*</text>
-</g>
-<!-- 124429910980304*&#45;&gt;124429910980304 -->
-<g id="edge1" class="edge">
-<title>124429910980304*-&gt;124429910980304</title>
-<path fill="none" stroke="black" d="M327.25,-55.5C335.09,-55.5 344.27,-55.5 354.17,-55.5"></path>
-<polygon fill="black" stroke="black" points="354.28,-59 364.28,-55.5 354.28,-52 354.28,-59"></polygon>
-</g>
-<!-- 124429910977856 -->
-<g id="node5" class="node">
-<title>124429910977856</title>
+<!-- 127366926841504 -->
+<g id="node2" class="node">
+<title>127366926841504</title>
 <polygon fill="none" stroke="black" points="728.5,-73.5 728.5,-109.5 960.5,-109.5 960.5,-73.5 728.5,-73.5"></polygon>
 <text text-anchor="middle" x="741.5" y="-87.8" font-family="Times,serif" font-size="14.00">d</text>
 <polyline fill="none" stroke="black" points="754.5,-73.5 754.5,-109.5 "></polyline>
@@ -532,21 +482,33 @@ The slope/gradient: 6.000000000021544</code></pre>
 <polyline fill="none" stroke="black" points="856.5,-73.5 856.5,-109.5 "></polyline>
 <text text-anchor="middle" x="908.5" y="-87.8" font-family="Times,serif" font-size="14.00">grad 0.0000</text>
 </g>
-<!-- 124429910977856&#45;&gt;124429910968160* -->
-<g id="edge4" class="edge">
-<title>124429910977856-&gt;124429910968160*</title>
+<!-- 127366926838768* -->
+<g id="node5" class="node">
+<title>127366926838768*</title>
+<ellipse fill="none" stroke="black" cx="1024" cy="-54.5" rx="27" ry="18"></ellipse>
+<text text-anchor="middle" x="1024" y="-50.8" font-family="Times,serif" font-size="14.00">*</text>
+</g>
+<!-- 127366926841504&#45;&gt;127366926838768* -->
+<g id="edge9" class="edge">
+<title>127366926841504-&gt;127366926838768*</title>
 <path fill="none" stroke="black" d="M931.91,-73.49C951.73,-69.36 971.7,-65.19 987.87,-61.82"></path>
 <polygon fill="black" stroke="black" points="988.84,-65.2 997.91,-59.73 987.41,-58.34 988.84,-65.2"></polygon>
 </g>
-<!-- 124429910977856+&#45;&gt;124429910977856 -->
-<g id="edge2" class="edge">
-<title>124429910977856+-&gt;124429910977856</title>
+<!-- 127366926841504+ -->
+<g id="node3" class="node">
+<title>127366926841504+</title>
+<ellipse fill="none" stroke="black" cx="665" cy="-91.5" rx="27" ry="18"></ellipse>
+<text text-anchor="middle" x="665" y="-87.8" font-family="Times,serif" font-size="14.00">+</text>
+</g>
+<!-- 127366926841504+&#45;&gt;127366926841504 -->
+<g id="edge1" class="edge">
+<title>127366926841504+-&gt;127366926841504</title>
 <path fill="none" stroke="black" d="M692.19,-91.5C699.78,-91.5 708.61,-91.5 718.11,-91.5"></path>
 <polygon fill="black" stroke="black" points="718.24,-95 728.24,-91.5 718.24,-88 718.24,-95"></polygon>
 </g>
-<!-- 124429910968160 -->
-<g id="node7" class="node">
-<title>124429910968160</title>
+<!-- 127366926838768 -->
+<g id="node4" class="node">
+<title>127366926838768</title>
 <polygon fill="none" stroke="black" points="1087,-36.5 1087,-72.5 1324,-72.5 1324,-36.5 1087,-36.5"></polygon>
 <text text-anchor="middle" x="1100" y="-50.8" font-family="Times,serif" font-size="14.00">L</text>
 <polyline fill="none" stroke="black" points="1113,-36.5 1113,-72.5 "></polyline>
@@ -554,43 +516,81 @@ The slope/gradient: 6.000000000021544</code></pre>
 <polyline fill="none" stroke="black" points="1220,-36.5 1220,-72.5 "></polyline>
 <text text-anchor="middle" x="1272" y="-50.8" font-family="Times,serif" font-size="14.00">grad 0.0000</text>
 </g>
-<!-- 124429910968160*&#45;&gt;124429910968160 -->
-<g id="edge3" class="edge">
-<title>124429910968160*-&gt;124429910968160</title>
+<!-- 127366926838768*&#45;&gt;127366926838768 -->
+<g id="edge2" class="edge">
+<title>127366926838768*-&gt;127366926838768</title>
 <path fill="none" stroke="black" d="M1051.1,-54.5C1058.61,-54.5 1067.33,-54.5 1076.75,-54.5"></path>
 <polygon fill="black" stroke="black" points="1076.78,-58 1086.78,-54.5 1076.78,-51 1076.78,-58"></polygon>
 </g>
-<!-- 124429910976896 -->
-<g id="node9" class="node">
-<title>124429910976896</title>
-<polygon fill="none" stroke="black" points="0,-74.5 0,-110.5 237,-110.5 237,-74.5 0,-74.5"></polygon>
-<text text-anchor="middle" x="13" y="-88.8" font-family="Times,serif" font-size="14.00">b</text>
-<polyline fill="none" stroke="black" points="26,-74.5 26,-110.5 "></polyline>
-<text text-anchor="middle" x="79.5" y="-88.8" font-family="Times,serif" font-size="14.00">data -3.0000</text>
-<polyline fill="none" stroke="black" points="133,-74.5 133,-110.5 "></polyline>
-<text text-anchor="middle" x="185" y="-88.8" font-family="Times,serif" font-size="14.00">grad 0.0000</text>
+<!-- 127366926831472 -->
+<g id="node6" class="node">
+<title>127366926831472</title>
+<polygon fill="none" stroke="black" points="3,-74.5 3,-110.5 234,-110.5 234,-74.5 3,-74.5"></polygon>
+<text text-anchor="middle" x="15.5" y="-88.8" font-family="Times,serif" font-size="14.00">a</text>
+<polyline fill="none" stroke="black" points="28,-74.5 28,-110.5 "></polyline>
+<text text-anchor="middle" x="79" y="-88.8" font-family="Times,serif" font-size="14.00">data 2.0000</text>
+<polyline fill="none" stroke="black" points="130,-74.5 130,-110.5 "></polyline>
+<text text-anchor="middle" x="182" y="-88.8" font-family="Times,serif" font-size="14.00">grad 0.0000</text>
 </g>
-<!-- 124429910976896&#45;&gt;124429910980304* -->
+<!-- 127366926831472&#45;&gt;127366926835696* -->
+<g id="edge6" class="edge">
+<title>127366926831472-&gt;127366926835696*</title>
+<path fill="none" stroke="black" d="M209.51,-110.55C228.7,-114.4 247.88,-118.25 263.53,-121.39"></path>
+<polygon fill="black" stroke="black" points="263.26,-124.9 273.75,-123.44 264.64,-118.04 263.26,-124.9"></polygon>
+</g>
+<!-- 127366926833056 -->
+<g id="node7" class="node">
+<title>127366926833056</title>
+<polygon fill="none" stroke="black" points="728,-0.5 728,-36.5 961,-36.5 961,-0.5 728,-0.5"></polygon>
+<text text-anchor="middle" x="739" y="-14.8" font-family="Times,serif" font-size="14.00">f</text>
+<polyline fill="none" stroke="black" points="750,-0.5 750,-36.5 "></polyline>
+<text text-anchor="middle" x="803.5" y="-14.8" font-family="Times,serif" font-size="14.00">data -2.0000</text>
+<polyline fill="none" stroke="black" points="857,-0.5 857,-36.5 "></polyline>
+<text text-anchor="middle" x="909" y="-14.8" font-family="Times,serif" font-size="14.00">grad 0.0000</text>
+</g>
+<!-- 127366926833056&#45;&gt;127366926838768* -->
 <g id="edge8" class="edge">
-<title>124429910976896-&gt;124429910980304*</title>
-<path fill="none" stroke="black" d="M206.88,-74.49C227.07,-70.33 247.42,-66.13 263.83,-62.75"></path>
-<polygon fill="black" stroke="black" points="264.93,-66.1 274.01,-60.65 263.51,-59.24 264.93,-66.1"></polygon>
+<title>127366926833056-&gt;127366926838768*</title>
+<path fill="none" stroke="black" d="M934.51,-36.55C953.49,-40.4 972.45,-44.25 987.92,-47.39"></path>
+<polygon fill="black" stroke="black" points="987.54,-50.88 998.03,-49.44 988.93,-44.02 987.54,-50.88"></polygon>
 </g>
-<!-- 124429910981552 -->
-<g id="node10" class="node">
-<title>124429910981552</title>
-<polygon fill="none" stroke="black" points="3,-1.5 3,-37.5 234,-37.5 234,-1.5 3,-1.5"></polygon>
-<text text-anchor="middle" x="15.5" y="-15.8" font-family="Times,serif" font-size="14.00">a</text>
-<polyline fill="none" stroke="black" points="28,-1.5 28,-37.5 "></polyline>
-<text text-anchor="middle" x="79" y="-15.8" font-family="Times,serif" font-size="14.00">data 2.0000</text>
-<polyline fill="none" stroke="black" points="130,-1.5 130,-37.5 "></polyline>
-<text text-anchor="middle" x="182" y="-15.8" font-family="Times,serif" font-size="14.00">grad 0.0000</text>
+<!-- 127366926838720 -->
+<g id="node8" class="node">
+<title>127366926838720</title>
+<polygon fill="none" stroke="black" points="363,-37.5 363,-73.5 602,-73.5 602,-37.5 363,-37.5"></polygon>
+<text text-anchor="middle" x="375" y="-51.8" font-family="Times,serif" font-size="14.00">c</text>
+<polyline fill="none" stroke="black" points="387,-37.5 387,-73.5 "></polyline>
+<text text-anchor="middle" x="442.5" y="-51.8" font-family="Times,serif" font-size="14.00">data 10.0000</text>
+<polyline fill="none" stroke="black" points="498,-37.5 498,-73.5 "></polyline>
+<text text-anchor="middle" x="550" y="-51.8" font-family="Times,serif" font-size="14.00">grad 0.0000</text>
 </g>
-<!-- 124429910981552&#45;&gt;124429910980304* -->
-<g id="edge9" class="edge">
-<title>124429910981552-&gt;124429910980304*</title>
-<path fill="none" stroke="black" d="M209.51,-37.55C228.7,-41.4 247.88,-45.25 263.53,-48.39"></path>
-<polygon fill="black" stroke="black" points="263.26,-51.9 273.75,-50.44 264.64,-45.04 263.26,-51.9"></polygon>
+<!-- 127366926838720&#45;&gt;127366926841504+ -->
+<g id="edge4" class="edge">
+<title>127366926838720-&gt;127366926841504+</title>
+<path fill="none" stroke="black" d="M574.01,-73.55C593.64,-77.47 613.25,-81.38 629.13,-84.55"></path>
+<polygon fill="black" stroke="black" points="628.5,-87.99 638.99,-86.51 629.87,-81.12 628.5,-87.99"></polygon>
+</g>
+<!-- 127366926835696 -->
+<g id="node9" class="node">
+<title>127366926835696</title>
+<polygon fill="none" stroke="black" points="364.5,-110.5 364.5,-146.5 600.5,-146.5 600.5,-110.5 364.5,-110.5"></polygon>
+<text text-anchor="middle" x="377" y="-124.8" font-family="Times,serif" font-size="14.00">e</text>
+<polyline fill="none" stroke="black" points="389.5,-110.5 389.5,-146.5 "></polyline>
+<text text-anchor="middle" x="443" y="-124.8" font-family="Times,serif" font-size="14.00">data -6.0000</text>
+<polyline fill="none" stroke="black" points="496.5,-110.5 496.5,-146.5 "></polyline>
+<text text-anchor="middle" x="548.5" y="-124.8" font-family="Times,serif" font-size="14.00">grad 0.0000</text>
+</g>
+<!-- 127366926835696&#45;&gt;127366926841504+ -->
+<g id="edge7" class="edge">
+<title>127366926835696-&gt;127366926841504+</title>
+<path fill="none" stroke="black" d="M571.37,-110.49C591.67,-106.33 612.13,-102.13 628.64,-98.75"></path>
+<polygon fill="black" stroke="black" points="629.78,-102.09 638.87,-96.65 628.37,-95.23 629.78,-102.09"></polygon>
+</g>
+<!-- 127366926835696*&#45;&gt;127366926835696 -->
+<g id="edge3" class="edge">
+<title>127366926835696*-&gt;127366926835696</title>
+<path fill="none" stroke="black" d="M327.25,-128.5C335.09,-128.5 344.27,-128.5 354.17,-128.5"></path>
+<polygon fill="black" stroke="black" points="354.28,-132 364.28,-128.5 354.28,-125 354.28,-132"></polygon>
 </g>
 </g>
 </svg>
@@ -604,7 +604,7 @@ L(d,f) = d \cdot f
 \frac{\partial L}{\partial d} = f \quad \text{and} \quad \frac{\partial L}{\partial f} = d
 \]</span></p>
 <p>So, the gradient for <span class="math inline">\(d\)</span> is the value of data in <span class="math inline">\(f\)</span>, and for the <span class="math inline">\(f\)</span>, it´s the value of data in <span class="math inline">\(d\)</span>, in this case, the grad of <span class="math inline">\(d\)</span> is -2 and the grad of <span class="math inline">\(f\)</span> is 4.</p>
-<div id="4f7d269c" class="cell" data-execution_count="11">
+<div id="ef46e104" class="cell" data-execution_count="11">
 <div class="cell-output cell-output-display">
 
 <div style="width: 100%; overflow-x: auto; background-color: white; border-radius: 8px; padding: 10px;">
@@ -613,85 +613,35 @@ L(d,f) = d \cdot f
 <!-- Generated by graphviz version 2.43.0 (0)
  -->
 <!-- Title: %3 Pages: 1 -->
-<svg width="1335pt" height="155pt" viewbox="0.00 0.00 1335.00 155.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink">
-<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 151)">
+<svg width="1335pt" height="192pt" viewbox="0.00 0.00 1335.00 192.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 188)">
 <title>%3</title>
-<polygon fill="white" stroke="transparent" points="-4,4 -4,-151 1331,-151 1331,4 -4,4"></polygon>
-<!-- 124429910967392 -->
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-188 1331,-188 1331,4 -4,4"></polygon>
+<!-- 127366926827680 -->
 <g id="node1" class="node">
-<title>124429910967392</title>
-<polygon fill="none" stroke="black" points="363,-110.5 363,-146.5 602,-146.5 602,-110.5 363,-110.5"></polygon>
-<text text-anchor="middle" x="375" y="-124.8" font-family="Times,serif" font-size="14.00">c</text>
-<polyline fill="none" stroke="black" points="387,-110.5 387,-146.5 "></polyline>
-<text text-anchor="middle" x="442.5" y="-124.8" font-family="Times,serif" font-size="14.00">data 10.0000</text>
-<polyline fill="none" stroke="black" points="498,-110.5 498,-146.5 "></polyline>
-<text text-anchor="middle" x="550" y="-124.8" font-family="Times,serif" font-size="14.00">grad 0.0000</text>
+<title>127366926827680</title>
+<polygon fill="none" stroke="black" points="0,-147.5 0,-183.5 237,-183.5 237,-147.5 0,-147.5"></polygon>
+<text text-anchor="middle" x="13" y="-161.8" font-family="Times,serif" font-size="14.00">b</text>
+<polyline fill="none" stroke="black" points="26,-147.5 26,-183.5 "></polyline>
+<text text-anchor="middle" x="79.5" y="-161.8" font-family="Times,serif" font-size="14.00">data -3.0000</text>
+<polyline fill="none" stroke="black" points="133,-147.5 133,-183.5 "></polyline>
+<text text-anchor="middle" x="185" y="-161.8" font-family="Times,serif" font-size="14.00">grad 0.0000</text>
 </g>
-<!-- 124429910977856+ -->
-<g id="node6" class="node">
-<title>124429910977856+</title>
-<ellipse fill="none" stroke="black" cx="665" cy="-91.5" rx="27" ry="18"></ellipse>
-<text text-anchor="middle" x="665" y="-87.8" font-family="Times,serif" font-size="14.00">+</text>
+<!-- 127366926835696* -->
+<g id="node10" class="node">
+<title>127366926835696*</title>
+<ellipse fill="none" stroke="black" cx="300" cy="-128.5" rx="27" ry="18"></ellipse>
+<text text-anchor="middle" x="300" y="-124.8" font-family="Times,serif" font-size="14.00">*</text>
 </g>
-<!-- 124429910967392&#45;&gt;124429910977856+ -->
-<g id="edge7" class="edge">
-<title>124429910967392-&gt;124429910977856+</title>
-<path fill="none" stroke="black" d="M571.37,-110.49C591.67,-106.33 612.13,-102.13 628.64,-98.75"></path>
-<polygon fill="black" stroke="black" points="629.78,-102.09 638.87,-96.65 628.37,-95.23 629.78,-102.09"></polygon>
-</g>
-<!-- 124429910975168 -->
-<g id="node2" class="node">
-<title>124429910975168</title>
-<polygon fill="none" stroke="black" points="729.5,-0.5 729.5,-36.5 962.5,-36.5 962.5,-0.5 729.5,-0.5"></polygon>
-<text text-anchor="middle" x="740.5" y="-14.8" font-family="Times,serif" font-size="14.00">f</text>
-<polyline fill="none" stroke="black" points="751.5,-0.5 751.5,-36.5 "></polyline>
-<text text-anchor="middle" x="805" y="-14.8" font-family="Times,serif" font-size="14.00">data -2.0000</text>
-<polyline fill="none" stroke="black" points="858.5,-0.5 858.5,-36.5 "></polyline>
-<text text-anchor="middle" x="910.5" y="-14.8" font-family="Times,serif" font-size="14.00">grad 4.0000</text>
-</g>
-<!-- 124429910968160* -->
-<g id="node8" class="node">
-<title>124429910968160*</title>
-<ellipse fill="none" stroke="black" cx="1027" cy="-54.5" rx="27" ry="18"></ellipse>
-<text text-anchor="middle" x="1027" y="-50.8" font-family="Times,serif" font-size="14.00">*</text>
-</g>
-<!-- 124429910975168&#45;&gt;124429910968160* -->
-<g id="edge6" class="edge">
-<title>124429910975168-&gt;124429910968160*</title>
-<path fill="none" stroke="black" d="M936.76,-36.55C955.9,-40.4 975.02,-44.25 990.62,-47.39"></path>
-<polygon fill="black" stroke="black" points="990.33,-50.9 1000.82,-49.44 991.71,-44.03 990.33,-50.9"></polygon>
-</g>
-<!-- 124429910980304 -->
-<g id="node3" class="node">
-<title>124429910980304</title>
-<polygon fill="none" stroke="black" points="364.5,-37.5 364.5,-73.5 600.5,-73.5 600.5,-37.5 364.5,-37.5"></polygon>
-<text text-anchor="middle" x="377" y="-51.8" font-family="Times,serif" font-size="14.00">e</text>
-<polyline fill="none" stroke="black" points="389.5,-37.5 389.5,-73.5 "></polyline>
-<text text-anchor="middle" x="443" y="-51.8" font-family="Times,serif" font-size="14.00">data -6.0000</text>
-<polyline fill="none" stroke="black" points="496.5,-37.5 496.5,-73.5 "></polyline>
-<text text-anchor="middle" x="548.5" y="-51.8" font-family="Times,serif" font-size="14.00">grad 0.0000</text>
-</g>
-<!-- 124429910980304&#45;&gt;124429910977856+ -->
+<!-- 127366926827680&#45;&gt;127366926835696* -->
 <g id="edge5" class="edge">
-<title>124429910980304-&gt;124429910977856+</title>
-<path fill="none" stroke="black" d="M574.01,-73.55C593.64,-77.47 613.25,-81.38 629.13,-84.55"></path>
-<polygon fill="black" stroke="black" points="628.5,-87.99 638.99,-86.51 629.87,-81.12 628.5,-87.99"></polygon>
+<title>127366926827680-&gt;127366926835696*</title>
+<path fill="none" stroke="black" d="M206.88,-147.49C227.07,-143.33 247.42,-139.13 263.83,-135.75"></path>
+<polygon fill="black" stroke="black" points="264.93,-139.1 274.01,-133.65 263.51,-132.24 264.93,-139.1"></polygon>
 </g>
-<!-- 124429910980304* -->
-<g id="node4" class="node">
-<title>124429910980304*</title>
-<ellipse fill="none" stroke="black" cx="300" cy="-55.5" rx="27" ry="18"></ellipse>
-<text text-anchor="middle" x="300" y="-51.8" font-family="Times,serif" font-size="14.00">*</text>
-</g>
-<!-- 124429910980304*&#45;&gt;124429910980304 -->
-<g id="edge1" class="edge">
-<title>124429910980304*-&gt;124429910980304</title>
-<path fill="none" stroke="black" d="M327.25,-55.5C335.09,-55.5 344.27,-55.5 354.17,-55.5"></path>
-<polygon fill="black" stroke="black" points="354.28,-59 364.28,-55.5 354.28,-52 354.28,-59"></polygon>
-</g>
-<!-- 124429910977856 -->
-<g id="node5" class="node">
-<title>124429910977856</title>
+<!-- 127366926841504 -->
+<g id="node2" class="node">
+<title>127366926841504</title>
 <polygon fill="none" stroke="black" points="728,-73.5 728,-109.5 964,-109.5 964,-73.5 728,-73.5"></polygon>
 <text text-anchor="middle" x="741" y="-87.8" font-family="Times,serif" font-size="14.00">d</text>
 <polyline fill="none" stroke="black" points="754,-73.5 754,-109.5 "></polyline>
@@ -699,21 +649,33 @@ L(d,f) = d \cdot f
 <polyline fill="none" stroke="black" points="856,-73.5 856,-109.5 "></polyline>
 <text text-anchor="middle" x="910" y="-87.8" font-family="Times,serif" font-size="14.00">grad -2.0000</text>
 </g>
-<!-- 124429910977856&#45;&gt;124429910968160* -->
-<g id="edge4" class="edge">
-<title>124429910977856-&gt;124429910968160*</title>
+<!-- 127366926838768* -->
+<g id="node5" class="node">
+<title>127366926838768*</title>
+<ellipse fill="none" stroke="black" cx="1027" cy="-54.5" rx="27" ry="18"></ellipse>
+<text text-anchor="middle" x="1027" y="-50.8" font-family="Times,serif" font-size="14.00">*</text>
+</g>
+<!-- 127366926841504&#45;&gt;127366926838768* -->
+<g id="edge9" class="edge">
+<title>127366926841504-&gt;127366926838768*</title>
 <path fill="none" stroke="black" d="M934.14,-73.49C954.27,-69.33 974.56,-65.13 990.93,-61.75"></path>
 <polygon fill="black" stroke="black" points="992,-65.1 1001.08,-59.65 990.58,-58.25 992,-65.1"></polygon>
 </g>
-<!-- 124429910977856+&#45;&gt;124429910977856 -->
-<g id="edge2" class="edge">
-<title>124429910977856+-&gt;124429910977856</title>
+<!-- 127366926841504+ -->
+<g id="node3" class="node">
+<title>127366926841504+</title>
+<ellipse fill="none" stroke="black" cx="665" cy="-91.5" rx="27" ry="18"></ellipse>
+<text text-anchor="middle" x="665" y="-87.8" font-family="Times,serif" font-size="14.00">+</text>
+</g>
+<!-- 127366926841504+&#45;&gt;127366926841504 -->
+<g id="edge1" class="edge">
+<title>127366926841504+-&gt;127366926841504</title>
 <path fill="none" stroke="black" d="M692.03,-91.5C699.58,-91.5 708.38,-91.5 717.87,-91.5"></path>
 <polygon fill="black" stroke="black" points="717.99,-95 727.99,-91.5 717.99,-88 717.99,-95"></polygon>
 </g>
-<!-- 124429910968160 -->
-<g id="node7" class="node">
-<title>124429910968160</title>
+<!-- 127366926838768 -->
+<g id="node4" class="node">
+<title>127366926838768</title>
 <polygon fill="none" stroke="black" points="1090,-36.5 1090,-72.5 1327,-72.5 1327,-36.5 1090,-36.5"></polygon>
 <text text-anchor="middle" x="1103" y="-50.8" font-family="Times,serif" font-size="14.00">L</text>
 <polyline fill="none" stroke="black" points="1116,-36.5 1116,-72.5 "></polyline>
@@ -721,43 +683,81 @@ L(d,f) = d \cdot f
 <polyline fill="none" stroke="black" points="1223,-36.5 1223,-72.5 "></polyline>
 <text text-anchor="middle" x="1275" y="-50.8" font-family="Times,serif" font-size="14.00">grad 1.0000</text>
 </g>
-<!-- 124429910968160*&#45;&gt;124429910968160 -->
-<g id="edge3" class="edge">
-<title>124429910968160*-&gt;124429910968160</title>
+<!-- 127366926838768*&#45;&gt;127366926838768 -->
+<g id="edge2" class="edge">
+<title>127366926838768*-&gt;127366926838768</title>
 <path fill="none" stroke="black" d="M1054.1,-54.5C1061.61,-54.5 1070.33,-54.5 1079.75,-54.5"></path>
 <polygon fill="black" stroke="black" points="1079.78,-58 1089.78,-54.5 1079.78,-51 1079.78,-58"></polygon>
 </g>
-<!-- 124429910976896 -->
-<g id="node9" class="node">
-<title>124429910976896</title>
-<polygon fill="none" stroke="black" points="0,-74.5 0,-110.5 237,-110.5 237,-74.5 0,-74.5"></polygon>
-<text text-anchor="middle" x="13" y="-88.8" font-family="Times,serif" font-size="14.00">b</text>
-<polyline fill="none" stroke="black" points="26,-74.5 26,-110.5 "></polyline>
-<text text-anchor="middle" x="79.5" y="-88.8" font-family="Times,serif" font-size="14.00">data -3.0000</text>
-<polyline fill="none" stroke="black" points="133,-74.5 133,-110.5 "></polyline>
-<text text-anchor="middle" x="185" y="-88.8" font-family="Times,serif" font-size="14.00">grad 0.0000</text>
+<!-- 127366926831472 -->
+<g id="node6" class="node">
+<title>127366926831472</title>
+<polygon fill="none" stroke="black" points="3,-74.5 3,-110.5 234,-110.5 234,-74.5 3,-74.5"></polygon>
+<text text-anchor="middle" x="15.5" y="-88.8" font-family="Times,serif" font-size="14.00">a</text>
+<polyline fill="none" stroke="black" points="28,-74.5 28,-110.5 "></polyline>
+<text text-anchor="middle" x="79" y="-88.8" font-family="Times,serif" font-size="14.00">data 2.0000</text>
+<polyline fill="none" stroke="black" points="130,-74.5 130,-110.5 "></polyline>
+<text text-anchor="middle" x="182" y="-88.8" font-family="Times,serif" font-size="14.00">grad 0.0000</text>
 </g>
-<!-- 124429910976896&#45;&gt;124429910980304* -->
+<!-- 127366926831472&#45;&gt;127366926835696* -->
+<g id="edge6" class="edge">
+<title>127366926831472-&gt;127366926835696*</title>
+<path fill="none" stroke="black" d="M209.51,-110.55C228.7,-114.4 247.88,-118.25 263.53,-121.39"></path>
+<polygon fill="black" stroke="black" points="263.26,-124.9 273.75,-123.44 264.64,-118.04 263.26,-124.9"></polygon>
+</g>
+<!-- 127366926833056 -->
+<g id="node7" class="node">
+<title>127366926833056</title>
+<polygon fill="none" stroke="black" points="729.5,-0.5 729.5,-36.5 962.5,-36.5 962.5,-0.5 729.5,-0.5"></polygon>
+<text text-anchor="middle" x="740.5" y="-14.8" font-family="Times,serif" font-size="14.00">f</text>
+<polyline fill="none" stroke="black" points="751.5,-0.5 751.5,-36.5 "></polyline>
+<text text-anchor="middle" x="805" y="-14.8" font-family="Times,serif" font-size="14.00">data -2.0000</text>
+<polyline fill="none" stroke="black" points="858.5,-0.5 858.5,-36.5 "></polyline>
+<text text-anchor="middle" x="910.5" y="-14.8" font-family="Times,serif" font-size="14.00">grad 4.0000</text>
+</g>
+<!-- 127366926833056&#45;&gt;127366926838768* -->
 <g id="edge8" class="edge">
-<title>124429910976896-&gt;124429910980304*</title>
-<path fill="none" stroke="black" d="M206.88,-74.49C227.07,-70.33 247.42,-66.13 263.83,-62.75"></path>
-<polygon fill="black" stroke="black" points="264.93,-66.1 274.01,-60.65 263.51,-59.24 264.93,-66.1"></polygon>
+<title>127366926833056-&gt;127366926838768*</title>
+<path fill="none" stroke="black" d="M936.76,-36.55C955.9,-40.4 975.02,-44.25 990.62,-47.39"></path>
+<polygon fill="black" stroke="black" points="990.33,-50.9 1000.82,-49.44 991.71,-44.03 990.33,-50.9"></polygon>
 </g>
-<!-- 124429910981552 -->
-<g id="node10" class="node">
-<title>124429910981552</title>
-<polygon fill="none" stroke="black" points="3,-1.5 3,-37.5 234,-37.5 234,-1.5 3,-1.5"></polygon>
-<text text-anchor="middle" x="15.5" y="-15.8" font-family="Times,serif" font-size="14.00">a</text>
-<polyline fill="none" stroke="black" points="28,-1.5 28,-37.5 "></polyline>
-<text text-anchor="middle" x="79" y="-15.8" font-family="Times,serif" font-size="14.00">data 2.0000</text>
-<polyline fill="none" stroke="black" points="130,-1.5 130,-37.5 "></polyline>
-<text text-anchor="middle" x="182" y="-15.8" font-family="Times,serif" font-size="14.00">grad 0.0000</text>
+<!-- 127366926838720 -->
+<g id="node8" class="node">
+<title>127366926838720</title>
+<polygon fill="none" stroke="black" points="363,-37.5 363,-73.5 602,-73.5 602,-37.5 363,-37.5"></polygon>
+<text text-anchor="middle" x="375" y="-51.8" font-family="Times,serif" font-size="14.00">c</text>
+<polyline fill="none" stroke="black" points="387,-37.5 387,-73.5 "></polyline>
+<text text-anchor="middle" x="442.5" y="-51.8" font-family="Times,serif" font-size="14.00">data 10.0000</text>
+<polyline fill="none" stroke="black" points="498,-37.5 498,-73.5 "></polyline>
+<text text-anchor="middle" x="550" y="-51.8" font-family="Times,serif" font-size="14.00">grad 0.0000</text>
 </g>
-<!-- 124429910981552&#45;&gt;124429910980304* -->
-<g id="edge9" class="edge">
-<title>124429910981552-&gt;124429910980304*</title>
-<path fill="none" stroke="black" d="M209.51,-37.55C228.7,-41.4 247.88,-45.25 263.53,-48.39"></path>
-<polygon fill="black" stroke="black" points="263.26,-51.9 273.75,-50.44 264.64,-45.04 263.26,-51.9"></polygon>
+<!-- 127366926838720&#45;&gt;127366926841504+ -->
+<g id="edge4" class="edge">
+<title>127366926838720-&gt;127366926841504+</title>
+<path fill="none" stroke="black" d="M574.01,-73.55C593.64,-77.47 613.25,-81.38 629.13,-84.55"></path>
+<polygon fill="black" stroke="black" points="628.5,-87.99 638.99,-86.51 629.87,-81.12 628.5,-87.99"></polygon>
+</g>
+<!-- 127366926835696 -->
+<g id="node9" class="node">
+<title>127366926835696</title>
+<polygon fill="none" stroke="black" points="364.5,-110.5 364.5,-146.5 600.5,-146.5 600.5,-110.5 364.5,-110.5"></polygon>
+<text text-anchor="middle" x="377" y="-124.8" font-family="Times,serif" font-size="14.00">e</text>
+<polyline fill="none" stroke="black" points="389.5,-110.5 389.5,-146.5 "></polyline>
+<text text-anchor="middle" x="443" y="-124.8" font-family="Times,serif" font-size="14.00">data -6.0000</text>
+<polyline fill="none" stroke="black" points="496.5,-110.5 496.5,-146.5 "></polyline>
+<text text-anchor="middle" x="548.5" y="-124.8" font-family="Times,serif" font-size="14.00">grad 0.0000</text>
+</g>
+<!-- 127366926835696&#45;&gt;127366926841504+ -->
+<g id="edge7" class="edge">
+<title>127366926835696-&gt;127366926841504+</title>
+<path fill="none" stroke="black" d="M571.37,-110.49C591.67,-106.33 612.13,-102.13 628.64,-98.75"></path>
+<polygon fill="black" stroke="black" points="629.78,-102.09 638.87,-96.65 628.37,-95.23 629.78,-102.09"></polygon>
+</g>
+<!-- 127366926835696*&#45;&gt;127366926835696 -->
+<g id="edge3" class="edge">
+<title>127366926835696*-&gt;127366926835696</title>
+<path fill="none" stroke="black" d="M327.25,-128.5C335.09,-128.5 344.27,-128.5 354.17,-128.5"></path>
+<polygon fill="black" stroke="black" points="354.28,-132 364.28,-128.5 354.28,-125 354.28,-132"></polygon>
 </g>
 </g>
 </svg>
@@ -778,7 +778,7 @@ L(d,f) = d \cdot f
 \frac{\partial L}{\partial e} = \frac{\partial L}{\partial d} \cdot \frac{\partial d}{\partial c} = -2 \cdot 1 = -2
 \]</span></p>
 <p>This is the strong concept that make the AutoGrad work, we only need to calc the local gradient and multiply with the gradient from the father of nodes (because the gradient of the father already is in relation with the last node).</p>
-<div id="8da5f9c7" class="cell" data-execution_count="12">
+<div id="c8084399" class="cell" data-execution_count="12">
 <div class="cell-output cell-output-display">
 
 <div style="width: 100%; overflow-x: auto; background-color: white; border-radius: 8px; padding: 10px;">
@@ -787,85 +787,35 @@ L(d,f) = d \cdot f
 <!-- Generated by graphviz version 2.43.0 (0)
  -->
 <!-- Title: %3 Pages: 1 -->
-<svg width="1339pt" height="155pt" viewbox="0.00 0.00 1339.00 155.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink">
-<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 151)">
+<svg width="1339pt" height="192pt" viewbox="0.00 0.00 1339.00 192.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 188)">
 <title>%3</title>
-<polygon fill="white" stroke="transparent" points="-4,4 -4,-151 1335,-151 1335,4 -4,4"></polygon>
-<!-- 124429910967392 -->
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-188 1335,-188 1335,4 -4,4"></polygon>
+<!-- 127366926827680 -->
 <g id="node1" class="node">
-<title>124429910967392</title>
-<polygon fill="none" stroke="black" points="363,-110.5 363,-146.5 606,-146.5 606,-110.5 363,-110.5"></polygon>
-<text text-anchor="middle" x="375" y="-124.8" font-family="Times,serif" font-size="14.00">c</text>
-<polyline fill="none" stroke="black" points="387,-110.5 387,-146.5 "></polyline>
-<text text-anchor="middle" x="442.5" y="-124.8" font-family="Times,serif" font-size="14.00">data 10.0000</text>
-<polyline fill="none" stroke="black" points="498,-110.5 498,-146.5 "></polyline>
-<text text-anchor="middle" x="552" y="-124.8" font-family="Times,serif" font-size="14.00">grad -2.0000</text>
+<title>127366926827680</title>
+<polygon fill="none" stroke="black" points="0,-147.5 0,-183.5 237,-183.5 237,-147.5 0,-147.5"></polygon>
+<text text-anchor="middle" x="13" y="-161.8" font-family="Times,serif" font-size="14.00">b</text>
+<polyline fill="none" stroke="black" points="26,-147.5 26,-183.5 "></polyline>
+<text text-anchor="middle" x="79.5" y="-161.8" font-family="Times,serif" font-size="14.00">data -3.0000</text>
+<polyline fill="none" stroke="black" points="133,-147.5 133,-183.5 "></polyline>
+<text text-anchor="middle" x="185" y="-161.8" font-family="Times,serif" font-size="14.00">grad 0.0000</text>
 </g>
-<!-- 124429910977856+ -->
-<g id="node6" class="node">
-<title>124429910977856+</title>
-<ellipse fill="none" stroke="black" cx="669" cy="-91.5" rx="27" ry="18"></ellipse>
-<text text-anchor="middle" x="669" y="-87.8" font-family="Times,serif" font-size="14.00">+</text>
+<!-- 127366926835696* -->
+<g id="node10" class="node">
+<title>127366926835696*</title>
+<ellipse fill="none" stroke="black" cx="300" cy="-128.5" rx="27" ry="18"></ellipse>
+<text text-anchor="middle" x="300" y="-124.8" font-family="Times,serif" font-size="14.00">*</text>
 </g>
-<!-- 124429910967392&#45;&gt;124429910977856+ -->
-<g id="edge7" class="edge">
-<title>124429910967392-&gt;124429910977856+</title>
-<path fill="none" stroke="black" d="M574.34,-110.49C595.21,-106.26 616.25,-101.99 633.09,-98.58"></path>
-<polygon fill="black" stroke="black" points="633.88,-101.99 642.99,-96.57 632.49,-95.13 633.88,-101.99"></polygon>
-</g>
-<!-- 124429910975168 -->
-<g id="node2" class="node">
-<title>124429910975168</title>
-<polygon fill="none" stroke="black" points="733.5,-0.5 733.5,-36.5 966.5,-36.5 966.5,-0.5 733.5,-0.5"></polygon>
-<text text-anchor="middle" x="744.5" y="-14.8" font-family="Times,serif" font-size="14.00">f</text>
-<polyline fill="none" stroke="black" points="755.5,-0.5 755.5,-36.5 "></polyline>
-<text text-anchor="middle" x="809" y="-14.8" font-family="Times,serif" font-size="14.00">data -2.0000</text>
-<polyline fill="none" stroke="black" points="862.5,-0.5 862.5,-36.5 "></polyline>
-<text text-anchor="middle" x="914.5" y="-14.8" font-family="Times,serif" font-size="14.00">grad 4.0000</text>
-</g>
-<!-- 124429910968160* -->
-<g id="node8" class="node">
-<title>124429910968160*</title>
-<ellipse fill="none" stroke="black" cx="1031" cy="-54.5" rx="27" ry="18"></ellipse>
-<text text-anchor="middle" x="1031" y="-50.8" font-family="Times,serif" font-size="14.00">*</text>
-</g>
-<!-- 124429910975168&#45;&gt;124429910968160* -->
-<g id="edge6" class="edge">
-<title>124429910975168-&gt;124429910968160*</title>
-<path fill="none" stroke="black" d="M940.76,-36.55C959.9,-40.4 979.02,-44.25 994.62,-47.39"></path>
-<polygon fill="black" stroke="black" points="994.33,-50.9 1004.82,-49.44 995.71,-44.03 994.33,-50.9"></polygon>
-</g>
-<!-- 124429910980304 -->
-<g id="node3" class="node">
-<title>124429910980304</title>
-<polygon fill="none" stroke="black" points="364.5,-37.5 364.5,-73.5 604.5,-73.5 604.5,-37.5 364.5,-37.5"></polygon>
-<text text-anchor="middle" x="377" y="-51.8" font-family="Times,serif" font-size="14.00">e</text>
-<polyline fill="none" stroke="black" points="389.5,-37.5 389.5,-73.5 "></polyline>
-<text text-anchor="middle" x="443" y="-51.8" font-family="Times,serif" font-size="14.00">data -6.0000</text>
-<polyline fill="none" stroke="black" points="496.5,-37.5 496.5,-73.5 "></polyline>
-<text text-anchor="middle" x="550.5" y="-51.8" font-family="Times,serif" font-size="14.00">grad -2.0000</text>
-</g>
-<!-- 124429910980304&#45;&gt;124429910977856+ -->
+<!-- 127366926827680&#45;&gt;127366926835696* -->
 <g id="edge5" class="edge">
-<title>124429910980304-&gt;124429910977856+</title>
-<path fill="none" stroke="black" d="M577.02,-73.55C596.86,-77.47 616.69,-81.38 632.74,-84.55"></path>
-<polygon fill="black" stroke="black" points="632.23,-88.01 642.71,-86.51 633.58,-81.14 632.23,-88.01"></polygon>
+<title>127366926827680-&gt;127366926835696*</title>
+<path fill="none" stroke="black" d="M206.88,-147.49C227.07,-143.33 247.42,-139.13 263.83,-135.75"></path>
+<polygon fill="black" stroke="black" points="264.93,-139.1 274.01,-133.65 263.51,-132.24 264.93,-139.1"></polygon>
 </g>
-<!-- 124429910980304* -->
-<g id="node4" class="node">
-<title>124429910980304*</title>
-<ellipse fill="none" stroke="black" cx="300" cy="-55.5" rx="27" ry="18"></ellipse>
-<text text-anchor="middle" x="300" y="-51.8" font-family="Times,serif" font-size="14.00">*</text>
-</g>
-<!-- 124429910980304*&#45;&gt;124429910980304 -->
-<g id="edge1" class="edge">
-<title>124429910980304*-&gt;124429910980304</title>
-<path fill="none" stroke="black" d="M327.15,-55.5C334.98,-55.5 344.16,-55.5 354.06,-55.5"></path>
-<polygon fill="black" stroke="black" points="354.19,-59 364.19,-55.5 354.19,-52 354.19,-59"></polygon>
-</g>
-<!-- 124429910977856 -->
-<g id="node5" class="node">
-<title>124429910977856</title>
+<!-- 127366926841504 -->
+<g id="node2" class="node">
+<title>127366926841504</title>
 <polygon fill="none" stroke="black" points="732,-73.5 732,-109.5 968,-109.5 968,-73.5 732,-73.5"></polygon>
 <text text-anchor="middle" x="745" y="-87.8" font-family="Times,serif" font-size="14.00">d</text>
 <polyline fill="none" stroke="black" points="758,-73.5 758,-109.5 "></polyline>
@@ -873,21 +823,33 @@ L(d,f) = d \cdot f
 <polyline fill="none" stroke="black" points="860,-73.5 860,-109.5 "></polyline>
 <text text-anchor="middle" x="914" y="-87.8" font-family="Times,serif" font-size="14.00">grad -2.0000</text>
 </g>
-<!-- 124429910977856&#45;&gt;124429910968160* -->
-<g id="edge4" class="edge">
-<title>124429910977856-&gt;124429910968160*</title>
+<!-- 127366926838768* -->
+<g id="node5" class="node">
+<title>127366926838768*</title>
+<ellipse fill="none" stroke="black" cx="1031" cy="-54.5" rx="27" ry="18"></ellipse>
+<text text-anchor="middle" x="1031" y="-50.8" font-family="Times,serif" font-size="14.00">*</text>
+</g>
+<!-- 127366926841504&#45;&gt;127366926838768* -->
+<g id="edge9" class="edge">
+<title>127366926841504-&gt;127366926838768*</title>
 <path fill="none" stroke="black" d="M938.14,-73.49C958.27,-69.33 978.56,-65.13 994.93,-61.75"></path>
 <polygon fill="black" stroke="black" points="996,-65.1 1005.08,-59.65 994.58,-58.25 996,-65.1"></polygon>
 </g>
-<!-- 124429910977856+&#45;&gt;124429910977856 -->
-<g id="edge2" class="edge">
-<title>124429910977856+-&gt;124429910977856</title>
+<!-- 127366926841504+ -->
+<g id="node3" class="node">
+<title>127366926841504+</title>
+<ellipse fill="none" stroke="black" cx="669" cy="-91.5" rx="27" ry="18"></ellipse>
+<text text-anchor="middle" x="669" y="-87.8" font-family="Times,serif" font-size="14.00">+</text>
+</g>
+<!-- 127366926841504+&#45;&gt;127366926841504 -->
+<g id="edge1" class="edge">
+<title>127366926841504+-&gt;127366926841504</title>
 <path fill="none" stroke="black" d="M696.03,-91.5C703.58,-91.5 712.38,-91.5 721.87,-91.5"></path>
 <polygon fill="black" stroke="black" points="721.99,-95 731.99,-91.5 721.99,-88 721.99,-95"></polygon>
 </g>
-<!-- 124429910968160 -->
-<g id="node7" class="node">
-<title>124429910968160</title>
+<!-- 127366926838768 -->
+<g id="node4" class="node">
+<title>127366926838768</title>
 <polygon fill="none" stroke="black" points="1094,-36.5 1094,-72.5 1331,-72.5 1331,-36.5 1094,-36.5"></polygon>
 <text text-anchor="middle" x="1107" y="-50.8" font-family="Times,serif" font-size="14.00">L</text>
 <polyline fill="none" stroke="black" points="1120,-36.5 1120,-72.5 "></polyline>
@@ -895,43 +857,81 @@ L(d,f) = d \cdot f
 <polyline fill="none" stroke="black" points="1227,-36.5 1227,-72.5 "></polyline>
 <text text-anchor="middle" x="1279" y="-50.8" font-family="Times,serif" font-size="14.00">grad 1.0000</text>
 </g>
-<!-- 124429910968160*&#45;&gt;124429910968160 -->
-<g id="edge3" class="edge">
-<title>124429910968160*-&gt;124429910968160</title>
+<!-- 127366926838768*&#45;&gt;127366926838768 -->
+<g id="edge2" class="edge">
+<title>127366926838768*-&gt;127366926838768</title>
 <path fill="none" stroke="black" d="M1058.1,-54.5C1065.61,-54.5 1074.33,-54.5 1083.75,-54.5"></path>
 <polygon fill="black" stroke="black" points="1083.78,-58 1093.78,-54.5 1083.78,-51 1083.78,-58"></polygon>
 </g>
-<!-- 124429910976896 -->
-<g id="node9" class="node">
-<title>124429910976896</title>
-<polygon fill="none" stroke="black" points="0,-74.5 0,-110.5 237,-110.5 237,-74.5 0,-74.5"></polygon>
-<text text-anchor="middle" x="13" y="-88.8" font-family="Times,serif" font-size="14.00">b</text>
-<polyline fill="none" stroke="black" points="26,-74.5 26,-110.5 "></polyline>
-<text text-anchor="middle" x="79.5" y="-88.8" font-family="Times,serif" font-size="14.00">data -3.0000</text>
-<polyline fill="none" stroke="black" points="133,-74.5 133,-110.5 "></polyline>
-<text text-anchor="middle" x="185" y="-88.8" font-family="Times,serif" font-size="14.00">grad 0.0000</text>
+<!-- 127366926831472 -->
+<g id="node6" class="node">
+<title>127366926831472</title>
+<polygon fill="none" stroke="black" points="3,-74.5 3,-110.5 234,-110.5 234,-74.5 3,-74.5"></polygon>
+<text text-anchor="middle" x="15.5" y="-88.8" font-family="Times,serif" font-size="14.00">a</text>
+<polyline fill="none" stroke="black" points="28,-74.5 28,-110.5 "></polyline>
+<text text-anchor="middle" x="79" y="-88.8" font-family="Times,serif" font-size="14.00">data 2.0000</text>
+<polyline fill="none" stroke="black" points="130,-74.5 130,-110.5 "></polyline>
+<text text-anchor="middle" x="182" y="-88.8" font-family="Times,serif" font-size="14.00">grad 0.0000</text>
 </g>
-<!-- 124429910976896&#45;&gt;124429910980304* -->
+<!-- 127366926831472&#45;&gt;127366926835696* -->
+<g id="edge6" class="edge">
+<title>127366926831472-&gt;127366926835696*</title>
+<path fill="none" stroke="black" d="M209.51,-110.55C228.7,-114.4 247.88,-118.25 263.53,-121.39"></path>
+<polygon fill="black" stroke="black" points="263.26,-124.9 273.75,-123.44 264.64,-118.04 263.26,-124.9"></polygon>
+</g>
+<!-- 127366926833056 -->
+<g id="node7" class="node">
+<title>127366926833056</title>
+<polygon fill="none" stroke="black" points="733.5,-0.5 733.5,-36.5 966.5,-36.5 966.5,-0.5 733.5,-0.5"></polygon>
+<text text-anchor="middle" x="744.5" y="-14.8" font-family="Times,serif" font-size="14.00">f</text>
+<polyline fill="none" stroke="black" points="755.5,-0.5 755.5,-36.5 "></polyline>
+<text text-anchor="middle" x="809" y="-14.8" font-family="Times,serif" font-size="14.00">data -2.0000</text>
+<polyline fill="none" stroke="black" points="862.5,-0.5 862.5,-36.5 "></polyline>
+<text text-anchor="middle" x="914.5" y="-14.8" font-family="Times,serif" font-size="14.00">grad 4.0000</text>
+</g>
+<!-- 127366926833056&#45;&gt;127366926838768* -->
 <g id="edge8" class="edge">
-<title>124429910976896-&gt;124429910980304*</title>
-<path fill="none" stroke="black" d="M206.88,-74.49C227.07,-70.33 247.42,-66.13 263.83,-62.75"></path>
-<polygon fill="black" stroke="black" points="264.93,-66.1 274.01,-60.65 263.51,-59.24 264.93,-66.1"></polygon>
+<title>127366926833056-&gt;127366926838768*</title>
+<path fill="none" stroke="black" d="M940.76,-36.55C959.9,-40.4 979.02,-44.25 994.62,-47.39"></path>
+<polygon fill="black" stroke="black" points="994.33,-50.9 1004.82,-49.44 995.71,-44.03 994.33,-50.9"></polygon>
 </g>
-<!-- 124429910981552 -->
-<g id="node10" class="node">
-<title>124429910981552</title>
-<polygon fill="none" stroke="black" points="3,-1.5 3,-37.5 234,-37.5 234,-1.5 3,-1.5"></polygon>
-<text text-anchor="middle" x="15.5" y="-15.8" font-family="Times,serif" font-size="14.00">a</text>
-<polyline fill="none" stroke="black" points="28,-1.5 28,-37.5 "></polyline>
-<text text-anchor="middle" x="79" y="-15.8" font-family="Times,serif" font-size="14.00">data 2.0000</text>
-<polyline fill="none" stroke="black" points="130,-1.5 130,-37.5 "></polyline>
-<text text-anchor="middle" x="182" y="-15.8" font-family="Times,serif" font-size="14.00">grad 0.0000</text>
+<!-- 127366926838720 -->
+<g id="node8" class="node">
+<title>127366926838720</title>
+<polygon fill="none" stroke="black" points="363,-37.5 363,-73.5 606,-73.5 606,-37.5 363,-37.5"></polygon>
+<text text-anchor="middle" x="375" y="-51.8" font-family="Times,serif" font-size="14.00">c</text>
+<polyline fill="none" stroke="black" points="387,-37.5 387,-73.5 "></polyline>
+<text text-anchor="middle" x="442.5" y="-51.8" font-family="Times,serif" font-size="14.00">data 10.0000</text>
+<polyline fill="none" stroke="black" points="498,-37.5 498,-73.5 "></polyline>
+<text text-anchor="middle" x="552" y="-51.8" font-family="Times,serif" font-size="14.00">grad -2.0000</text>
 </g>
-<!-- 124429910981552&#45;&gt;124429910980304* -->
-<g id="edge9" class="edge">
-<title>124429910981552-&gt;124429910980304*</title>
-<path fill="none" stroke="black" d="M209.51,-37.55C228.7,-41.4 247.88,-45.25 263.53,-48.39"></path>
-<polygon fill="black" stroke="black" points="263.26,-51.9 273.75,-50.44 264.64,-45.04 263.26,-51.9"></polygon>
+<!-- 127366926838720&#45;&gt;127366926841504+ -->
+<g id="edge4" class="edge">
+<title>127366926838720-&gt;127366926841504+</title>
+<path fill="none" stroke="black" d="M577.02,-73.55C596.86,-77.47 616.69,-81.38 632.74,-84.55"></path>
+<polygon fill="black" stroke="black" points="632.23,-88.01 642.71,-86.51 633.58,-81.14 632.23,-88.01"></polygon>
+</g>
+<!-- 127366926835696 -->
+<g id="node9" class="node">
+<title>127366926835696</title>
+<polygon fill="none" stroke="black" points="364.5,-110.5 364.5,-146.5 604.5,-146.5 604.5,-110.5 364.5,-110.5"></polygon>
+<text text-anchor="middle" x="377" y="-124.8" font-family="Times,serif" font-size="14.00">e</text>
+<polyline fill="none" stroke="black" points="389.5,-110.5 389.5,-146.5 "></polyline>
+<text text-anchor="middle" x="443" y="-124.8" font-family="Times,serif" font-size="14.00">data -6.0000</text>
+<polyline fill="none" stroke="black" points="496.5,-110.5 496.5,-146.5 "></polyline>
+<text text-anchor="middle" x="550.5" y="-124.8" font-family="Times,serif" font-size="14.00">grad -2.0000</text>
+</g>
+<!-- 127366926835696&#45;&gt;127366926841504+ -->
+<g id="edge7" class="edge">
+<title>127366926835696-&gt;127366926841504+</title>
+<path fill="none" stroke="black" d="M574.34,-110.49C595.21,-106.26 616.25,-101.99 633.09,-98.58"></path>
+<polygon fill="black" stroke="black" points="633.88,-101.99 642.99,-96.57 632.49,-95.13 633.88,-101.99"></polygon>
+</g>
+<!-- 127366926835696*&#45;&gt;127366926835696 -->
+<g id="edge3" class="edge">
+<title>127366926835696*-&gt;127366926835696</title>
+<path fill="none" stroke="black" d="M327.15,-128.5C334.98,-128.5 344.16,-128.5 354.06,-128.5"></path>
+<polygon fill="black" stroke="black" points="354.19,-132 364.19,-128.5 354.19,-125 354.19,-132"></polygon>
 </g>
 </g>
 </svg>
@@ -940,7 +940,7 @@ L(d,f) = d \cdot f
 </div>
 </div>
 <p>So for the last two variables <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>, its another multiplication, so the local grad of <span class="math inline">\(b\)</span> its data of <span class="math inline">\(a\)</span>, and for <span class="math inline">\(a\)</span> its data from <span class="math inline">\(b\)</span>. Put in a code, its just</p>
-<div id="08b2d1cf" class="cell" data-execution_count="13">
+<div id="bc734b81" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>L.grad <span class="op">=</span> <span class="dv">1</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>d.grad <span class="op">=</span> f.data</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>f.grad <span class="op">=</span> d.data</span>
@@ -949,7 +949,7 @@ L(d,f) = d \cdot f
 <span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>a.grad <span class="op">=</span> b.data <span class="op">*</span> e.grad</span>
 <span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>b.grad <span class="op">=</span> a.data <span class="op">*</span> e.grad</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="2de5cb86" class="cell" data-execution_count="14">
+<div id="fec25d37" class="cell" data-execution_count="14">
 <div class="cell-output cell-output-display">
 
 <div style="width: 100%; overflow-x: auto; background-color: white; border-radius: 8px; padding: 10px;">
@@ -958,85 +958,35 @@ L(d,f) = d \cdot f
 <!-- Generated by graphviz version 2.43.0 (0)
  -->
 <!-- Title: %3 Pages: 1 -->
-<svg width="1343pt" height="155pt" viewbox="0.00 0.00 1343.00 155.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink">
-<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 151)">
+<svg width="1343pt" height="192pt" viewbox="0.00 0.00 1343.00 192.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 188)">
 <title>%3</title>
-<polygon fill="white" stroke="transparent" points="-4,4 -4,-151 1339,-151 1339,4 -4,4"></polygon>
-<!-- 124429910967392 -->
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-188 1339,-188 1339,4 -4,4"></polygon>
+<!-- 127366926827680 -->
 <g id="node1" class="node">
-<title>124429910967392</title>
-<polygon fill="none" stroke="black" points="367,-110.5 367,-146.5 610,-146.5 610,-110.5 367,-110.5"></polygon>
-<text text-anchor="middle" x="379" y="-124.8" font-family="Times,serif" font-size="14.00">c</text>
-<polyline fill="none" stroke="black" points="391,-110.5 391,-146.5 "></polyline>
-<text text-anchor="middle" x="446.5" y="-124.8" font-family="Times,serif" font-size="14.00">data 10.0000</text>
-<polyline fill="none" stroke="black" points="502,-110.5 502,-146.5 "></polyline>
-<text text-anchor="middle" x="556" y="-124.8" font-family="Times,serif" font-size="14.00">grad -2.0000</text>
+<title>127366926827680</title>
+<polygon fill="none" stroke="black" points="0,-147.5 0,-183.5 241,-183.5 241,-147.5 0,-147.5"></polygon>
+<text text-anchor="middle" x="13" y="-161.8" font-family="Times,serif" font-size="14.00">b</text>
+<polyline fill="none" stroke="black" points="26,-147.5 26,-183.5 "></polyline>
+<text text-anchor="middle" x="79.5" y="-161.8" font-family="Times,serif" font-size="14.00">data -3.0000</text>
+<polyline fill="none" stroke="black" points="133,-147.5 133,-183.5 "></polyline>
+<text text-anchor="middle" x="187" y="-161.8" font-family="Times,serif" font-size="14.00">grad -4.0000</text>
 </g>
-<!-- 124429910977856+ -->
-<g id="node6" class="node">
-<title>124429910977856+</title>
-<ellipse fill="none" stroke="black" cx="673" cy="-91.5" rx="27" ry="18"></ellipse>
-<text text-anchor="middle" x="673" y="-87.8" font-family="Times,serif" font-size="14.00">+</text>
+<!-- 127366926835696* -->
+<g id="node10" class="node">
+<title>127366926835696*</title>
+<ellipse fill="none" stroke="black" cx="304" cy="-128.5" rx="27" ry="18"></ellipse>
+<text text-anchor="middle" x="304" y="-124.8" font-family="Times,serif" font-size="14.00">*</text>
 </g>
-<!-- 124429910967392&#45;&gt;124429910977856+ -->
-<g id="edge7" class="edge">
-<title>124429910967392-&gt;124429910977856+</title>
-<path fill="none" stroke="black" d="M578.34,-110.49C599.21,-106.26 620.25,-101.99 637.09,-98.58"></path>
-<polygon fill="black" stroke="black" points="637.88,-101.99 646.99,-96.57 636.49,-95.13 637.88,-101.99"></polygon>
-</g>
-<!-- 124429910975168 -->
-<g id="node2" class="node">
-<title>124429910975168</title>
-<polygon fill="none" stroke="black" points="737.5,-0.5 737.5,-36.5 970.5,-36.5 970.5,-0.5 737.5,-0.5"></polygon>
-<text text-anchor="middle" x="748.5" y="-14.8" font-family="Times,serif" font-size="14.00">f</text>
-<polyline fill="none" stroke="black" points="759.5,-0.5 759.5,-36.5 "></polyline>
-<text text-anchor="middle" x="813" y="-14.8" font-family="Times,serif" font-size="14.00">data -2.0000</text>
-<polyline fill="none" stroke="black" points="866.5,-0.5 866.5,-36.5 "></polyline>
-<text text-anchor="middle" x="918.5" y="-14.8" font-family="Times,serif" font-size="14.00">grad 4.0000</text>
-</g>
-<!-- 124429910968160* -->
-<g id="node8" class="node">
-<title>124429910968160*</title>
-<ellipse fill="none" stroke="black" cx="1035" cy="-54.5" rx="27" ry="18"></ellipse>
-<text text-anchor="middle" x="1035" y="-50.8" font-family="Times,serif" font-size="14.00">*</text>
-</g>
-<!-- 124429910975168&#45;&gt;124429910968160* -->
-<g id="edge6" class="edge">
-<title>124429910975168-&gt;124429910968160*</title>
-<path fill="none" stroke="black" d="M944.76,-36.55C963.9,-40.4 983.02,-44.25 998.62,-47.39"></path>
-<polygon fill="black" stroke="black" points="998.33,-50.9 1008.82,-49.44 999.71,-44.03 998.33,-50.9"></polygon>
-</g>
-<!-- 124429910980304 -->
-<g id="node3" class="node">
-<title>124429910980304</title>
-<polygon fill="none" stroke="black" points="368.5,-37.5 368.5,-73.5 608.5,-73.5 608.5,-37.5 368.5,-37.5"></polygon>
-<text text-anchor="middle" x="381" y="-51.8" font-family="Times,serif" font-size="14.00">e</text>
-<polyline fill="none" stroke="black" points="393.5,-37.5 393.5,-73.5 "></polyline>
-<text text-anchor="middle" x="447" y="-51.8" font-family="Times,serif" font-size="14.00">data -6.0000</text>
-<polyline fill="none" stroke="black" points="500.5,-37.5 500.5,-73.5 "></polyline>
-<text text-anchor="middle" x="554.5" y="-51.8" font-family="Times,serif" font-size="14.00">grad -2.0000</text>
-</g>
-<!-- 124429910980304&#45;&gt;124429910977856+ -->
+<!-- 127366926827680&#45;&gt;127366926835696* -->
 <g id="edge5" class="edge">
-<title>124429910980304-&gt;124429910977856+</title>
-<path fill="none" stroke="black" d="M581.02,-73.55C600.86,-77.47 620.69,-81.38 636.74,-84.55"></path>
-<polygon fill="black" stroke="black" points="636.23,-88.01 646.71,-86.51 637.58,-81.14 636.23,-88.01"></polygon>
+<title>127366926827680-&gt;127366926835696*</title>
+<path fill="none" stroke="black" d="M209.86,-147.49C230.46,-143.29 251.23,-139.05 267.91,-135.65"></path>
+<polygon fill="black" stroke="black" points="268.64,-139.08 277.73,-133.65 267.24,-132.22 268.64,-139.08"></polygon>
 </g>
-<!-- 124429910980304* -->
-<g id="node4" class="node">
-<title>124429910980304*</title>
-<ellipse fill="none" stroke="black" cx="304" cy="-55.5" rx="27" ry="18"></ellipse>
-<text text-anchor="middle" x="304" y="-51.8" font-family="Times,serif" font-size="14.00">*</text>
-</g>
-<!-- 124429910980304*&#45;&gt;124429910980304 -->
-<g id="edge1" class="edge">
-<title>124429910980304*-&gt;124429910980304</title>
-<path fill="none" stroke="black" d="M331.15,-55.5C338.98,-55.5 348.16,-55.5 358.06,-55.5"></path>
-<polygon fill="black" stroke="black" points="358.19,-59 368.19,-55.5 358.19,-52 358.19,-59"></polygon>
-</g>
-<!-- 124429910977856 -->
-<g id="node5" class="node">
-<title>124429910977856</title>
+<!-- 127366926841504 -->
+<g id="node2" class="node">
+<title>127366926841504</title>
 <polygon fill="none" stroke="black" points="736,-73.5 736,-109.5 972,-109.5 972,-73.5 736,-73.5"></polygon>
 <text text-anchor="middle" x="749" y="-87.8" font-family="Times,serif" font-size="14.00">d</text>
 <polyline fill="none" stroke="black" points="762,-73.5 762,-109.5 "></polyline>
@@ -1044,21 +994,33 @@ L(d,f) = d \cdot f
 <polyline fill="none" stroke="black" points="864,-73.5 864,-109.5 "></polyline>
 <text text-anchor="middle" x="918" y="-87.8" font-family="Times,serif" font-size="14.00">grad -2.0000</text>
 </g>
-<!-- 124429910977856&#45;&gt;124429910968160* -->
-<g id="edge4" class="edge">
-<title>124429910977856-&gt;124429910968160*</title>
+<!-- 127366926838768* -->
+<g id="node5" class="node">
+<title>127366926838768*</title>
+<ellipse fill="none" stroke="black" cx="1035" cy="-54.5" rx="27" ry="18"></ellipse>
+<text text-anchor="middle" x="1035" y="-50.8" font-family="Times,serif" font-size="14.00">*</text>
+</g>
+<!-- 127366926841504&#45;&gt;127366926838768* -->
+<g id="edge9" class="edge">
+<title>127366926841504-&gt;127366926838768*</title>
 <path fill="none" stroke="black" d="M942.14,-73.49C962.27,-69.33 982.56,-65.13 998.93,-61.75"></path>
 <polygon fill="black" stroke="black" points="1000,-65.1 1009.08,-59.65 998.58,-58.25 1000,-65.1"></polygon>
 </g>
-<!-- 124429910977856+&#45;&gt;124429910977856 -->
-<g id="edge2" class="edge">
-<title>124429910977856+-&gt;124429910977856</title>
+<!-- 127366926841504+ -->
+<g id="node3" class="node">
+<title>127366926841504+</title>
+<ellipse fill="none" stroke="black" cx="673" cy="-91.5" rx="27" ry="18"></ellipse>
+<text text-anchor="middle" x="673" y="-87.8" font-family="Times,serif" font-size="14.00">+</text>
+</g>
+<!-- 127366926841504+&#45;&gt;127366926841504 -->
+<g id="edge1" class="edge">
+<title>127366926841504+-&gt;127366926841504</title>
 <path fill="none" stroke="black" d="M700.03,-91.5C707.58,-91.5 716.38,-91.5 725.87,-91.5"></path>
 <polygon fill="black" stroke="black" points="725.99,-95 735.99,-91.5 725.99,-88 725.99,-95"></polygon>
 </g>
-<!-- 124429910968160 -->
-<g id="node7" class="node">
-<title>124429910968160</title>
+<!-- 127366926838768 -->
+<g id="node4" class="node">
+<title>127366926838768</title>
 <polygon fill="none" stroke="black" points="1098,-36.5 1098,-72.5 1335,-72.5 1335,-36.5 1098,-36.5"></polygon>
 <text text-anchor="middle" x="1111" y="-50.8" font-family="Times,serif" font-size="14.00">L</text>
 <polyline fill="none" stroke="black" points="1124,-36.5 1124,-72.5 "></polyline>
@@ -1066,43 +1028,81 @@ L(d,f) = d \cdot f
 <polyline fill="none" stroke="black" points="1231,-36.5 1231,-72.5 "></polyline>
 <text text-anchor="middle" x="1283" y="-50.8" font-family="Times,serif" font-size="14.00">grad 1.0000</text>
 </g>
-<!-- 124429910968160*&#45;&gt;124429910968160 -->
-<g id="edge3" class="edge">
-<title>124429910968160*-&gt;124429910968160</title>
+<!-- 127366926838768*&#45;&gt;127366926838768 -->
+<g id="edge2" class="edge">
+<title>127366926838768*-&gt;127366926838768</title>
 <path fill="none" stroke="black" d="M1062.1,-54.5C1069.61,-54.5 1078.33,-54.5 1087.75,-54.5"></path>
 <polygon fill="black" stroke="black" points="1087.78,-58 1097.78,-54.5 1087.78,-51 1087.78,-58"></polygon>
 </g>
-<!-- 124429910976896 -->
-<g id="node9" class="node">
-<title>124429910976896</title>
-<polygon fill="none" stroke="black" points="0,-74.5 0,-110.5 241,-110.5 241,-74.5 0,-74.5"></polygon>
-<text text-anchor="middle" x="13" y="-88.8" font-family="Times,serif" font-size="14.00">b</text>
-<polyline fill="none" stroke="black" points="26,-74.5 26,-110.5 "></polyline>
-<text text-anchor="middle" x="79.5" y="-88.8" font-family="Times,serif" font-size="14.00">data -3.0000</text>
-<polyline fill="none" stroke="black" points="133,-74.5 133,-110.5 "></polyline>
-<text text-anchor="middle" x="187" y="-88.8" font-family="Times,serif" font-size="14.00">grad -4.0000</text>
+<!-- 127366926831472 -->
+<g id="node6" class="node">
+<title>127366926831472</title>
+<polygon fill="none" stroke="black" points="5,-74.5 5,-110.5 236,-110.5 236,-74.5 5,-74.5"></polygon>
+<text text-anchor="middle" x="17.5" y="-88.8" font-family="Times,serif" font-size="14.00">a</text>
+<polyline fill="none" stroke="black" points="30,-74.5 30,-110.5 "></polyline>
+<text text-anchor="middle" x="81" y="-88.8" font-family="Times,serif" font-size="14.00">data 2.0000</text>
+<polyline fill="none" stroke="black" points="132,-74.5 132,-110.5 "></polyline>
+<text text-anchor="middle" x="184" y="-88.8" font-family="Times,serif" font-size="14.00">grad 6.0000</text>
 </g>
-<!-- 124429910976896&#45;&gt;124429910980304* -->
+<!-- 127366926831472&#45;&gt;127366926835696* -->
+<g id="edge6" class="edge">
+<title>127366926831472-&gt;127366926835696*</title>
+<path fill="none" stroke="black" d="M212.52,-110.55C232.25,-114.47 251.97,-118.38 267.94,-121.55"></path>
+<polygon fill="black" stroke="black" points="267.36,-125 277.85,-123.51 268.72,-118.13 267.36,-125"></polygon>
+</g>
+<!-- 127366926833056 -->
+<g id="node7" class="node">
+<title>127366926833056</title>
+<polygon fill="none" stroke="black" points="737.5,-0.5 737.5,-36.5 970.5,-36.5 970.5,-0.5 737.5,-0.5"></polygon>
+<text text-anchor="middle" x="748.5" y="-14.8" font-family="Times,serif" font-size="14.00">f</text>
+<polyline fill="none" stroke="black" points="759.5,-0.5 759.5,-36.5 "></polyline>
+<text text-anchor="middle" x="813" y="-14.8" font-family="Times,serif" font-size="14.00">data -2.0000</text>
+<polyline fill="none" stroke="black" points="866.5,-0.5 866.5,-36.5 "></polyline>
+<text text-anchor="middle" x="918.5" y="-14.8" font-family="Times,serif" font-size="14.00">grad 4.0000</text>
+</g>
+<!-- 127366926833056&#45;&gt;127366926838768* -->
 <g id="edge8" class="edge">
-<title>124429910976896-&gt;124429910980304*</title>
-<path fill="none" stroke="black" d="M209.86,-74.49C230.46,-70.29 251.23,-66.05 267.91,-62.65"></path>
-<polygon fill="black" stroke="black" points="268.64,-66.08 277.73,-60.65 267.24,-59.22 268.64,-66.08"></polygon>
+<title>127366926833056-&gt;127366926838768*</title>
+<path fill="none" stroke="black" d="M944.76,-36.55C963.9,-40.4 983.02,-44.25 998.62,-47.39"></path>
+<polygon fill="black" stroke="black" points="998.33,-50.9 1008.82,-49.44 999.71,-44.03 998.33,-50.9"></polygon>
 </g>
-<!-- 124429910981552 -->
-<g id="node10" class="node">
-<title>124429910981552</title>
-<polygon fill="none" stroke="black" points="5,-1.5 5,-37.5 236,-37.5 236,-1.5 5,-1.5"></polygon>
-<text text-anchor="middle" x="17.5" y="-15.8" font-family="Times,serif" font-size="14.00">a</text>
-<polyline fill="none" stroke="black" points="30,-1.5 30,-37.5 "></polyline>
-<text text-anchor="middle" x="81" y="-15.8" font-family="Times,serif" font-size="14.00">data 2.0000</text>
-<polyline fill="none" stroke="black" points="132,-1.5 132,-37.5 "></polyline>
-<text text-anchor="middle" x="184" y="-15.8" font-family="Times,serif" font-size="14.00">grad 6.0000</text>
+<!-- 127366926838720 -->
+<g id="node8" class="node">
+<title>127366926838720</title>
+<polygon fill="none" stroke="black" points="367,-37.5 367,-73.5 610,-73.5 610,-37.5 367,-37.5"></polygon>
+<text text-anchor="middle" x="379" y="-51.8" font-family="Times,serif" font-size="14.00">c</text>
+<polyline fill="none" stroke="black" points="391,-37.5 391,-73.5 "></polyline>
+<text text-anchor="middle" x="446.5" y="-51.8" font-family="Times,serif" font-size="14.00">data 10.0000</text>
+<polyline fill="none" stroke="black" points="502,-37.5 502,-73.5 "></polyline>
+<text text-anchor="middle" x="556" y="-51.8" font-family="Times,serif" font-size="14.00">grad -2.0000</text>
 </g>
-<!-- 124429910981552&#45;&gt;124429910980304* -->
-<g id="edge9" class="edge">
-<title>124429910981552-&gt;124429910980304*</title>
-<path fill="none" stroke="black" d="M212.52,-37.55C232.25,-41.47 251.97,-45.38 267.94,-48.55"></path>
-<polygon fill="black" stroke="black" points="267.36,-52 277.85,-50.51 268.72,-45.13 267.36,-52"></polygon>
+<!-- 127366926838720&#45;&gt;127366926841504+ -->
+<g id="edge4" class="edge">
+<title>127366926838720-&gt;127366926841504+</title>
+<path fill="none" stroke="black" d="M581.02,-73.55C600.86,-77.47 620.69,-81.38 636.74,-84.55"></path>
+<polygon fill="black" stroke="black" points="636.23,-88.01 646.71,-86.51 637.58,-81.14 636.23,-88.01"></polygon>
+</g>
+<!-- 127366926835696 -->
+<g id="node9" class="node">
+<title>127366926835696</title>
+<polygon fill="none" stroke="black" points="368.5,-110.5 368.5,-146.5 608.5,-146.5 608.5,-110.5 368.5,-110.5"></polygon>
+<text text-anchor="middle" x="381" y="-124.8" font-family="Times,serif" font-size="14.00">e</text>
+<polyline fill="none" stroke="black" points="393.5,-110.5 393.5,-146.5 "></polyline>
+<text text-anchor="middle" x="447" y="-124.8" font-family="Times,serif" font-size="14.00">data -6.0000</text>
+<polyline fill="none" stroke="black" points="500.5,-110.5 500.5,-146.5 "></polyline>
+<text text-anchor="middle" x="554.5" y="-124.8" font-family="Times,serif" font-size="14.00">grad -2.0000</text>
+</g>
+<!-- 127366926835696&#45;&gt;127366926841504+ -->
+<g id="edge7" class="edge">
+<title>127366926835696-&gt;127366926841504+</title>
+<path fill="none" stroke="black" d="M578.34,-110.49C599.21,-106.26 620.25,-101.99 637.09,-98.58"></path>
+<polygon fill="black" stroke="black" points="637.88,-101.99 646.99,-96.57 636.49,-95.13 637.88,-101.99"></polygon>
+</g>
+<!-- 127366926835696*&#45;&gt;127366926835696 -->
+<g id="edge3" class="edge">
+<title>127366926835696*-&gt;127366926835696</title>
+<path fill="none" stroke="black" d="M331.15,-128.5C338.98,-128.5 348.16,-128.5 358.06,-128.5"></path>
+<polygon fill="black" stroke="black" points="358.19,-132 368.19,-128.5 358.19,-125 358.19,-132"></polygon>
 </g>
 </g>
 </svg>
@@ -1114,7 +1114,7 @@ L(d,f) = d \cdot f
 <section id="automatically-backward-pass" class="level3">
 <h3 class="anchored" data-anchor-id="automatically-backward-pass">Automatically backward pass</h3>
 <p>To make this automatically, we probably notted that we need to start from the last node and go in a reverse order, this is necessery because for calc the gradient of and node, we need the local gradient of the variable, and the gradient of the father, the unique exception is the last node, because its gradient always will be 1. The way will we implement this, its just make a node do the calc of his childs gradients, lets see the mul function:</p>
-<div id="67bac694" class="cell" data-execution_count="15">
+<div id="a50931f8" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Value:</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, data, _children<span class="op">=</span>(), _op<span class="op">=</span><span class="st">""</span>, label<span class="op">=</span><span class="st">""</span>):</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.data <span class="op">=</span> data</span>
@@ -1137,7 +1137,7 @@ L(d,f) = d \cdot f
 <span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> out</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Lets check with this can calc the gradients of <span class="math inline">\(d\)</span> and <span class="math inline">\(f\)</span></p>
-<div id="fdcd7acf" class="cell" data-execution_count="17">
+<div id="8c580891" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> Value(<span class="fl">2.</span>, label<span class="op">=</span><span class="st">"a"</span>)</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> Value(<span class="op">-</span><span class="fl">3.0</span>, label<span class="op">=</span><span class="st">"b"</span>)</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> Value(<span class="fl">10.</span>, label<span class="op">=</span><span class="st">"c"</span>)</span>
@@ -1157,7 +1157,7 @@ Grad of f: 4.0</code></pre>
 </div>
 </div>
 <p>It works! So know, its just do for add too, below are the complete Value class</p>
-<div id="1b14790a" class="cell" data-execution_count="18">
+<div id="f3f42584" class="cell" data-execution_count="18">
 <details class="code-fold">
 <summary>Show Python code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Value:</span>
@@ -1198,7 +1198,7 @@ Grad of f: 4.0</code></pre>
 </details>
 </div>
 <p>Lets check with we can calc all the gradients:</p>
-<div id="b217e0d8" class="cell" data-execution_count="19">
+<div id="5456c18c" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> Value(<span class="fl">2.</span>, label<span class="op">=</span><span class="st">"a"</span>)</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> Value(<span class="op">-</span><span class="fl">3.0</span>, label<span class="op">=</span><span class="st">"b"</span>)</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> Value(<span class="fl">10.</span>, label<span class="op">=</span><span class="st">"c"</span>)</span>
@@ -1239,7 +1239,7 @@ Grad of a: 6.0</code></pre>
 </div>
 </div>
 <p>It worked perfectly, know we only need to make a funcion that calls all _backward() in all nodes recursively. Therefore we will use an algorithm for generating the topological order of the graph. That is, a linear order in which we can execute the nodes without causing any kind of dependency problem. Explaining this algorithm in depth is outside the scope of this project, but it is not that complicated, see below:</p>
-<div id="96e968b5" class="cell" data-execution_count="20">
+<div id="a8820a41" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ... All methods of Value class</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> backward(<span class="va">self</span>):</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.grad <span class="op">=</span> <span class="dv">1</span></span>
@@ -1258,7 +1258,7 @@ Grad of a: 6.0</code></pre>
 <span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>        node._backward()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Know, lets test our backward function</p>
-<div id="c942cc5f" class="cell" data-execution_count="21">
+<div id="e176bcda" class="cell" data-execution_count="21">
 <details class="code-fold">
 <summary>Show Python code</summary>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Value:</span>
@@ -1314,7 +1314,7 @@ Grad of a: 6.0</code></pre>
 <span id="cb22-51"><a href="#cb22-51" aria-hidden="true" tabindex="-1"></a>            node._backward()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="d2ad686e" class="cell" data-execution_count="22">
+<div id="7915fb3b" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> Value(<span class="fl">2.</span>, label<span class="op">=</span><span class="st">"a"</span>)</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> Value(<span class="op">-</span><span class="fl">3.0</span>, label<span class="op">=</span><span class="st">"b"</span>)</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> Value(<span class="fl">10.</span>, label<span class="op">=</span><span class="st">"c"</span>)</span>
@@ -1349,7 +1349,7 @@ Grad of a: 6.0</code></pre>
 </div>
 </div>
 <p>It´s worked perfectly again, know we already have a functional AutoGrad system, know, it´s just need to add more operations and we will be capable of create our propely framework of Deep Learning using our own AutoGrad. Before going to the next part, see the code bellow, its the same that we create together, but with some little changes, try to figure out what they’re for (Hint, they’re important for the next part)</p>
-<div id="8504f5ec" class="cell" data-execution_count="23">
+<div id="25fcadcc" class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Value:</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, data, _children<span class="op">=</span>(), _op<span class="op">=</span><span class="st">""</span>, label<span class="op">=</span><span class="st">""</span>):</span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.data <span class="op">=</span> data</span>
@@ -1391,36 +1391,35 @@ Grad of a: 6.0</code></pre>
 <span id="cb25-39"><a href="#cb25-39" aria-hidden="true" tabindex="-1"></a>        out <span class="op">=</span> Value(<span class="va">self</span>.data<span class="op">**</span>other, (<span class="va">self</span>,), <span class="ss">f'**</span><span class="sc">{</span>other<span class="sc">}</span><span class="ss">'</span>)</span>
 <span id="cb25-40"><a href="#cb25-40" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-41"><a href="#cb25-41" aria-hidden="true" tabindex="-1"></a>        <span class="kw">def</span> _backward():</span>
-<span id="cb25-42"><a href="#cb25-42" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Regra da cadeia para potência: n * x^(n-1) * grad_out</span></span>
-<span id="cb25-43"><a href="#cb25-43" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.grad <span class="op">+=</span> (other <span class="op">*</span> <span class="va">self</span>.data<span class="op">**</span>(other<span class="op">-</span><span class="dv">1</span>)) <span class="op">*</span> out.grad</span>
-<span id="cb25-44"><a href="#cb25-44" aria-hidden="true" tabindex="-1"></a>        out._backward <span class="op">=</span> _backward</span>
-<span id="cb25-45"><a href="#cb25-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-46"><a href="#cb25-46" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> out</span>
-<span id="cb25-47"><a href="#cb25-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-48"><a href="#cb25-48" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__neg__</span>(<span class="va">self</span>): <span class="co"># Para permitir -self</span></span>
-<span id="cb25-49"><a href="#cb25-49" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span> <span class="op">*</span> <span class="op">-</span><span class="dv">1</span></span>
-<span id="cb25-50"><a href="#cb25-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-51"><a href="#cb25-51" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__sub__</span>(<span class="va">self</span>, other): <span class="co"># Para permitir self - other</span></span>
-<span id="cb25-52"><a href="#cb25-52" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span> <span class="op">+</span> (<span class="op">-</span>other)</span>
-<span id="cb25-53"><a href="#cb25-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-54"><a href="#cb25-54" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__radd__</span>(<span class="va">self</span>, other): <span class="co"># Para permitir sum([Value, Value]) onde começa com 0 + Value</span></span>
-<span id="cb25-55"><a href="#cb25-55" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span> <span class="op">+</span> other</span>
-<span id="cb25-56"><a href="#cb25-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-57"><a href="#cb25-57" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> backward(<span class="va">self</span>):</span>
-<span id="cb25-58"><a href="#cb25-58" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.grad <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb25-59"><a href="#cb25-59" aria-hidden="true" tabindex="-1"></a>        <span class="co"># create a topological order</span></span>
-<span id="cb25-60"><a href="#cb25-60" aria-hidden="true" tabindex="-1"></a>        topo <span class="op">=</span> []</span>
-<span id="cb25-61"><a href="#cb25-61" aria-hidden="true" tabindex="-1"></a>        visited <span class="op">=</span> <span class="bu">set</span>()</span>
-<span id="cb25-62"><a href="#cb25-62" aria-hidden="true" tabindex="-1"></a>        <span class="kw">def</span> build_topo(v):</span>
-<span id="cb25-63"><a href="#cb25-63" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> v <span class="kw">not</span> <span class="kw">in</span> visited:</span>
-<span id="cb25-64"><a href="#cb25-64" aria-hidden="true" tabindex="-1"></a>                visited.add(v)</span>
-<span id="cb25-65"><a href="#cb25-65" aria-hidden="true" tabindex="-1"></a>                <span class="cf">for</span> child <span class="kw">in</span> v._prev:</span>
-<span id="cb25-66"><a href="#cb25-66" aria-hidden="true" tabindex="-1"></a>                    build_topo(child)</span>
-<span id="cb25-67"><a href="#cb25-67" aria-hidden="true" tabindex="-1"></a>                topo.append(v)</span>
-<span id="cb25-68"><a href="#cb25-68" aria-hidden="true" tabindex="-1"></a>        build_topo(<span class="va">self</span>)</span>
-<span id="cb25-69"><a href="#cb25-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-70"><a href="#cb25-70" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> node <span class="kw">in</span> <span class="bu">reversed</span>(topo):</span>
-<span id="cb25-71"><a href="#cb25-71" aria-hidden="true" tabindex="-1"></a>            node._backward()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb25-42"><a href="#cb25-42" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.grad <span class="op">+=</span> (other <span class="op">*</span> <span class="va">self</span>.data<span class="op">**</span>(other<span class="op">-</span><span class="dv">1</span>)) <span class="op">*</span> out.grad</span>
+<span id="cb25-43"><a href="#cb25-43" aria-hidden="true" tabindex="-1"></a>        out._backward <span class="op">=</span> _backward</span>
+<span id="cb25-44"><a href="#cb25-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-45"><a href="#cb25-45" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> out</span>
+<span id="cb25-46"><a href="#cb25-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-47"><a href="#cb25-47" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__neg__</span>(<span class="va">self</span>): </span>
+<span id="cb25-48"><a href="#cb25-48" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span> <span class="op">*</span> <span class="op">-</span><span class="dv">1</span></span>
+<span id="cb25-49"><a href="#cb25-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-50"><a href="#cb25-50" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__sub__</span>(<span class="va">self</span>, other): </span>
+<span id="cb25-51"><a href="#cb25-51" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span> <span class="op">+</span> (<span class="op">-</span>other)</span>
+<span id="cb25-52"><a href="#cb25-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-53"><a href="#cb25-53" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__radd__</span>(<span class="va">self</span>, other): </span>
+<span id="cb25-54"><a href="#cb25-54" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span> <span class="op">+</span> other</span>
+<span id="cb25-55"><a href="#cb25-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-56"><a href="#cb25-56" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> backward(<span class="va">self</span>):</span>
+<span id="cb25-57"><a href="#cb25-57" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.grad <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb25-58"><a href="#cb25-58" aria-hidden="true" tabindex="-1"></a>        <span class="co"># create a topological order</span></span>
+<span id="cb25-59"><a href="#cb25-59" aria-hidden="true" tabindex="-1"></a>        topo <span class="op">=</span> []</span>
+<span id="cb25-60"><a href="#cb25-60" aria-hidden="true" tabindex="-1"></a>        visited <span class="op">=</span> <span class="bu">set</span>()</span>
+<span id="cb25-61"><a href="#cb25-61" aria-hidden="true" tabindex="-1"></a>        <span class="kw">def</span> build_topo(v):</span>
+<span id="cb25-62"><a href="#cb25-62" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> v <span class="kw">not</span> <span class="kw">in</span> visited:</span>
+<span id="cb25-63"><a href="#cb25-63" aria-hidden="true" tabindex="-1"></a>                visited.add(v)</span>
+<span id="cb25-64"><a href="#cb25-64" aria-hidden="true" tabindex="-1"></a>                <span class="cf">for</span> child <span class="kw">in</span> v._prev:</span>
+<span id="cb25-65"><a href="#cb25-65" aria-hidden="true" tabindex="-1"></a>                    build_topo(child)</span>
+<span id="cb25-66"><a href="#cb25-66" aria-hidden="true" tabindex="-1"></a>                topo.append(v)</span>
+<span id="cb25-67"><a href="#cb25-67" aria-hidden="true" tabindex="-1"></a>        build_topo(<span class="va">self</span>)</span>
+<span id="cb25-68"><a href="#cb25-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-69"><a href="#cb25-69" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> node <span class="kw">in</span> <span class="bu">reversed</span>(topo):</span>
+<span id="cb25-70"><a href="#cb25-70" aria-hidden="true" tabindex="-1"></a>            node._backward()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
@@ -1440,63 +1439,30 @@ Figure&nbsp;1: An Artificial Neuron
 </figure>
 </div>
 <p>To start, we can make a simple class for our neuron:</p>
-<div id="34236ac8" class="cell" data-execution_count="24">
+<div id="794dc5e4" class="cell" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Neuron:</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, input_num):</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, input_num, non_linear<span class="op">=</span><span class="va">True</span>):</span>
 <span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.w <span class="op">=</span> [Value(random.uniform(<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>)) <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(input_num)] <span class="co"># This basicaly creates a list of Value's from a uniform distribuition with lenth equals to input_num</span></span>
 <span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.b <span class="op">=</span> Value(random.uniform(<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>)) <span class="co"># This is for the bias, explain deeply the importance of this is out of scope, but you can think bias its just a special weight that dosnt multiply the inputs, just sum in the sum part.</span></span>
 <span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Call is a special function in python, its like __add__, the sintax for use this is when you just put () after the object, like range(x)</span></span>
 <span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__call__</span>(<span class="va">self</span>,x):</span>
-<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>        act <span class="op">=</span> <span class="bu">sum</span>((wi<span class="op">*</span>xi <span class="cf">for</span> wi,xi <span class="kw">in</span> <span class="bu">zip</span>(<span class="va">self</span>.w, x)), <span class="va">self</span>.b) <span class="co"># This just do the calculation of a neuron until the sum part</span></span>
-<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>        out <span class="op">=</span> act.tahn() <span class="co"># This calls a non-linear function from the Value class, I will show how to implement bellow</span></span>
-<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> out</span>
-<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> parameters(<span class="va">self</span>):</span>
-<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.w <span class="op">+</span> [<span class="va">self</span>.b] <span class="co"># this function just return all the parameters of our neuron</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>        out <span class="op">=</span> <span class="bu">sum</span>((wi<span class="op">*</span>xi <span class="cf">for</span> wi,xi <span class="kw">in</span> <span class="bu">zip</span>(<span class="va">self</span>.w, x)), <span class="va">self</span>.b) <span class="co"># This just do the calculation of a neuron until the sum part</span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> out</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> parameters(<span class="va">self</span>):</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.w <span class="op">+</span> [<span class="va">self</span>.b] <span class="co"># this function just return all the parameters of our neuron</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>And, its just it, a completely and functional artificial neuron, or at least after we implement the tahn (tangent hyperbolic) function. It’s formula is: <span class="math display">\[
-\tanh(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}}
-\]</span></p>
-<p>Note that there is 3 operations that we don’t implement to make this, so, lets implement them. For know, I presume that you understand how to implement this, so, try your self, you can search in google for this, just don’t use an llm.</p>
-<div id="5945cbb7" class="cell" data-execution_count="25">
-<details class="code-fold">
-<summary>Show solution:</summary>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Its not really necessery to add exp, subtraction or divided, but its good with you do 😊</span></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> tahn(<span class="va">self</span>):</span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> <span class="va">self</span>.data</span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>    t <span class="op">=</span> (math.exp(x) <span class="op">-</span> math.exp(<span class="op">-</span>x))<span class="op">/</span> (math.exp(x) <span class="op">+</span> math.exp(<span class="op">-</span>x))</span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>    out <span class="op">=</span> Value(t, (<span class="va">self</span>,), <span class="st">"tahn"</span>)</span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># We can derivate, or just pick up on google</span></span>
-<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _backwards():</span>
-<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.grad <span class="op">=</span> (<span class="dv">1</span> <span class="op">-</span> t<span class="op">**</span><span class="dv">2</span>) <span class="op">*</span> out.grad</span>
-<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>    out._backward <span class="op">=</span> _backward</span>
-<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> out</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
+<p>And, its just it, a completely and functional artificial neuron.</p>
 <p>Know, lets test if this are working</p>
-<div id="aed8f7c0" class="cell" data-execution_count="27">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> Value(<span class="dv">10</span>)</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> x.tahn()</span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>y.backward()</span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>y.data, y.grad, x.data, x.grad</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="775">
-<pre><code>(0.9999999958776926, 1, 10, 8.244614768671e-09)</code></pre>
-</div>
-</div>
-<p>Works pretty well. Let’s try the neuron</p>
-<div id="a1aea128" class="cell" data-execution_count="28">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> Neuron(<span class="dv">2</span>)</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> [<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>]</span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>out <span class="op">=</span> n(x)</span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(out, n.parameters())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="96ce9360" class="cell" data-execution_count="26">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> Neuron(<span class="dv">2</span>)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> [<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>]</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>out <span class="op">=</span> n(x)</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(out, n.parameters())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Value(data=0.9990069731166361) [Value(data=0.8845385329920525), Value(data=0.8690899811172499), Value(data=-0.572645326722703)]</code></pre>
+<pre><code>Value(data=1.0372965619075352) [Value(data=0.13692148549954686), Value(data=0.3184388946970691), Value(data=-0.19186309318276584)]</code></pre>
 </div>
 </div>
 <p>Works, lets move on.</p>
@@ -1504,44 +1470,71 @@ Figure&nbsp;1: An Artificial Neuron
 <section id="building-a-layer" class="level3">
 <h3 class="anchored" data-anchor-id="building-a-layer">Building a Layer</h3>
 <p>So, we already create an simple Neuron, now, we just need to line them up for make a Layer.</p>
-<div id="fd8e15c4" class="cell" data-execution_count="29">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Layer:</span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, input_num, output_num):</span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.neurons <span class="op">=</span> [Neuron(input_num) <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(output_num)] <span class="co"># Create a list of neurons that accept input_num variables in input, and will generate output_num outputs</span></span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Just process all operations in all neurons with the input</span></span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__call__</span>(<span class="va">self</span>,x):</span>
-<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>        out <span class="op">=</span> [n(x) <span class="cf">for</span> n <span class="kw">in</span> <span class="va">self</span>.neurons]</span>
-<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> out[<span class="dv">0</span>] <span class="cf">if</span> <span class="bu">len</span>(out) <span class="op">==</span> <span class="dv">1</span> <span class="cf">else</span> out</span>
-<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> parameters(<span class="va">self</span>):</span>
-<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>        out <span class="op">=</span> []</span>
-<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> neuron <span class="kw">in</span> <span class="va">self</span>.neurons:</span>
-<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>            out.extend(neuron.parameters()) <span class="co"># Add the values in an unique list</span></span>
-<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> out</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="5fca30af" class="cell" data-execution_count="27">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Layer:</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, input_num, output_num, non_linear<span class="op">=</span><span class="va">True</span>):</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.neurons <span class="op">=</span> [Neuron(input_num) <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(output_num)] <span class="co"># Create a list of neurons that accept input_num variables in input, and will generate output_num outputs</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.non_linear <span class="op">=</span> non_linear</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Just process all operations in all neurons with the input</span></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__call__</span>(<span class="va">self</span>,x):</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>        outs <span class="op">=</span> [n(x) <span class="cf">for</span> n <span class="kw">in</span> <span class="va">self</span>.neurons]</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="va">self</span>.non_linear:</span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>            outs <span class="op">=</span> [out.tahn() <span class="cf">for</span> out <span class="kw">in</span> outs]</span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> outs[<span class="dv">0</span>] <span class="cf">if</span> <span class="bu">len</span>(outs) <span class="op">==</span> <span class="dv">1</span> <span class="cf">else</span> outs</span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> parameters(<span class="va">self</span>):</span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>        out <span class="op">=</span> []</span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> neuron <span class="kw">in</span> <span class="va">self</span>.neurons:</span>
+<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a>            out.extend(neuron.parameters()) <span class="co"># Add the values in an unique list</span></span>
+<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> out</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>, or at least after we implement the tahn (tangent hyperbolic) function. It’s formula is: <span class="math display">\[
+\tanh(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}}
+\]</span></p>
+<p>Note that there is 3 operations that we don’t implement to make this, so, lets implement them. For know, I presume that you understand how to implement this, so, try your self, you can search in google for this, just don’t use an llm.</p>
+<div id="9c0329f9" class="cell" data-execution_count="28">
+<details class="code-fold">
+<summary>Show solution:</summary>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Its not really necessery to add exp, subtraction or divided, but its good with you do 😊</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> tahn(<span class="va">self</span>):</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> <span class="va">self</span>.data</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>    t <span class="op">=</span> (math.exp(x) <span class="op">-</span> math.exp(<span class="op">-</span>x))<span class="op">/</span> (math.exp(x) <span class="op">+</span> math.exp(<span class="op">-</span>x))</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>    out <span class="op">=</span> Value(t, (<span class="va">self</span>,), <span class="st">"tahn"</span>)</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># We can derivate, or just pick up on google</span></span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _backwards():</span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.grad <span class="op">=</span> (<span class="dv">1</span> <span class="op">-</span> t<span class="op">**</span><span class="dv">2</span>) <span class="op">*</span> out.grad</span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>    out._backward <span class="op">=</span> _backward</span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> out</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <p>Let’s test if this work</p>
-<div id="47468d6f" class="cell" data-execution_count="30">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> [<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>]</span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>layer <span class="op">=</span> Layer(<span class="dv">3</span>,<span class="dv">3</span>)</span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>layer(x), layer.parameters()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="778">
-<pre><code>([Value(data=-0.9975466445997095),
-  Value(data=-0.8603898088861367),
-  Value(data=-0.5739890823985446)],
- [Value(data=0.9249624324965577),
-  Value(data=-0.9749603785977712),
-  Value(data=-0.32069397451830506),
-  Value(data=-0.9933770261971591),
-  Value(data=0.9941546654131326),
-  Value(data=-0.3483923319648241),
-  Value(data=-0.39441769044095243),
-  Value(data=-0.6603051379217166),
-  Value(data=0.20324908566243227),
-  Value(data=-0.6129587525230566),
-  Value(data=0.37162697255269683),
-  Value(data=-0.7075815632792295)])</code></pre>
+<div id="aeeff363" class="cell" data-execution_count="29">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> [<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>]</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>layer <span class="op">=</span> Layer(<span class="dv">3</span>,<span class="dv">3</span>)</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>layer(x), layer.parameters()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="417">
+<pre><code>([Value(data=0.3585600411667015),
+  Value(data=0.9964243945549321),
+  Value(data=-0.48074807975258693)],
+ [Value(data=-0.6316097366669491),
+  Value(data=-0.1569344831088142),
+  Value(data=0.31629221374371386),
+  Value(data=0.8440865876040577),
+  Value(data=-0.1124283211252306),
+  Value(data=-0.3271014271371093),
+  Value(data=0.9681227187250676),
+  Value(data=0.49615931862264606),
+  Value(data=-0.6514842307892414),
+  Value(data=-0.33076987436060556),
+  Value(data=0.47991864274459717),
+  Value(data=-0.14835325505920816)])</code></pre>
 </div>
 </div>
 <p>Work well, this is pretty simple too. Now let’s move to the last part, create an complete Artificial Neural Network</p>
@@ -1549,169 +1542,178 @@ Figure&nbsp;1: An Artificial Neuron
 <section id="building-an-mlp" class="level3">
 <h3 class="anchored" data-anchor-id="building-an-mlp">Building an MLP</h3>
 <p>For last, we will create a Multilayer Perceptron, for this, we just need to to line layer up.</p>
-<div id="b2d75437" class="cell" data-execution_count="31">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MLP:</span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, input_num, outputs_nums):</span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.layers <span class="op">=</span> []</span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>        values <span class="op">=</span> [input_num] <span class="op">+</span> outputs_nums</span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="bu">id</span> <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(outputs_nums)): <span class="co"># This work for create an unique list used to describe input and output for all layers</span></span>
-<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.layers.append(Layer(values[<span class="bu">id</span>], values[<span class="bu">id</span><span class="op">+</span><span class="dv">1</span>]))</span>
-<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__call__</span>(<span class="va">self</span>, X):</span>
-<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> layer <span class="kw">in</span> <span class="va">self</span>.layers: <span class="co"># This works because with exception from the first, each layer just receive the input from the last layer</span></span>
-<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>            X <span class="op">=</span> layer(X)</span>
-<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> X</span>
-<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> parameters(<span class="va">self</span>):</span>
-<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a>        out <span class="op">=</span> []</span>
-<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> layer <span class="kw">in</span> <span class="va">self</span>.layers:</span>
-<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a>            out.extend(layer.parameters())</span>
-<span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> out</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="9c0d0a1f" class="cell" data-execution_count="30">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MLP:</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, input_num, outputs_nums):</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.layers <span class="op">=</span> []</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>        values <span class="op">=</span> [input_num] <span class="op">+</span> outputs_nums</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="bu">id</span> <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(outputs_nums)<span class="op">-</span><span class="dv">1</span>): <span class="co"># This work for create an unique list used to describe input and output for all layers</span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.layers.append(Layer(values[<span class="bu">id</span>], values[<span class="bu">id</span><span class="op">+</span><span class="dv">1</span>]))</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.layers.append(Layer(values[<span class="op">-</span><span class="dv">2</span>], values[<span class="op">-</span><span class="dv">1</span>], non_linear<span class="op">=</span><span class="va">False</span>))</span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__call__</span>(<span class="va">self</span>, X):</span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> layer <span class="kw">in</span> <span class="va">self</span>.layers: <span class="co"># This works because with exception from the first, each layer just receive the input from the last layer</span></span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>            X <span class="op">=</span> layer(X)</span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> X</span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> parameters(<span class="va">self</span>):</span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>        out <span class="op">=</span> []</span>
+<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> layer <span class="kw">in</span> <span class="va">self</span>.layers:</span>
+<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a>            out.extend(layer.parameters())</span>
+<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> out</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>And, its finish, just need to test now</p>
-<div id="29635899" class="cell" data-execution_count="32">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>nn <span class="op">=</span> MLP(<span class="dv">3</span>, [<span class="dv">6</span>,<span class="dv">6</span>,<span class="dv">1</span>])</span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> [<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>]</span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>nn(x) <span class="co"># You can test the parameters</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="780">
-<pre><code>Value(data=0.9181094920083286)</code></pre>
+<div id="5b897bfe" class="cell" data-execution_count="31">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>nn <span class="op">=</span> MLP(<span class="dv">3</span>, [<span class="dv">6</span>,<span class="dv">6</span>,<span class="dv">1</span>])</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> [<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>]</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>nn(x) <span class="co"># You can test the parameters</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="419">
+<pre><code>Value(data=1.393975209385002)</code></pre>
 </div>
 </div>
 </section>
 <section id="training-our-neural-network" class="level3">
 <h3 class="anchored" data-anchor-id="training-our-neural-network">Training our neural network</h3>
 <p>In the last part, we create a MLP, but we don’t fit them in any data. Lets creat a function and values with some noise</p>
-<div id="7cee7aeb" class="cell" data-cache="true" data-execution_count="33">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(x,y,z):</span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fl">0.04</span><span class="op">*</span>x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="fl">0.07</span><span class="op">*</span>y<span class="op">*</span>x <span class="op">-</span> z <span class="op">+</span> random.gauss(<span class="dv">0</span>, <span class="dv">1</span>)</span>
-<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> []</span>
-<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> []</span>
-<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">100</span>):</span>
-<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>    X.append([random.uniform(<span class="op">-</span><span class="dv">5</span>,<span class="dv">5</span>) <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>)])</span>
-<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>    y.append(f(X[i][<span class="dv">0</span>],X[i][<span class="dv">1</span>],X[i][<span class="dv">2</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="e9a42d3b" class="cell" data-cache="true" data-execution_count="32">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(x,y,z):</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fl">0.4</span><span class="op">*</span>x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="fl">0.7</span><span class="op">*</span>y<span class="op">*</span>x <span class="op">-</span> z <span class="op">+</span> random.gauss(<span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> []</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> []</span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">100</span>):</span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>    X.append([random.uniform(<span class="op">-</span><span class="dv">5</span>,<span class="dv">5</span>) <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>)])</span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>    y.append(f(X[i][<span class="dv">0</span>],X[i][<span class="dv">1</span>],X[i][<span class="dv">2</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>To implement the train loop, we will need one more thing, there is an loss functions, this is just an metric that describes how well our model are fitting in data. For these case, we will use Mean Squared Error, so the steps for the training loop, its, calc the prediction, calc the loss, calc the gradients, subtract the gradients from the weights, reset the gradients values (our code accumulate the gradients) and do it again, and again.</p>
-<div id="c815e202" class="cell" data-cache="true" data-execution_count="34">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>ann <span class="op">=</span> MLP(<span class="dv">3</span>, [<span class="dv">8</span>,<span class="dv">8</span>,<span class="dv">1</span>])</span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">100</span>): <span class="co"># Our code will do 100 epochs of training</span></span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>    y_pred <span class="op">=</span> [ann(x) <span class="cf">for</span> x <span class="kw">in</span> X] <span class="co"># Our model only accept one prediction per time</span></span>
-<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>    loss <span class="op">=</span> <span class="bu">sum</span>((pred<span class="op">-</span>origin)<span class="op">**</span><span class="dv">2</span> <span class="cf">for</span> pred,origin <span class="kw">in</span> <span class="bu">zip</span>(y_pred, y))</span>
-<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>    loss.backward() <span class="co"># Calc of gradients</span></span>
-<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> p <span class="kw">in</span> ann.parameters():</span>
-<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>        p.data <span class="op">=</span> p.data <span class="op">-</span> <span class="fl">0.001</span><span class="op">*</span>p.grad <span class="co"># Updating weights, we multiply the gradient by a small number called learning rate, we do this for not have problems with model convergence</span></span>
-<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a>        p.grad <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Epoch </span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">, Loss: </span><span class="sc">{</span>loss<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="43fc117c" class="cell" data-cache="true" data-execution_count="33">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>ann <span class="op">=</span> MLP(<span class="dv">3</span>, [<span class="dv">8</span>,<span class="dv">8</span>,<span class="dv">1</span>]) </span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">100</span>): <span class="co"># Our code will do 100 epochs of training</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>    y_pred <span class="op">=</span> [ann(x) <span class="cf">for</span> x <span class="kw">in</span> X] <span class="co"># Our model only accept one prediction per time</span></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>    loss <span class="op">=</span> <span class="bu">sum</span>((pred<span class="op">-</span>origin)<span class="op">**</span><span class="dv">2</span> <span class="cf">for</span> pred,origin <span class="kw">in</span> <span class="bu">zip</span>(y_pred, y))</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>    loss.backward() <span class="co"># Calc of gradients</span></span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> p <span class="kw">in</span> ann.parameters():</span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>        p.data <span class="op">=</span> p.data <span class="op">-</span> <span class="fl">0.001</span><span class="op">*</span>p.grad <span class="co"># Updating weights, we multiply the gradient by a small number called learning rate, we do this for not have problems with model convergence</span></span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>        p.grad <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Epoch </span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">, Loss: </span><span class="sc">{</span>loss<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Epoch 0, Loss: Value(data=1051.2949882986056)
-Epoch 1, Loss: Value(data=923.4902588148647)
-Epoch 2, Loss: Value(data=791.3205833402908)
-Epoch 3, Loss: Value(data=606.923291174209)
-Epoch 4, Loss: Value(data=566.8920785836017)
-Epoch 5, Loss: Value(data=558.2112058055417)
-Epoch 6, Loss: Value(data=552.9211008496376)
-Epoch 7, Loss: Value(data=549.0125731979632)
-Epoch 8, Loss: Value(data=545.865828747848)
-Epoch 9, Loss: Value(data=543.2254633947665)
-Epoch 10, Loss: Value(data=540.9651547940884)
-Epoch 11, Loss: Value(data=539.0107157210807)
-Epoch 12, Loss: Value(data=537.3103936898699)
-Epoch 13, Loss: Value(data=535.823604938972)
-Epoch 14, Loss: Value(data=534.5172883519647)
-Epoch 15, Loss: Value(data=533.3645537607747)
-Epoch 16, Loss: Value(data=532.3435684101173)
-Epoch 17, Loss: Value(data=531.4364333032352)
-Epoch 18, Loss: Value(data=530.6282263807801)
-Epoch 19, Loss: Value(data=529.906277910882)
-Epoch 20, Loss: Value(data=529.2596524503496)
-Epoch 21, Loss: Value(data=528.6787999332045)
-Epoch 22, Loss: Value(data=528.1553376731289)
-Epoch 23, Loss: Value(data=527.6819184969505)
-Epoch 24, Loss: Value(data=527.2521410668172)
-Epoch 25, Loss: Value(data=526.8604710081507)
-Epoch 26, Loss: Value(data=526.5021580586933)
-Epoch 27, Loss: Value(data=526.1731470283877)
-Epoch 28, Loss: Value(data=525.8699864324543)
-Epoch 29, Loss: Value(data=525.5897398761521)
-Epoch 30, Loss: Value(data=525.3299041814302)
-Epoch 31, Loss: Value(data=525.0883366152775)
-Epoch 32, Loss: Value(data=524.8631921896257)
-Epoch 33, Loss: Value(data=524.6528710316994)
-Epoch 34, Loss: Value(data=524.4559752076543)
-Epoch 35, Loss: Value(data=524.2712740139098)
-Epoch 36, Loss: Value(data=524.0976765505235)
-Epoch 37, Loss: Value(data=523.9342103151313)
-Epoch 38, Loss: Value(data=523.7800045799114)
-Epoch 39, Loss: Value(data=523.6342774179062)
-Epoch 40, Loss: Value(data=523.4963254056153)
-Epoch 41, Loss: Value(data=523.3655152193421)
-Epoch 42, Loss: Value(data=523.2412765370021)
-Epoch 43, Loss: Value(data=523.1230958337383)
-Epoch 44, Loss: Value(data=523.0105108054325)
-Epoch 45, Loss: Value(data=522.9031052638385)
-Epoch 46, Loss: Value(data=522.800504422061)
-Epoch 47, Loss: Value(data=522.7023705349505)
-Epoch 48, Loss: Value(data=522.6083988828914)
-Epoch 49, Loss: Value(data=522.5183140965106)
-Epoch 50, Loss: Value(data=522.4318668200312)
-Epoch 51, Loss: Value(data=522.3488307067473)
-Epoch 52, Loss: Value(data=522.2689997344307)
-Epoch 53, Loss: Value(data=522.1921858231358)
-Epoch 54, Loss: Value(data=522.1182167337126)
-Epoch 55, Loss: Value(data=522.0469342227007)
-Epoch 56, Loss: Value(data=521.9781924280293)
-Epoch 57, Loss: Value(data=521.9118564599281)
-Epoch 58, Loss: Value(data=521.8478011723306)
-Epoch 59, Loss: Value(data=521.7859100915276)
-Epoch 60, Loss: Value(data=521.7260744807019)
-Epoch 61, Loss: Value(data=521.668192520975)
-Epoch 62, Loss: Value(data=521.6121685916504)
-Epoch 63, Loss: Value(data=521.557912634261)
-Epoch 64, Loss: Value(data=521.5053395868107)
-Epoch 65, Loss: Value(data=521.4543688761596)
-Epoch 66, Loss: Value(data=521.4049239578216)
-Epoch 67, Loss: Value(data=521.356931893515)
-Epoch 68, Loss: Value(data=521.3103229575952)
-Epoch 69, Loss: Value(data=521.265030264012)
-Epoch 70, Loss: Value(data=521.2209894056319)
-Epoch 71, Loss: Value(data=521.1781380976365)
-Epoch 72, Loss: Value(data=521.136415816148)
-Epoch 73, Loss: Value(data=521.0957634222322)
-Epoch 74, Loss: Value(data=521.0561227597639)
-Epoch 75, Loss: Value(data=521.0174362132178)
-Epoch 76, Loss: Value(data=520.9796462078906)
-Epoch 77, Loss: Value(data=520.9426946300249)
-Epoch 78, Loss: Value(data=520.906522137112)
-Epoch 79, Loss: Value(data=520.8710673183747)
-Epoch 80, Loss: Value(data=520.8362656506391)
-Epoch 81, Loss: Value(data=520.8020481732336)
-Epoch 82, Loss: Value(data=520.7683397737756)
-Epoch 83, Loss: Value(data=520.7350569290403)
-Epoch 84, Loss: Value(data=520.7021046725919)
-Epoch 85, Loss: Value(data=520.6693724483112)
-Epoch 86, Loss: Value(data=520.63672833086)
-Epoch 87, Loss: Value(data=520.604010806012)
-Epoch 88, Loss: Value(data=520.5710168263171)
-Epoch 89, Loss: Value(data=520.5374840454269)
-Epoch 90, Loss: Value(data=520.5030637126539)
-Epoch 91, Loss: Value(data=520.4672781410886)
-Epoch 92, Loss: Value(data=520.4294518609698)
-Epoch 93, Loss: Value(data=520.3885962493517)
-Epoch 94, Loss: Value(data=520.3432085826756)
-Epoch 95, Loss: Value(data=520.2909066698585)
-Epoch 96, Loss: Value(data=520.2277324007282)
-Epoch 97, Loss: Value(data=520.1467557102727)
-Epoch 98, Loss: Value(data=520.0351363481948)
-Epoch 99, Loss: Value(data=519.867738678577)</code></pre>
+<pre><code>Epoch 0, Loss: Value(data=5238.837610887218)
+Epoch 1, Loss: Value(data=4258.231971606619)
+Epoch 2, Loss: Value(data=4108.924341790015)
+Epoch 3, Loss: Value(data=3259.6200692000175)
+Epoch 4, Loss: Value(data=3182.8031299465397)
+Epoch 5, Loss: Value(data=2676.1533134415745)
+Epoch 6, Loss: Value(data=2472.472109796962)
+Epoch 7, Loss: Value(data=2786.7947090264556)
+Epoch 8, Loss: Value(data=4377.733223304162)
+Epoch 9, Loss: Value(data=4720.238762332739)
+Epoch 10, Loss: Value(data=3541.542366568152)
+Epoch 11, Loss: Value(data=3108.255642908191)
+Epoch 12, Loss: Value(data=2728.9737193692317)
+Epoch 13, Loss: Value(data=2414.4555733094103)
+Epoch 14, Loss: Value(data=2124.6992915992196)
+Epoch 15, Loss: Value(data=2024.460601226954)
+Epoch 16, Loss: Value(data=2052.766588369614)
+Epoch 17, Loss: Value(data=1998.8075193790587)
+Epoch 18, Loss: Value(data=2028.6456359284946)
+Epoch 19, Loss: Value(data=2112.1169039538836)
+Epoch 20, Loss: Value(data=2310.970573335282)
+Epoch 21, Loss: Value(data=1993.067228364977)
+Epoch 22, Loss: Value(data=1722.58497326276)
+Epoch 23, Loss: Value(data=1623.4243396451116)
+Epoch 24, Loss: Value(data=1496.229752586816)
+Epoch 25, Loss: Value(data=1442.5086508997492)
+Epoch 26, Loss: Value(data=1436.2075932037071)
+Epoch 27, Loss: Value(data=1462.1298152018367)
+Epoch 28, Loss: Value(data=1548.1971941570273)
+Epoch 29, Loss: Value(data=2096.0825892700586)
+Epoch 30, Loss: Value(data=2689.234697876874)
+Epoch 31, Loss: Value(data=2183.327384817677)
+Epoch 32, Loss: Value(data=2906.969065916411)
+Epoch 33, Loss: Value(data=2321.9583653758928)
+Epoch 34, Loss: Value(data=2003.6044236496239)
+Epoch 35, Loss: Value(data=1842.6554892487156)
+Epoch 36, Loss: Value(data=1839.4371275205228)
+Epoch 37, Loss: Value(data=2306.0155016364033)
+Epoch 38, Loss: Value(data=2656.4137275634994)
+Epoch 39, Loss: Value(data=2650.0732140087034)
+Epoch 40, Loss: Value(data=2328.893574298385)
+Epoch 41, Loss: Value(data=2382.5110040047507)
+Epoch 42, Loss: Value(data=2034.9172228373736)
+Epoch 43, Loss: Value(data=1721.1964185232382)
+Epoch 44, Loss: Value(data=1525.4046567799753)
+Epoch 45, Loss: Value(data=1335.9838926669759)
+Epoch 46, Loss: Value(data=1219.706012836985)
+Epoch 47, Loss: Value(data=1250.809503098143)
+Epoch 48, Loss: Value(data=1594.6675488404342)
+Epoch 49, Loss: Value(data=1522.694820067401)
+Epoch 50, Loss: Value(data=1686.6064265699997)
+Epoch 51, Loss: Value(data=1371.911327874759)
+Epoch 52, Loss: Value(data=1263.1352048210501)
+Epoch 53, Loss: Value(data=1128.365657156428)
+Epoch 54, Loss: Value(data=1036.2310969581263)
+Epoch 55, Loss: Value(data=936.4207170726347)
+Epoch 56, Loss: Value(data=920.309729168369)
+Epoch 57, Loss: Value(data=1019.2781716504836)
+Epoch 58, Loss: Value(data=1119.791346080483)
+Epoch 59, Loss: Value(data=1341.8515939662227)
+Epoch 60, Loss: Value(data=1305.0692949176191)
+Epoch 61, Loss: Value(data=1273.585098461844)
+Epoch 62, Loss: Value(data=1193.021705384067)
+Epoch 63, Loss: Value(data=855.4701195066509)
+Epoch 64, Loss: Value(data=863.1536282416009)
+Epoch 65, Loss: Value(data=885.507165035014)
+Epoch 66, Loss: Value(data=969.5429395042922)
+Epoch 67, Loss: Value(data=904.8169743773998)
+Epoch 68, Loss: Value(data=1038.3274807088058)
+Epoch 69, Loss: Value(data=1040.026951633938)
+Epoch 70, Loss: Value(data=905.078875798231)
+Epoch 71, Loss: Value(data=840.363439182571)
+Epoch 72, Loss: Value(data=773.8611375774854)
+Epoch 73, Loss: Value(data=830.3696071285461)
+Epoch 74, Loss: Value(data=979.0374559922903)
+Epoch 75, Loss: Value(data=1079.8207750044564)
+Epoch 76, Loss: Value(data=850.2454138350612)
+Epoch 77, Loss: Value(data=991.4078702673)
+Epoch 78, Loss: Value(data=779.4197540828076)
+Epoch 79, Loss: Value(data=799.9704601459587)
+Epoch 80, Loss: Value(data=833.0548573406062)
+Epoch 81, Loss: Value(data=937.1390298713859)
+Epoch 82, Loss: Value(data=848.2755700228473)
+Epoch 83, Loss: Value(data=756.4654372811016)
+Epoch 84, Loss: Value(data=744.5624802722351)
+Epoch 85, Loss: Value(data=818.0447017196727)
+Epoch 86, Loss: Value(data=955.0378437862706)
+Epoch 87, Loss: Value(data=1313.988094848996)
+Epoch 88, Loss: Value(data=1082.8921912266385)
+Epoch 89, Loss: Value(data=1375.2380601086275)
+Epoch 90, Loss: Value(data=1376.6185780183273)
+Epoch 91, Loss: Value(data=1044.1976069089653)
+Epoch 92, Loss: Value(data=808.4501436978665)
+Epoch 93, Loss: Value(data=853.8511748333851)
+Epoch 94, Loss: Value(data=908.0540371766903)
+Epoch 95, Loss: Value(data=923.8252357878418)
+Epoch 96, Loss: Value(data=945.5715488014247)
+Epoch 97, Loss: Value(data=986.4312519640034)
+Epoch 98, Loss: Value(data=946.7403152131878)
+Epoch 99, Loss: Value(data=779.9343996316218)</code></pre>
 </div>
 </div>
-<p>Work, but not very well, it’s possible to improve this changing the activation function by an ReLU. But for our propose, it’s good enough</p>
+<p>Work, but not very well, it’s possible to improve this changing the activation function by an ReLU. But for our propose, it’s good enough. Lets just see the values comming from our model</p>
+<div id="ed4f85f3" class="cell" data-cache="true" data-execution_count="34">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> ann(X[<span class="dv">0</span>])</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Real value: </span><span class="sc">{</span>y[<span class="dv">0</span>]<span class="sc">}</span><span class="ch">\n</span><span class="ss">Predict value: </span><span class="sc">{</span>y_pred<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Real value: 5.038176214214584
+Predict value: Value(data=7.9343630243137095)</code></pre>
+</div>
+</div>
 
 
 </section>

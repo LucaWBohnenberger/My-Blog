@@ -14,14 +14,8 @@ _freeze/
 *_cache/
 *_files/
 
-# =========================
-# R / RStudio
-# =========================
-.Rhistory
-.RData
-.Ruserdata
-.Rproj.user/
-*.Rproj
+# Datasets
+posts/makemore-1/names.txt
 
 # Pacotes e bibliotecas locais
 renv/library/
@@ -66,7 +60,7 @@ Thumbs.db
 .idea/
 
 # =========================
-# Dados sensíveis (opcional)
+# Dados sensíveis
 # =========================
 *.key
 *.pem

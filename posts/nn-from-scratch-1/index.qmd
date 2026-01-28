@@ -1,18 +1,16 @@
 ---
 title: "Building Neural Networks from Scratch"
-subtitle: "Part 1"
 author: "Luca WB"
 date: "2026-01-08"         
 date-modified: last-modified 
 categories: [scratch, en, code, math, nn]
 ---
-
+ 
 ## Brief summary
 
 The objective from this page to understand how to implement a neural network from scratch without any external libraries, this page consider that you already have some 
 knowledge of Artificial Neural Networks. The main reason for this is just to make 
-more understandable the black box of Neural Networks. So, to this project, the main resource (but not the unique) are the series of videos from [Andrej Karpathy](https://www.youtube.com/@AndrejKarpathy). In this first part, I will cover how to implement AutoGrad for do backpropagation. At the end of this post, yo will cable of create MLPs 
-without any external library.
+more understandable the black box of Neural Networks. So, to this project, the main resource (but not the unique) is this [video](https://www.youtube.com/watch?v=VMj-3S1tku0&list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ) from Andrej Karpathy. I will cover how to implement AutoGrad for backpropagation. At the end of this post, you will cable of create MLPs without any external library.
 
 
 ## Basic knowledge of derivative
@@ -845,7 +843,7 @@ Note that there is 3 operations that we don't implement to make this, so, lets i
 #| code-fold: true
 #| code-summary: "Show solution:"
 import math
-# Its not really necessery to add exp, subtraction or divided, but its good with you do 😊
+# Its not really necessary to add exp, subtraction or divided, but its good with you do 😊
 def tahn(self):
     x = self.data
     t = (math.exp(x) - math.exp(-x))/ (math.exp(x) + math.exp(-x))
@@ -905,7 +903,7 @@ nn(x) # You can test the parameters
 
 ### Training our neural network
 
-In the last part, we create a MLP, but we don't fit them in any data. Lets creat a function and values with some noise
+In the last part, we create a MLP, but we don't fit them in any data. Lets create a function and values with some noise
 ```{python}
 #| cache: true
 import random
@@ -941,7 +939,7 @@ for i in range(50): # Our code will do 50 epochs of training
 ```   
 
 
-Work, but not very well, it's possible to improve this changing the activation function by an ReLU. But for our propose, it's good enough. Lets just see the values comming from our model
+Work, but not very well, it's possible to improve this changing the activation function by an ReLU. But for our propose, it's good enough. Lets just see the values coming from our model
 
 ``` {python}
 #| cache: true

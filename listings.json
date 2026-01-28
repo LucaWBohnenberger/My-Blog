@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/makemore-1/index.html",
       "/posts/nn-from-scratch-1/index.html",
       "/posts/machine-unlearning/index.html"
     ]

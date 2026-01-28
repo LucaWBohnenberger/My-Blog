@@ -6,10 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Harlow Malloc">
-<meta name="dcterms.date" content="2025-12-19">
+<meta name="author" content="Luca WB">
+<meta name="dcterms.date" content="2026-01-28">
 
-<title>Ex1 – Meus Estudos</title>
+<title>Building an Autoregressive Neural Network – My Studies</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,6 +21,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -82,7 +116,7 @@ ul.task-list li input[type="checkbox"] {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
-    <span class="navbar-title">Meus Estudos</span>
+    <span class="navbar-title">My Studies</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -93,7 +127,7 @@ ul.task-list li input[type="checkbox"] {
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
     <a class="nav-link" href="../../about.html"> 
-<span class="menu-text">About</span></a>
+<span class="menu-text">Luca Wolffenbuttel Bohnenberger</span></a>
   </li>  
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/LucaWBohnenberger/my-blog"> <i class="bi bi-github" role="img">
@@ -112,11 +146,13 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Ex1</h1>
+      <h1 class="title">Building an Autoregressive Neural Network</h1>
+            <p class="subtitle lead">Part 1</p>
                                 <div class="quarto-categories">
-                <div class="quarto-category">news</div>
+                <div class="quarto-category">scratch</div>
+                <div class="quarto-category">en</div>
                 <div class="quarto-category">code</div>
-                <div class="quarto-category">analysis</div>
+                <div class="quarto-category">nn</div>
               </div>
                   </div>
   </div>
@@ -127,17 +163,23 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Author</div>
       <div class="quarto-title-meta-contents">
-               <p>Harlow Malloc </p>
+               <p>Luca WB </p>
             </div>
     </div>
       
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">December 19, 2025</p>
+        <p class="date">January 28, 2026</p>
       </div>
     </div>
     
+      <div>
+      <div class="quarto-title-meta-heading">Modified</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date-modified">January 28, 2026</p>
+      </div>
+    </div>
       
     </div>
     
@@ -155,9 +197,192 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<p>This is a post with executable code.</p>
+<section id="brief-summary" class="level2">
+<h2 class="anchored" data-anchor-id="brief-summary">Brief summary</h2>
+<p>In this post, we will implement an Autoregressive Neural Network from scratch, relying solely on the PyTorch tensor class. We assume prior familiarity with Neural Networks; however, if your knowledge feels a bit rusty or you need a refresher, I recommend reading this post beforehand <a href="../../posts/nn-from-scratch-1/index.html">Building Neural Networks from Scratch</a>.</p>
+<p>The main reason for this is to learn how an Autoregressive NN works to generate words, for this, I’m drawing on Andrej Karpathy’s video series about <a href="https://www.youtube.com/watch?v=PaCmpygFfXo&amp;list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ&amp;index=2">makemore</a>, a network capable of creating more words of the same type, so if you train with names, it generates more proper names it generates more words that remember proper names, and so on with anything that is formed by letters.</p>
+<p>In this post, I will cover how to make a simple model for our baseline, and how to implement a model with MLP and compare them.</p>
+</section>
+<section id="setup" class="level2">
+<h2 class="anchored" data-anchor-id="setup">Setup</h2>
+<p>First, you need to download PyTorch and the dataset. For PyTorch, just download in the official site https://pytorch.org/get-started/locally/. Now, for the dataset, you can create your own with random names that you can think, but It’s much easier just download the names.txt dataset from the Andrej repository https://github.com/karpathy/makemore/blob/master/names.txt.</p>
+</section>
+<section id="creating-a-baseline" class="level2">
+<h2 class="anchored" data-anchor-id="creating-a-baseline">Creating a baseline</h2>
+<p>In propose of this, it’s just to create the most simple and naive model. It’s important because we need some baseline to compare with our future models, so we will create a model called bigram, the logic is just to look to the last character. Note that you will use just one character of context for our model, and we will consider that the most small part of our word is a character, for models like chatGPT, they don’t use characters, they use combinations of characters similar to syllables.</p>
+<p>So, to start, we need first import our dataset and PyTorch</p>
+<div id="a5d72659" class="cell" data-cache="true" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Basically makes a list of all the names</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>names <span class="op">=</span> <span class="bu">open</span>(<span class="st">"names.txt"</span>, <span class="st">"r"</span>).read().splitlines() </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>names[:<span class="dv">5</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="91">
+<pre><code>['emma', 'olivia', 'ava', 'isabella', 'sophia']</code></pre>
+</div>
+</div>
+<p>Most part of models usually can’t handle with characters, so it’s useful to convert this letters in numbers in some way. For this, there are many possibles, but I will use just a simple dictionary to convert them. But we</p>
+<div id="ac3bd6f8" class="cell" data-cache="true" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>chars <span class="op">=</span> <span class="bu">sorted</span>(<span class="bu">list</span>(<span class="bu">set</span>(<span class="st">""</span>.join(names)))) <span class="co"># Creates an ordered list with all letters in our dataset</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>charToInt <span class="op">=</span> {s:i<span class="op">+</span><span class="dv">1</span> <span class="cf">for</span> i,s <span class="kw">in</span> <span class="bu">enumerate</span>(chars)} <span class="co"># Creates a dict to convert chars to int, we add one in the value, because of the bellow line</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>charToInt[<span class="st">"."</span>] <span class="op">=</span> <span class="dv">0</span> <span class="co"># I will explain later why we need a special character</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(charToInt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>{'a': 1, 'b': 2, 'c': 3, 'd': 4, 'e': 5, 'f': 6, 'g': 7, 'h': 8, 'i': 9, 'j': 10, 'k': 11, 'l': 12, 'm': 13, 'n': 14, 'o': 15, 'p': 16, 'q': 17, 'r': 18, 's': 19, 't': 20, 'u': 21, 'v': 22, 'w': 23, 'x': 24, 'y': 25, 'z': 26, '.': 0}</code></pre>
+</div>
+</div>
+<p>Just to get it ready, if we convert to int, so we can read it at the end, we will need an intToChar converter, so let’s get it ready</p>
+<div id="fb0852d8" class="cell" data-cache="true" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>intToChar <span class="op">=</span> {s:i <span class="cf">for</span> i,s <span class="kw">in</span> charToInt.items()}</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(intToChar)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>{1: 'a', 2: 'b', 3: 'c', 4: 'd', 5: 'e', 6: 'f', 7: 'g', 8: 'h', 9: 'i', 10: 'j', 11: 'k', 12: 'l', 13: 'm', 14: 'n', 15: 'o', 16: 'p', 17: 'q', 18: 'r', 19: 's', 20: 't', 21: 'u', 22: 'v', 23: 'w', 24: 'x', 25: 'y', 26: 'z', 0: '.'}</code></pre>
+</div>
+</div>
+<p>Know, for our model, we need to calculate the total number that each sequence occurs, like, with we start with letter “a”, how many times occurs that “m” is the next character. And it’s for this that we need and special characters, because we always need something to start, after all, the autoregressive model logic and take the output of the model and put it in its input, so we need an initial input. In our case, we will use “.” as the symbol to start a name/words and to stop word (without a final symbol, it would generate forever). To make more clear, see the code bellow</p>
+<div id="3e22e4ff" class="cell" data-cache="true" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> torch.zeros((<span class="dv">27</span>,<span class="dv">27</span>)).<span class="bu">int</span>()</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name <span class="kw">in</span> names:</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    chars <span class="op">=</span> [<span class="st">"."</span>] <span class="op">+</span> <span class="bu">list</span>(name) <span class="op">+</span> [<span class="st">"."</span>] <span class="co"># turn the name in a list of characters and add "." </span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> ch1,ch2 <span class="kw">in</span> <span class="bu">zip</span>(chars, chars[<span class="dv">1</span>:]): <span class="co"># In each loop, pick up one letter in ch1, and the next in ch2</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>        id1, id2 <span class="op">=</span> charToInt[ch1], charToInt[ch2]</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>        N[id1, id2] <span class="op">+=</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Basically, this count how often some sequence of characters occurs, like the most common letter sequence is “n” follow by “.”, this mean, that the most commum letter to finish a name in our dataset it’s “n”. If you run with all the names, you can use the code bellow to find the most common occurrences</p>
+<div id="05abce3b" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>id1, id2 <span class="op">=</span> (N <span class="op">==</span> N.<span class="bu">max</span>()).nonzero(as_tuple<span class="op">=</span><span class="va">True</span>) <span class="co"># Creates a boolean matrix that only it's True in the max value, than return a tuple where its true</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(intToChar[id1.item()], <span class="st">"--&gt;"</span>, intToChar[id2.item()],<span class="st">"occurs "</span>, N.<span class="bu">max</span>().item())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>n --&gt; . occurs  6763</code></pre>
+</div>
+</div>
+<p>So let’s see how our bigrams are distributed</p>
+<div id="530f5291" class="cell" data-cache="true" data-execution_count="6">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span> (<span class="dv">16</span>,<span class="dv">16</span>))</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>plt.imshow(N, cmap<span class="op">=</span><span class="st">"Blues"</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">27</span>):</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">27</span>):</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>        chstr <span class="op">=</span> intToChar[i] <span class="op">+</span> intToChar[j]</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>        plt.text(j,i, chstr, ha<span class="op">=</span><span class="st">"center"</span>, va<span class="op">=</span><span class="st">"bottom"</span>, color<span class="op">=</span><span class="st">"gray"</span>)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>        plt.text(j,i, N[i,j].item(), ha<span class="op">=</span><span class="st">"center"</span>, va<span class="op">=</span><span class="st">"top"</span>, color<span class="op">=</span><span class="st">"gray"</span>)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>plt.axis(<span class="st">"off"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-7-output-1.png" width="1202" height="1202" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>One thing very interesting you can note, it’s that have many combinations that don’t exist, like “bk” or “gc”. This makes it impossible for our model to generate a name with this combination, it is ok to leave it like this, but it would be a good practice to add 1 in all values, thus ensuring that at least there is the minimal possibility of generating a rare sequence</p>
+<div id="1fdbc10c" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> N <span class="op">+</span> <span class="dv">1</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="98ee975b" class="cell" data-cache="true" data-execution_count="8">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-9-output-1.png" width="1202" height="1202" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>So, lets transform our probability matrix</p>
+<div id="9c4a59d1" class="cell" data-cache="true" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>P <span class="op">=</span> N</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>P <span class="op">=</span> P <span class="op">/</span> P.<span class="bu">sum</span>(dim<span class="op">=</span><span class="dv">1</span>, keepdims<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="2c44362c" class="cell" data-cache="true" data-execution_count="10">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span> (<span class="dv">16</span>,<span class="dv">16</span>))</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>plt.imshow(P, cmap<span class="op">=</span><span class="st">"Blues"</span>)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">27</span>):</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">27</span>):</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>        chstr <span class="op">=</span> intToChar[i] <span class="op">+</span> intToChar[j]</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>        plt.text(j,i, chstr, ha<span class="op">=</span><span class="st">"center"</span>, va<span class="op">=</span><span class="st">"bottom"</span>, color<span class="op">=</span><span class="st">"gray"</span>)</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>        plt.text(j,i, <span class="ss">f"</span><span class="sc">{</span>P[i,j]<span class="sc">.</span>item()<span class="sc">:.3f}</span><span class="ss">"</span>, ha<span class="op">=</span><span class="st">"center"</span>, va<span class="op">=</span><span class="st">"top"</span>, color<span class="op">=</span><span class="st">"gray"</span>)</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>plt.axis(<span class="st">"off"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-11-output-1.png" width="1202" height="1202" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Some probabilities stay in 0 because the visualization it’s limited to 3 decimal numbers. Now we already have our model, it’s just our probability matrix P, bellow I will show how to use it.</p>
+<div id="9bef3ff6" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>):</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    out <span class="op">=</span> []</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    init <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="va">True</span>:</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>        <span class="bu">id</span> <span class="op">=</span> torch.multinomial(P[init], num_samples<span class="op">=</span><span class="dv">1</span>, replacement<span class="op">=</span><span class="va">True</span>).item()</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">id</span> <span class="op">==</span> <span class="dv">0</span>: </span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>        out.append(intToChar[<span class="bu">id</span>])</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>        init <span class="op">=</span> <span class="bu">id</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">""</span>.join(out)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>seren
+ti
+kegwa
+shamidelyl
+seazay
+jome
+bashuligey
+swadellandeckaramauaigen
+n
+adeloc</code></pre>
+</div>
+</div>
+<p>Not good at all, but it’s correct, with you think the model it’s just saying random letters, see the code bellow, were any letter has the same probability</p>
+<div id="1ab725a7" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> torch.ones((<span class="dv">27</span>,<span class="dv">27</span>))</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>P <span class="op">=</span> N</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>P <span class="op">=</span> P <span class="op">/</span> P.<span class="bu">sum</span>()</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>):</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    out <span class="op">=</span> []</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    init <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="va">True</span>:</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>        <span class="bu">id</span> <span class="op">=</span> torch.multinomial(P[init], num_samples<span class="op">=</span><span class="dv">1</span>, replacement<span class="op">=</span><span class="va">True</span>).item()</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">id</span> <span class="op">==</span> <span class="dv">0</span>: </span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>        out.append(intToChar[<span class="bu">id</span>])</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>        init <span class="op">=</span> <span class="bu">id</span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">""</span>.join(out)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>gsogwlixwdmsfjehnpius
+hoeauujelywlnlgwgubsygmanhmenfddnsnoplmlmzqrglwhxcobnbbfhqegtxbzuxhquw
+jllihyagglxhczwjlaaffyvbjgrglhodtmu
+jzcz
+ywbqpdsvspemyipgtbydx
+
+icpfhuxyx
+prxo
+ixgtidexdbbolsimavyulqhsvggstbwjjyang
+qi</code></pre>
+</div>
+</div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -396,7 +621,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
+      var filterRegex = new RegExp("https:\/\/deeplynoted\.net");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }

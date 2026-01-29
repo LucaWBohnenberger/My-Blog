@@ -171,3 +171,63 @@ for i in range(10):
         init = id
     print("".join(out)) 
 ```
+
+
+
+## Lets Build the MLP
+
+Moving forward, now we need to create our MLP, the basic idea is to create a first layer that is responsible for transforming the characters(or better, the number that represents the character) into an embedding form, basically we transform random number that represent a word in a vector with multiple numbers, one reason for this is that in this way, the model have a representation in vector space of the letters, so, the vowels probably will be close from each other, and our special character "." will likely be distant from all other characters. For the model, this mean that de vowels probably can be changed with other vowels without increasing much loss. After create this, will simply connect in a common dense layer and a layer for output.
+
+First, we need to create a new split of our data, we need X (the decision variables, our context) and Y (the target, the next char)
+
+```{python}
+context_size = 2 # This is a very important variable, this mean how many characters the model will see to predict next
+
+X, Y = [], []
+for n in names:
+    context = [0] * context_size # Create vector with 0 (the int that represent "." for us) with the length of our context
+    for ch in n + ".": # We add "." just in final, because the context already start with "."
+        ix = charToInt[ch]
+        X.append(context)
+        Y.append(ix)
+        context = context[1:] + [ix] # We remove the first int in context and add the new
+X = torch.tensor(X)
+Y = torch.tensor(Y)
+print(X.shape, Y.shape)
+```
+
+
+To create our first layer that will embed the integers, it will act like a weight matrix, but without bias (we don't need bias because it's redundant, you will see later that we don't even need to actually perform multiplication).
+```{python}
+C = torch.randn((27, 2)) # 27 because our vocabulary have 27 words (the char + ".") and 2 because we want to transform each char into a vector with 2 dimensions 
+C.shape
+```
+
+Now, to test, we need to multiply the X with C, but the shape doesn't match
+```{python}
+X.shape, C.shape
+```
+
+So, for be able to make the multiplication, we need to make the last dimension of X become 27, this can be achieved by simple putting one hot, but it's a better way to do that. Bellow there is a multiplication between a one hot vector that represent 5 ("e" in our vocabulary)
+```{python}
+import torch.nn.functional as F 
+
+F.one_hot(torch.tensor(5), num_classes = 27).float() @ C
+```
+
+Now, see the code bellow
+```{python}
+C[5], C[[5,6,7]] 
+```
+
+Basically, multiply by a one hot vector, it's pick up the specific line, so, to solve our multiplication problem, we don't need to transform all the last dimension of X with one_hot encoding, we can just use X like an index for C.
+
+```{python}
+emb = C[X] 
+emb.shape
+```
+
+The first dimension represent the inputs, the second is the size of our context, and the last is the value in the embedding. To clarify, the code bellow, pick up the embedding value of the letter in the second position in the context for the first prediction 
+```{python}
+emb[0][1]
+```

@@ -1,0 +1,479 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "title: \"Building an Autoregressive Neural Network\"\n",
+        "\"subtitle\": Part 1\n",
+        "author: \"Luca WB\"\n",
+        "date: \"2026-01-28\"         \n",
+        "date-modified: last-modified \n",
+        "categories: [scratch, en, code, nn]\n",
+        "---\n",
+        "\n",
+        "\n",
+        "## Brief summary\n",
+        "\n",
+        "In this post, we will implement an Autoregressive Neural Network from scratch, relying solely on the PyTorch tensor class. We assume prior familiarity with Neural Networks; however, if your knowledge feels a bit rusty or you need a refresher, I recommend reading this post beforehand [Building Neural Networks from Scratch](../nn-from-scratch-1/index.qmd). \n",
+        "\n",
+        "The main reason for this is to learn how an Autoregressive NN works to generate words, for this, I'm drawing on Andrej Karpathy's video series about [makemore](https://www.youtube.com/watch?v=PaCmpygFfXo&list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ&index=2), a network capable of creating more words of the same type, so if you train with names, it generates more proper names it generates more words that remember proper names, and so on with anything that is formed by letters.\n",
+        "\n",
+        "In this post, I will cover how to make a simple model for our baseline, and how to implement a model with MLP and compare them.\n",
+        "\n",
+        "## Setup\n",
+        "\n",
+        "First, you need to download PyTorch and the dataset. For PyTorch, just download in the official site https://pytorch.org/get-started/locally/. Now, for the dataset, you can\n",
+        "create your own with random names that you can think, but It's much easier just download the names.txt dataset from the Andrej repository https://github.com/karpathy/makemore/blob/master/names.txt.\n",
+        "\n",
+        "\n",
+        "## Creating a baseline\n",
+        "\n",
+        "In propose of this, it's just to create the most simple and naive model. It's important because we need some baseline to compare with our future models, so we will create a model called bigram, the logic is just to look to the last character. Note that you will use just one character of context for our model, and we will consider that the most small part of our word is a character, for models like chatGPT, they don't use characters, they use combinations of characters similar to syllables.\n",
+        "\n",
+        "So, to start, we need first import our dataset and PyTorch"
+      ],
+      "id": "eea86bb9"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "cache": true
+      },
+      "source": [
+        "import torch\n",
+        " \n",
+        "# Basically makes a list of all the names\n",
+        "names = open(\"names.txt\", \"r\").read().splitlines() \n",
+        "names[:5]"
+      ],
+      "id": "ca083b9b",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Most part of models usually can't handle with characters, so it's useful to convert this letters in numbers in some way. For this, there are many possibles, but I will use just a simple dictionary to convert them. But we \n"
+      ],
+      "id": "23151377"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "cache": true
+      },
+      "source": [
+        "chars = sorted(list(set(\"\".join(names)))) # Creates an ordered list with all letters in our dataset\n",
+        "charToInt = {s:i+1 for i,s in enumerate(chars)} # Creates a dict to convert chars to int, we add one in the value, because of the bellow line\n",
+        "charToInt[\".\"] = 0 # I will explain later why we need a special character\n",
+        "print(charToInt)"
+      ],
+      "id": "e262c88e",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Just to get it ready, if we convert to int, so we can read it at the end, we will need an intToChar converter, so let's get it ready"
+      ],
+      "id": "6ea1dd01"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "cache": true
+      },
+      "source": [
+        "intToChar = {s:i for i,s in charToInt.items()}\n",
+        "print(intToChar)"
+      ],
+      "id": "48b34727",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Know, for our model, we need to calculate the total number that each sequence occurs, like, with we start with letter \"a\", how many times occurs that \"m\" is the next character. And it's for this that we need and special characters, because we always need something to start, after all, the autoregressive model logic and take the output of the model and put it in its input, so we need an initial input. In our case, we will use \".\" as the symbol to start a name/words and to stop word (without a final symbol, it would generate forever). To make more clear, see the code bellow\n"
+      ],
+      "id": "86f04a4a"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "cache": true
+      },
+      "source": [
+        "N = torch.zeros((27,27)).int()\n",
+        "\n",
+        "for name in names:\n",
+        "    chars = [\".\"] + list(name) + [\".\"] # turn the name in a list of characters and add \".\" \n",
+        "    for ch1,ch2 in zip(chars, chars[1:]): # In each loop, pick up one letter in ch1, and the next in ch2\n",
+        "        id1, id2 = charToInt[ch1], charToInt[ch2]\n",
+        "        N[id1, id2] += 1"
+      ],
+      "id": "6a9c4fc4",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Basically, this count how often some sequence of characters occurs, like the most common letter sequence is \"n\" follow by \".\", this mean, that the most commum letter to finish a name in our dataset it's \"n\". If you run with all the names, you can use the code bellow to find the most common occurrences"
+      ],
+      "id": "b8a1fc1e"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "id1, id2 = (N == N.max()).nonzero(as_tuple=True) # Creates a boolean matrix that only it's True in the max value, than return a tuple where its true\n",
+        "print(intToChar[id1.item()], \"-->\", intToChar[id2.item()],\"occurs \", N.max().item())"
+      ],
+      "id": "f7c8d3d2",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "So let's see how our bigrams are distributed"
+      ],
+      "id": "b6dd7f1b"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "cache": true
+      },
+      "source": [
+        "#| code-fold: true\n",
+        "import matplotlib.pyplot as plt\n",
+        "\n",
+        "plt.figure(figsize= (16,16))\n",
+        "plt.imshow(N, cmap=\"Blues\")\n",
+        "for i in range(27):\n",
+        "    for j in range(27):\n",
+        "        chstr = intToChar[i] + intToChar[j]\n",
+        "        plt.text(j,i, chstr, ha=\"center\", va=\"bottom\", color=\"gray\")\n",
+        "        plt.text(j,i, N[i,j].item(), ha=\"center\", va=\"top\", color=\"gray\")\n",
+        "    \n",
+        "plt.axis(\"off\")"
+      ],
+      "id": "7240d054",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "One thing very interesting you can note, it's that have many combinations that don't exist, like \"bk\" or \"gc\". This makes it impossible for our model to generate a name with this combination, it is ok to leave it like this, but it would be a good practice to add 1 in all values, thus ensuring that at least there is the minimal possibility of generating a rare sequence\n"
+      ],
+      "id": "0fd6a485"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "N = N + 1 "
+      ],
+      "id": "7c77c5d8",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "cache": true
+      },
+      "source": [
+        "#| echo: false\n",
+        "import matplotlib.pyplot as plt\n",
+        "\n",
+        "plt.figure(figsize= (16,16))\n",
+        "plt.imshow(N, cmap=\"Blues\")\n",
+        "for i in range(27):\n",
+        "    for j in range(27):\n",
+        "        chstr = intToChar[i] + intToChar[j]\n",
+        "        plt.text(j,i, chstr, ha=\"center\", va=\"bottom\", color=\"gray\")\n",
+        "        plt.text(j,i, N[i,j].item(), ha=\"center\", va=\"top\", color=\"gray\")\n",
+        "    \n",
+        "plt.axis(\"off\")"
+      ],
+      "id": "477a579b",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "So, lets transform our probability matrix"
+      ],
+      "id": "b8dd04e9"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "cache": true
+      },
+      "source": [
+        "P = N\n",
+        "P = P / P.sum(dim=1, keepdims=True)"
+      ],
+      "id": "8f7af816",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "cache": true
+      },
+      "source": [
+        "#| code-fold: true\n",
+        "import matplotlib.pyplot as plt\n",
+        "\n",
+        "plt.figure(figsize= (16,16))\n",
+        "plt.imshow(P, cmap=\"Blues\")\n",
+        "for i in range(27):\n",
+        "    for j in range(27):\n",
+        "        chstr = intToChar[i] + intToChar[j]\n",
+        "        plt.text(j,i, chstr, ha=\"center\", va=\"bottom\", color=\"gray\")\n",
+        "        plt.text(j,i, f\"{P[i,j].item():.3f}\", ha=\"center\", va=\"top\", color=\"gray\")\n",
+        "    \n",
+        "plt.axis(\"off\")"
+      ],
+      "id": "8a5a69f9",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Some probabilities stay in 0 because the visualization it's limited to 3 decimal numbers. Now we already have our model, it's just our probability matrix P, bellow I will show how to use it.\n"
+      ],
+      "id": "053c5b4b"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "for i in range(10):\n",
+        "    out = []\n",
+        "    init = 0\n",
+        "    while True:\n",
+        "        id = torch.multinomial(P[init], num_samples=1, replacement=True).item()\n",
+        "\n",
+        "        if id == 0: \n",
+        "            break\n",
+        "\n",
+        "        out.append(intToChar[id])\n",
+        "        init = id\n",
+        "    print(\"\".join(out)) "
+      ],
+      "id": "ef6de8f9",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Not good at all, but it's correct, with you think the model it's just saying random letters, see the code bellow, were any letter has the same probability"
+      ],
+      "id": "7973e741"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "N = torch.ones((27,27))\n",
+        "P = N\n",
+        "P = P / P.sum(dim=1, keepdims=True)\n",
+        "\n",
+        "for i in range(10):\n",
+        "    out = []\n",
+        "    init = 0\n",
+        "    while True:\n",
+        "        id = torch.multinomial(P[init], num_samples=1, replacement=True).item()\n",
+        "\n",
+        "        if id == 0: \n",
+        "            break\n",
+        "\n",
+        "        out.append(intToChar[id])\n",
+        "        init = id\n",
+        "    print(\"\".join(out)) "
+      ],
+      "id": "26647e69",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Lets Build the MLP\n",
+        "\n",
+        "Moving forward, now we need to create our MLP, the basic idea is to create a first layer that is responsible for transforming the characters(or better, the number that represents the character) into an embedding form, basically we transform random number that represent a word in a vector with multiple numbers, one reason for this is that in this way, the model have a representation in vector space of the letters, so, the vowels probably will be close from each other, and our special character \".\" will likely be distant from all other characters. For the model, this mean that de vowels probably can be changed with other vowels without increasing much loss. After create this, will simply connect in a common dense layer and a layer for output.\n",
+        "\n",
+        "First, we need to create a new split of our data, we need X (the decision variables, our context) and Y (the target, the next char)\n"
+      ],
+      "id": "376321b7"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "context_size = 2 # This is a very important variable, this mean how many characters the model will see to predict next\n",
+        "\n",
+        "X, Y = [], []\n",
+        "for n in names:\n",
+        "    context = [0] * context_size # Create vector with 0 (the int that represent \".\" for us) with the length of our context\n",
+        "    for ch in n + \".\": # We add \".\" just in final, because the context already start with \".\"\n",
+        "        ix = charToInt[ch]\n",
+        "        X.append(context)\n",
+        "        Y.append(ix)\n",
+        "        context = context[1:] + [ix] # We remove the first int in context and add the new\n",
+        "X = torch.tensor(X)\n",
+        "Y = torch.tensor(Y)\n",
+        "print(X.shape, Y.shape)"
+      ],
+      "id": "4b63d9f0",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "To create our first layer that will embed the integers, it will act like a weight matrix, but without bias (we don't need bias because it's redundant, you will see later that we don't even need to actually perform multiplication)."
+      ],
+      "id": "2ed59b1c"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "C = torch.randn((27, 2)) # 27 because our vocabulary have 27 words (the char + \".\") and 2 because we want to transform each char into a vector with 2 dimensions \n",
+        "C.shape"
+      ],
+      "id": "0ea5f6be",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Now, to test, we need to multiply the X with C, but the shape doesn't match"
+      ],
+      "id": "c78d952f"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "X.shape, C.shape"
+      ],
+      "id": "783b078c",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "So, for be able to make the multiplication, we need to make the last dimension of X become 27, this can be achieved by simple putting one hot, but it's a better way to do that. Bellow there is a multiplication between a one hot vector that represent 5 (\"e\" in our vocabulary)"
+      ],
+      "id": "d55c7fd3"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "import torch.nn.functional as F \n",
+        "\n",
+        "F.one_hot(torch.tensor(5), num_classes = 27).float() @ C"
+      ],
+      "id": "bf49fed9",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Now, see the code bellow"
+      ],
+      "id": "752970c8"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "C[5], C[[5,6,7]] "
+      ],
+      "id": "2f3be8a2",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Basically, multiply by a one hot vector, it's pick up the specific line, so, to solve our multiplication problem, we don't need to transform all the last dimension of X with one_hot encoding, we can just use X like an index for C.\n"
+      ],
+      "id": "d04fb339"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "emb = C[X] \n",
+        "emb.shape"
+      ],
+      "id": "f9c7f6f1",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "The first dimension represent the inputs, the second is the size of our context, and the last is the value in the embedding. To clari, the code bellow, pick up the embedding value of the letter in the second position in the context for the first prediction "
+      ],
+      "id": "efe934ab"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "emb[0][1]"
+      ],
+      "id": "4f72585e",
+      "execution_count": null,
+      "outputs": []
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "name": "python3",
+      "language": "python",
+      "display_name": "Python 3 (ipykernel)",
+      "path": "/home/naia/miniconda3/envs/pytorch/share/jupyter/kernels/python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}

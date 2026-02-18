@@ -175,13 +175,15 @@ for i in range(10):
 
 
 ## Lets Build the MLP
+### The embedding
 
-Moving forward, now we need to create our MLP, the basic idea is to create a first layer that is responsible for transforming the characters(or better, the number that represents the character) into an embedding form, basically we transform random number that represent a word in a vector with multiple numbers, one reason for this is that in this way, the model have a representation in vector space of the letters, so, the vowels probably will be close from each other, and our special character "." will likely be distant from all other characters. For the model, this mean that de vowels probably can be changed with other vowels without increasing much loss. After create this, will simply connect in a common dense layer and a layer for output.
+Moving forward, now we need to create our MLP, the basic idea is to create a first layer that is responsible for transforming the characters(or better, the number that represents the character) into an embedding form, and then connect into a normal dense layer. An embedding form is basically a number that represent a word in a vector with multiple numbers. 
+One reason for this is that in this way, the model have a representation in vector space of the letters, so, the vowels probably will be close from each other, and our special character "." will likely be distant from all other characters. For the model, this mean that de vowels probably can be changed with other vowels without increasing much loss. After create this, will simply connect in a common dense layer and a layer for output.
 
 First, we need to create a new split of our data, we need X (the decision variables, our context) and Y (the target, the next char)
 
 ```{python}
-context_size = 2 # This is a very important variable, this mean how many characters the model will see to predict next
+context_size = 3 # This is a very important variable, this mean how many characters the model will see to predict next
 
 X, Y = [], []
 for n in names:
@@ -199,7 +201,8 @@ print(X.shape, Y.shape)
 
 To create our first layer that will embed the integers, it will act like a weight matrix, but without bias (we don't need bias because it's redundant, you will see later that we don't even need to actually perform multiplication).
 ```{python}
-C = torch.randn((27, 2)) # 27 because our vocabulary have 27 words (the char + ".") and 2 because we want to transform each char into a vector with 2 dimensions 
+emb_dim = 2
+C = torch.randn((27, emb_dim)) # 27 because our vocabulary have 27 words (the char + ".") and 2 because we want to transform each char into a vector with 2 dimensions 
 C.shape
 ```
 
@@ -220,14 +223,53 @@ Now, see the code bellow
 C[5], C[[5,6,7]] 
 ```
 
-Basically, multiply by a one hot vector, it's pick up the specific line, so, to solve our multiplication problem, we don't need to transform all the last dimension of X with one_hot encoding, we can just use X like an index for C.
+Basically, multiply by a one hot vector, it's pick up the specific row, so, to solve our multiplication problem, we don't need to transform all the last dimension of X with one_hot encoding, we can just use X like an index for C.
 
 ```{python}
 emb = C[X] 
 emb.shape
 ```
 
-The first dimension represent the inputs, the second is the size of our context, and the last is the value in the embedding. To clarify, the code bellow, pick up the embedding value of the letter in the second position in the context for the first prediction 
+The first dimension represent the inputs, the second is the size of our context, and the last is the value in the embedding. To clarify, the code bellow, pick up the embedding value of the letter in the second position in the context for the sixth prediction 
 ```{python}
-emb[0][1]
+emb[5][1]
 ```
+
+
+### The Deep Layers
+
+Going further, since we now have our chars represented in an embedding form, just create the deep layers; But we have another problem in the dimensions of matrix, see bellow
+```{python}
+emb.shape
+```
+
+In deep learning, it's always matrix multiplications between layers, now we want to do one with embedding layer and some weight matrix W1, like bellow:
+$$ \sigma(\mathbf{emb} \mathbf{W}_1 + \mathbf{b}_1) $$
+
+Since $W_1$ is a matrix, emb also needs to be one, so we can perform standard deep learning operations. We can use several PyTorch functions for this, like reshape, but the most efficient is view. This is because view doesn't change the underlying data in memory; it just changes how the tensor is read. See bellow how this works:
+
+```{python}
+X = torch.tensor(( ((1,2), (3,4)), ((5,6), (7,8)), ((9,10), (11,12)) ))
+X.shape, X, X.view((-1,3)), X.view((-1,3)).shape 
+``` 
+
+PyTorch reads in order from the last dimension in the tensor, and just will pack the elements in the quantity you ask. By applying this we do this with the emb, our objective is to create a dimension with all the context, basically each row will be a complete context:
+
+```{python}
+emb[0], emb[0].view(-1, context_size*emb_dim) 
+``` 
+
+Now we can build the other layers like bellow
+```{python}
+W1 = torch.randn((context_size*emb_dim, 100)) # The first row is to be possible the multiplication, and the second it's the number of neurons
+b1 = torch.randn(100)
+W2 = torch.randn((100, 27)) # It's important that we return have the last dimension equal to the length of our vocabulary, for be possible to use some loss function comparing the predicted terms with the original ones
+b2 = torch.randn(27)
+
+
+h = torch.relu(emb.view(-1, W1.shape[0]) @ W1 + b1)
+logits = torch.relu(h @ W2 + b2)
+logits[:3]
+``` 
+
+Note that the initial logits are completely random, because the neural network is untrained, to do this we need a way to compute the loss, at this stage, the standard approach is, is with cross entropy 

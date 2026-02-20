@@ -236,7 +236,7 @@ emb[5][1]
 ```
 
 
-### The Deep Layers
+### The Deep Layers and the Train
 
 Going further, since we now have our chars represented in an embedding form, just create the deep layers; But we have another problem in the dimensions of matrix, see bellow
 ```{python}
@@ -249,8 +249,8 @@ $$ \sigma(\mathbf{emb} \mathbf{W}_1 + \mathbf{b}_1) $$
 Since $W_1$ is a matrix, emb also needs to be one, so we can perform standard deep learning operations. We can use several PyTorch functions for this, like reshape, but the most efficient is view. This is because view doesn't change the underlying data in memory; it just changes how the tensor is read. See bellow how this works:
 
 ```{python}
-X = torch.tensor(( ((1,2), (3,4)), ((5,6), (7,8)), ((9,10), (11,12)) ))
-X.shape, X, X.view((-1,3)), X.view((-1,3)).shape 
+B = torch.tensor(( ((1,2), (3,4)), ((5,6), (7,8)), ((9,10), (11,12)) ))
+B.shape, B, B.view((-1,3)), B.view((-1,3)).shape 
 ``` 
 
 PyTorch reads in order from the last dimension in the tensor, and just will pack the elements in the quantity you ask. By applying this we do this with the emb, our objective is to create a dimension with all the context, basically each row will be a complete context:
@@ -272,4 +272,144 @@ logits = torch.relu(h @ W2 + b2)
 logits[:3]
 ``` 
 
-Note that the initial logits are completely random, because the neural network is untrained, to do this we need a way to compute the loss, at this stage, the standard approach is, is with cross entropy 
+Note that the initial logits are completely random, because the neural network is untrained, to do this we need a way to compute the loss, at this stage, the standard approach is, is with softmax and cross entropy.
+Softmax is basically a function that turns a vector of real numbers into probabilities, making it much easier to compute derivatives. It is defined by the following expression:
+$$ \text{Softmax}(z_i) = \frac{e^{z_i}}{\sum_{j=1}^{K} e^{z_j}} $$
+
+And cross entropy is just a negative sum for all log probabilities that matches with the true label
+$$ L_{CE} = -\sum_{i=1}^{C} y_i \log(\hat{y}_i) $$
+
+To do softmax in PyTorch, see the code bellow
+```{python}
+A = torch.tensor(((1,2), (2,2)))
+counts = A.exp()
+probs = counts / counts.sum(axis=1, keepdims=True) # Axis = 1 tell to PyTorch to compute the sum belong the columns
+probs
+``` 
+
+Note that the *keepdims = True* is ***necessary***, with you don't put it, see what happens
+```{python}
+probs = counts / counts.sum(axis=1) 
+probs
+``` 
+
+
+This occurs because of PyTorch's broadcast system, which aligns the two tensors from right to left, with the last dimensions matching; PyTorch simply replicates these values along other axes. Going to the cross-entropy, we just need to sum the log probabilities with the larger probability in a vector, which is the probability that predicts the correct value.
+
+```{python}
+probs = counts / counts.sum(axis=1, keepdims=True) 
+values = torch.tensor((0,1)) # The correct value is represents by the index like in our vocabulary, the first row the correct is the index 0, but our model predict index 1
+loss = -probs[torch.arange(A.shape[0]), values].log().sum() # Just pick all rows and the column in values
+loss
+``` 
+
+If we do this with our logits, it will be correct, but PyTorch offers a better way to do softmax cross-entropy. PyTorch makes all these three lines without create intermediates tensors and applies a technique to make it more numerically stable.
+
+```{python}
+A = torch.tensor([-5,-3, 0, 100]) 
+B = torch.tensor([-5,-3, 0, 100]) - 100
+C = torch.tensor([1,2,5])
+D = torch.tensor([1,2,5]) - 5
+  
+counts1 = A.exp()
+probs1 = counts1 / counts1.sum()
+
+counts2 = B.exp()
+probs2 = counts2 / counts2.sum()
+
+counts3 = C.exp()
+probs3 = counts3 / counts3.sum()
+
+counts4 = D.exp()
+probs4 = counts4 / counts4.sum()
+ 
+probs1, probs2, probs3, probs4
+``` 
+
+As you can see in C and D, subtracting a number from a tensor before applying the softmax doesn’t change the results. But our computer struggles to hands with a bigger number when we perform exp function, so the trick it’s subtract the bigger value from the vector.
+Finally, we can now apply this in our logits with the native function in PyTorch
+
+```{python}
+loss = F.cross_entropy(logits, Y)
+loss
+```
+
+Now we just need to put all these together and make a train loop
+```{python}
+#| cache: true
+emb_dim = 2
+C = torch.randn((27, emb_dim))
+W1 = torch.randn((context_size*emb_dim, 100))
+b1 = torch.randn(100)
+W2 = torch.randn((100, 27))
+b2 = torch.randn(27)
+
+parameters = [C, W1, b1, W2, b2]
+
+for p in parameters:
+    p.requires_grad = True # This make PyTorch calculates and keep the gradients values
+
+epochs = 1000
+lr = 0.1
+for epoch in range(epochs):
+    emb = C[X]
+    h = torch.relu(emb.view(-1, context_size*emb_dim) @ W1 + b1)
+    logits = h @ W2 + b2
+
+    loss = F.cross_entropy(logits, Y)
+    
+    # Backpropgation
+    for p in parameters:
+        p.grad = None
+    loss.backward()
+    for p in parameters:
+        p.data -= lr*p.grad
+
+loss
+```
+
+With you doesn't understand the code above very well, check this other post [Building Neural Networks from Scratch](../nn-from-scratch-1/index.qmd)
+
+Now, let's test this new model. The code bellow generates 20 random names
+```{python}
+#| cache: true
+for _ in range(20):
+    
+    out = []
+    context = [0] * context_size
+    while True:
+        emb = C[torch.tensor([context])]
+        h = torch.relu(emb.view(-1,W1.shape[0]) @ W1 + b1)
+        logits = h @ W2 + b2
+        probs = F.softmax(logits, dim=1)
+        ix = torch.multinomial(probs, 1).item()
+        
+        out.append(ix)
+        context = context[1:] + [ix]
+        if ix == 0:
+            break
+
+    print(''.join(intToChar[it] for it in out))
+        
+```  
+
+
+You probably noticed that the loss in our neural network is worse than the baseline model, so, why have all this trouble? This trouble worth because the advantage of this approach in relation to the baseline, it's the fact you can improve this model just by increasing the context_size, the embedding dim, adding more layers. 
+
+But it's your work improve these model by tuning the hyperparameters. So, this is some exercise:
+
+1) Change the code in baseline to have some loss to compare with the neural network (Tip: You can use Negative Log-Likelihood)
+
+2) Improve the neural network 
+
+### Visualizing the embeddings
+
+We already have a full trained neural network, these mean that the first layer (the embedding layer) is already trained. The code bellow shows us how our model understand the letters for this task (only work with emb_dim = 2)
+ 
+```{python}
+plt.figure(figsize=(8,8))
+plt.scatter(C[:,0].data, C[:, 1].data, s=200)
+for i in range(C.shape[0]):
+    plt.text(C[i,0].item(), C[i,1].item(), intToChar[i], ha="center", va="center", color="white")
+
+```

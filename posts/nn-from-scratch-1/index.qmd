@@ -8,14 +8,14 @@ categories: [scratch, en, code, math, nn]
  
 ## Brief summary
 
-The objective from this page to understand how to implement a neural network from scratch without any external libraries, this page consider that you already have some 
-knowledge of Artificial Neural Networks. The main reason for this is just to make 
-more understandable the black box of Neural Networks. So, to this project, the main resource (but not the unique) is this [video](https://www.youtube.com/watch?v=VMj-3S1tku0&list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ) from Andrej Karpathy. I will cover how to implement AutoGrad for backpropagation. At the end of this post, you will cable of create MLPs without any external library.
+The goal of this page is to understand how to implement a neural network from scratch without any external libraries. I'll consider that you already have some 
+basic knowledge of Artificial Neural Networks. The main reason for doing this is to demystify the black box of Neural Networks. 
+For this project, the main resource (though not the only one) is this awesome [video](https://www.youtube.com/watch?v=VMj-3S1tku0&list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ) from Andrej Karpathy. I will cover how to implement AutoGrad for backpropagation. By the end of this post, you will be capable of creating MLPs from scratch!
 
 
 ## Basic knowledge of derivative
 
-So, from the start, to make sense at how an NN train and learn something, you first need a very good understanding around the meaning of derivative operations.
+To make sense at how an NN train and learns, you first need a solid understand of what a derivative is.
 A derivative is an operation that gives us a formula that describes the slope of a function as it modifies a variable, but for out propose, we will only work with functions that generate linear derivatives. Thus, for the function $f(x) = 3x^2 - 4x + 5$, see the graph below.
 ```{python}
 #| code-fold: true
@@ -44,7 +44,7 @@ plt.grid(True)
 plt.show()
 ```
 
-This function is easy to undestand and derivate analytic, the derivate is $\frac{df(x)}{dx} = 6x - 4$. Plotting both function and his derivate, we get the graphic below.
+This function is easy to understand and derivate analytic, the derivate is $\frac{df(x)}{dx} = 6x - 4$. Plotting both function and his derivate, we get the graphic below.
 ```{python}
 #| code-fold: true
 #| code-summary: "Show Python code"
@@ -155,9 +155,9 @@ So, for start, lets make the basic of our class:
 class Value:
     def __init__(self, data, _children=(), _op="", label=""):
         self.data = data
-        self.grad = 0 # All nodes will start with no grad, becouse we dont know what is the grad (and for other math reaseon will explain soon)
-        self._prev = set(_children) # Dont worry about this for know, we only use set for a little bit better performance
-        self._op = _op # To save the operation, its usefull for debug
+        self.grad = 0 # All nodes will start with no grad, because we don't know what is the grad (and for other math reason will explain soon)
+        self._prev = set(_children) # Don't worry about this for know, we only use set for a little bit better performance
+        self._op = _op # To save the operation, its useful for debug
         self.label = label # You can ignore this, its just for the graphs I make below
 
     # This is just for us visualize our class
@@ -349,8 +349,8 @@ This is a complete backward pass manual, know we need to make a code to this aut
 
 ### Automatically backward pass
 
-To make this automatically, we probably notted that we need to start from the last node and go in a reverse order, this is necessery because for calc the gradient of and node, we need the local gradient of the variable, and the gradient of the father, the unique exception is the last node, because its gradient always will be 1.
-The way will we implement this, its just make a node do the calc of his childs gradients, lets see the mul function:
+To do this automatically, you probably noticed that we need to start from the last node and work backwards (from the last to the first). The reverse order is necessary because for calculate the gradient of any node, we need the local gradient of the variable, and the gradient of the father, the unique exception is the last node, because its gradient always will be 1.
+he way we will implement this is by making each node responsible for calculating and passing the gradients down to its children. Let's see how this works for the multiplication (mul) function::
 ```{python}
 class Value:
     def __init__(self, data, _children=(), _op="", label=""):
@@ -365,7 +365,9 @@ class Value:
         out =  Value(self.data * other.data, (self,other), '+')
         
         def _backward():
-            # We use += over =, because with we use the same node two times it will be reset, and with this node influences in two other nodes, its influence in final result, are the sum of the influence on both nodes
+            # We use += instead of = to accumulate the gradients. 
+            # If we just used =, using the same node more than once would overwrite its gradient. 
+            # Since a single node can influence multiple forward paths, its total influence on the final result is the sum of the gradients from all those paths!
             self.grad += other.data * out.grad 
             other.grad += self.data * out.grad
 
@@ -390,7 +392,6 @@ class Value:
         out =  Value(self.data * other.data, (self,other), '+')
         
         def _backward():
-            # We use += over =, because with we use the same node two times it will be reset, and with this node influences in two other nodes, its influence in final result, are the sum of the influence on both nodes
             self.grad += other.data * out.grad 
             other.grad += self.data * out.grad
 
@@ -425,7 +426,7 @@ print("Grad of d:", d.grad)
 print("Grad of f:", f.grad)
 ```
 
-It works! So know, its just do for add too, below are the complete Value class
+It works! So know, its just do for *add* too, below are the complete Value class
 ```{python}
 #| code-fold: true
 #| code-summary: "Show Python code"
@@ -726,10 +727,10 @@ class Value:
         return out
 
     import math
-    def tahn(self):
+    def tanh(self):
         x = self.data
         t = (math.exp(x) - math.exp(-x))/ (math.exp(x) + math.exp(-x))
-        out = Value(t, (self,), "tahn")
+        out = Value(t, (self,), "tanh")
 
         # We can derivate, or just pick up on google
         def _backward():
@@ -776,19 +777,19 @@ class Value:
         out = Value(self.data**other, (self,), f'**{other}')
 
         def _backward():
-            # Regra da cadeia para potência: n * x^(n-1) * grad_out
+            # Chain rule for pow: n * x^(n-1) * grad_out
             self.grad += (other * self.data**(other-1)) * out.grad
         out._backward = _backward
 
         return out
 
-    def __neg__(self): # Para permitir -self
+    def __neg__(self): # To be possible do - (self)
         return self * -1
 
-    def __sub__(self, other): # Para permitir self - other
+    def __sub__(self, other): # To be possible self - other
         return self + (-other)
 
-    def __radd__(self, other): # Para permitir sum([Value, Value]) onde começa com 0 + Value
+    def __radd__(self, other): # To be possible do sum([Value, Value]) when starts with 0 + Value
         return self + other
 
 ``` 
@@ -821,7 +822,7 @@ class Layer:
         outs = [n(x) for n in self.neurons]
 
         if self.non_linear:
-            outs = [out.tahn() for out in outs]
+            outs = [out.tanh() for out in outs]
 
         return outs[0] if len(outs) == 1 else outs
     
@@ -832,7 +833,7 @@ class Layer:
         return out
 ```
 
-For this Layer class, we need to implement the tahn (tangent hyperbolic) function. It's formula is:
+For this Layer class, we need to implement the tanh (tangent hyperbolic) function. It's formula is:
 $$
 \tanh(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}}
 $$  
@@ -844,10 +845,10 @@ Note that there is 3 operations that we don't implement to make this, so, lets i
 #| code-summary: "Show solution:"
 import math
 # Its not really necessary to add exp, subtraction or divided, but its good with you do 😊
-def tahn(self):
+def tanh(self):
     x = self.data
     t = (math.exp(x) - math.exp(-x))/ (math.exp(x) + math.exp(-x))
-    out = Value(t, (self,), "tahn")
+    out = Value(t, (self,), "tanh")
 
     # We can derivate, or just pick up on google
     def _backwards():
@@ -869,7 +870,7 @@ Work well, this is pretty simple too. Now let's move to the last part, create an
 
 ### Building an MLP
 
-For last, we will create a Multilayer Perceptron, for this, we just need to to line layer up.
+For last, we will create a Multilayer Perceptron, for this, we just need to line layer up.
 
 ```{python}
 class MLP:
@@ -927,13 +928,13 @@ ann = MLP(3, [8, 8, 1])
  
 for i in range(50): # Our code will do 50 epochs of training 
     y_pred = [ann(x) for x in X] # Our model only accept one prediction per time
-    loss = sum((pred-origin)**2 for pred,origin in zip(y_pred, y)) 
+    loss = sum((pred-origin)**2 for pred,origin in zip(y_pred, y)) * (Value((len(y))) ** -1) # You can implement the division operator or do it this way
 
-    loss.backward() # Calc of gradients 
+    loss.backward() # Calc of gradients  
 
     for p in ann.parameters():
         p.data = p.data - 0.001*p.grad # Updating weights, we multiply the gradient by a small number called learning rate, we do this for not have problems with model convergence
-        p.grad = 0
+        p.grad = 0 # Reset the gradients, with we don't do this, our grad will increase infinitely
     print(f"Epoch {i}, Loss: {loss}")
 
 ```   

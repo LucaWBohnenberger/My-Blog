@@ -912,8 +912,8 @@ import random
 def f(x,y,z):
     return 0.04*x**2 + 0.07*y*x - z + random.gauss(0, 1)/5
 
-X = []
-y = []
+X = [] 
+y = [] 
 for i in range(100):
     X.append([random.uniform(-5,5) for _ in range(3)])
     y.append(f(X[i][0],X[i][1],X[i][2]))
@@ -932,18 +932,18 @@ for i in range(50): # Our code will do 50 epochs of training
 
     loss.backward() # Calc of gradients  
 
-    for p in ann.parameters():
-        p.data = p.data - 0.001*p.grad # Updating weights, we multiply the gradient by a small number called learning rate, we do this for not have problems with model convergence
+    for p in ann.parameters(): 
+        p.data = p.data - 0.01*p.grad # Updating weights, we multiply the gradient by a small number called learning rate, we do this for not have problems with model convergence
         p.grad = 0 # Reset the gradients, with we don't do this, our grad will increase infinitely
-    print(f"Epoch {i}, Loss: {loss}")
+    print(f"Epoch {i}, Loss: {loss}") 
 
 ```   
 
 
-Work, but not very well, it's possible to improve this changing the activation function by an ReLU. But for our propose, it's good enough. Lets just see the values coming from our model
+Work, it's probability possible to improve this changing the activation function by an ReLU. But for our propose, it's good enough. Lets just see the values coming from our model
 
 ``` {python}
 #| cache: true
-y_pred = ann(X[1])
-print(f"Real value: {y[1]}\nPredict value: {y_pred}") 
+y_pred = ann(X[0])
+print(f"Real value: {y[0]}\nPredict value: {y_pred}") 
 ```   

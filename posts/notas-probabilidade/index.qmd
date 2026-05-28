@@ -1,0 +1,120 @@
+---
+title: "De onde vem as fórmulas de probabilidade?"
+"subtitle": "Uma construção axiomática da probabilidade com exemplos"
+author: "Luca WB"
+date: "2026-05-28"         
+date-modified: last-modified 
+categories: [scratch, pt, math, probability]
+---
+
+## Breve introdução
+
+Durante minha gradução, a cadeira de probabilidade foi dada de forma muito mecânica, onde apenas apareciam fórmulas mágicas que supostamente calculavam a probabilidade, mas eu não fazia ideia do porque, então fui aos livros estudar e descobri como elas foram construidas e porque funcionavam, e isso me fascinou bastante. Por isso decidi compilar uma versão bem resumida dos meus estudos, para que outras pessoas que já tiveram a mesma experiência que eu, possam ter uma visão geral de como a probabilidade é construída, e porque as fórmulas que aprendemos na graduação funcionam.
+
+Esse material foi construido com base em minhas notas de estudos do livro do Sheldon Ross, "Probabilidade, Um curso moderno com aplicações". Os conteudos aqui apresentados serão com base nos capitulos 1 a 4 do livro, alguns problemas nesse post serão de problemas famosos, e outros serão releitura de alguns exercicios do livro. Recomendo fortemente a leitura dele para quem quiser se aprofundar mais em probabilidade a nível de graduação. Não usarei necessáriamente a mesma notação do livro, e nem as mesmas demonstrações, mas a ideia é a mesma, apenas de uma forma mais resumida e com exemplos mais simples. Na seção de contagem, trarei uma abordagem diferente da do livro que considero mais intuitiva.
+
+Pré-requisitos: Não essencial ter feito uma cadeira de probabilidade, ainda que seja interesante. O pré-requisito real aqui é ter uma noçaõ miníma de teoria dos conjuntos. Também é bom ter uma noção combinatória bascia e sobre limites, ainda que não seja essencial.
+
+## O básico sobre contar
+
+Antes de nos adentrarmos em probabilidade, é importante saber contar as coisas, e isso é algo que a maioria das pessoas tem dificuldade, então vamos começar por aqui.
+
+Primeiro de tudo, contar possui dois principios fundamentais, o principio da adição e o principio da multiplicação. O principio da adição diz que se temos dois conjuntos de coisas, e eles não possuem interseção, ou seja, não possuem elementos em comum, então a quantidade total de coisas é a soma das quantidades de cada conjunto. Já o principio da multiplicação diz que se temos um processo que ocorre em etapas, e cada etapa possui uma quantidade fixa de possibilidades, então a quantidade total de possibilidades é o produto das quantidades de cada etapa.
+
+Para formalizar:
+
+- Princípio da adição: Se A e B são conjuntos disjuntos, então |A ∪ B| = |A| + |B|
+
+- Princípio da multiplicação: Se um processo ocorre em n etapas, e cada etapa possui $k_i$ possibilidades, então a quantidade total de possibilidades é $\prod_{i=1}^{n} k_i$
+
+
+Agora que disse um monte de coisas, vamos por um pouco de intuição nisso. Primeiro sobre o PA (a partir de agora chamarei o principio da adição de PA e o principio da multiplicação de PM), ele é bastante simples, ele funciona da seguinte forma, se precisamos escolher entre coisas mutuamente exclusivas, isso é, escolher uma coisa OU outra, nos somamos as possibilidades. Por exemplo no seguinte problema:
+
+João tem que escolher o que comer, há 3 tipos de sorvete e 2 de bolo, quantas opções de sobremesa ele tem?
+$$
+3 + 2 = 5 \quad \text{(PA)}
+$$
+
+Bastente simples, não?
+
+
+Agora sobre o principio da multiplicação, ele funciona quando fazemos experimentos (um experimento é um processo onde gera algum resultado entre várias possibilidades) sequenciais, ou seja, quando podemos combinar os resultados de um experimento com o outro. Veja no exemplo abaixo:
+
+João tem que escolher o que comer, há 3 tipos de sorvete e 2 caldas diferentes para colocar no sorvete, quantas opções de sobremesa ele tem?
+$$
+3 \times 2 = 6 \quad \text{(PM)}
+$$
+
+Com esses dois principios, podemos contar quase qualquer coisas, mas ainda são ferramentas muito básicas, abaixo vamos derivar alguns casos especiais que são uteis de saber.
+
+### Permutação
+
+Se temos 3 letras, A, B e C, quantas formas diferentes podemos organizá-las? Pelo principio da multiplicação, na primeia letra temos 3 opções, na segunda letra temos 2 opções (pois já escolhemos uma letra para a primeira), e na terceira letra temos apenas 1 opção (pois já escolhemos as outras duas), então o total de formas diferentes de organizar as letras é:
+$$
+3 \times 2 \times 1 = 6 \quad \text{(PM)}
+$$
+
+As combinações possíveis: ABC, ACB, BAC, BCA, CAB e CBA.
+
+Note que o calculo assima, é o mesmo que calcular o fatorial de 3, ou seja, $3!$. Dessa forma, se temos n objetos distintos, o número de formas diferentes de organizá-los é dado por $n!$.
+
+Ex.1: Quantas formas diferentes podemos organizar as letras da palavra "Claudio"?
+
+Via a formula da permutação, temos que o número de formas diferentes de organizar as letras é dado por $7!$
+
+
+Agora vamos complicar um pouco as coisas, assima o raciocineo é valido porque todas as letras são distintas, mas e se tivermos letras repetidas? 
+
+Ex.2: Quantas formas diferentes podemos organizar as letras da palavra "Claudia"?
+
+A formula da permutação, não é mais valida, pois a letra a é repetida, se usarmos a formula da permutação, contaremos por exemplo Claudia duas vezes, pois consideramos cada "a" diferente um do outro, ainda que não sejam. Então como resolver? 
+
+O truque consiste em pensar em quantas vezes estamos contando a mesma coisa, nosso objetivo é sempre contar exatamente uma vez cada arranjo (combinação). Então, como temos uma letra só repetida uma unica vez, nós sempre iremos contar a mesma coisa duas vezes, veja abaixo um exemplo:
+
+1. $Cla_1udia_2$
+2. $Cla_2udia_1$
+
+Então, para corrigir isso, basta contarmos a permutação total, e dividir por 2:
+$$
+\frac{7!}{2} \quad \text{(PM)}
+$$
+
+Agora, e se tivermos mais de uma letra repetida? Para isso temos a formula geral da permutação com repetição
+
+Permutação com repetição: Se temos n objetos, onde $n_1$ são idênticos, $n_2$ são idênticos, ..., $n_k$ são idênticos, então o número de formas diferentes de organizá-los é dado por:
+$$
+\frac{n!}{n_1! \times n_2! \times ... \times n_k!} \quad \text{(PM)}
+$$
+
+Mas porque é assim? No exercicio anterior, o pensamento de quantas vezes estamos contando a mesma coisa, pode ser pensado sob a ótica de "De quantasformas posssiveis podemos trocar de lugar as letras repetidas sem mudar o arranjo?" Se temos uma letra repetida n vezes, pela permutação, sabemos que há $n!$ formas de trocar de lugar as letras repetidas sem mudar o arranjo. E caso tenhamos mais de uma letra repetida, sabemos pelo PM (pois é um processo sequencial) que o número total de formas de trocar de lugar as letras repetidas sem mudar o arranjo é dado por $n_1! \times n_2! \times ... \times n_k!$. Assim, para corrigir a contagem, basta dividir a permutação total por esse número.
+
+### Combinação
+
+Até agora estavamos nos importanto com a ordem das coisas, mas e se ela não importar?
+
+Ex.3: Quantas formas diferentes podemos escolher 3 pessoas, dentre 10 pessoas para formar um time?
+
+Acredito que seja claro porque a ordem é irrelevante, pois o time formado por João, Maria e José é o mesmo time formado por José, João e Maria. 
+
+Pelo PM, temos:
+
+$$
+10 \times 9 \times 8 = 720 \quad \text{(PM)}
+$$
+
+times totais importando a ordem, agora basta usar a mesma logica que usamos para permutações repetidas, vamos dividir pela quantidade de vezes que estamos contando esse arranjo a mais, que no caso é o número de formas de eu puxar essas mesmas 3 pessoas em diferentes ordens, ou seja, $3!$ pela permutação. então o resultado final é:
+
+$$
+\frac{10 \times 9 \times 8}{3!} = 120
+$$
+
+De forma mais geral chamamos isso de combinação: Se temos n objetos distintos, e queremos escolher r deles, sem importar a ordem, então o número de formas diferentes de escolher é dado por:
+
+$$
+\binom{n}{r} = \frac{n!}{r! \times
+(n-r)!} \quad 
+$$ 
+
+Agora já temos um básico da ideia de como contar coisas, então podemos partir para o que realmente interessa, a probabilidade.
+
+## Axiomas da Probabilidade

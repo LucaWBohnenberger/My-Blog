@@ -25,7 +25,7 @@ Bom, por ciência, quero dizer que utilizamos de metódo cientifico, que consist
 
 Agora, o que quero dizer com insght? Basicamente uma compreensão clara e acionável sobre algo.
 
-Em outras palavras, ciência de dados é o processo de obter um conhecimento não trivial (não óbvio) apartir de dados
+Em outras palavras, ciência de dados é o processo de obter um conhecimento não trivial (não óbvio) a partir de dados
 
 ## O processo de ciência de dados
 

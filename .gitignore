@@ -14,9 +14,6 @@ _freeze/
 *_cache/
 *_files/
 
-# Datasets
-posts/makemore-1/names.txt
-
 # Pacotes e bibliotecas locais
 renv/library/
 renv/staging/

@@ -13,7 +13,7 @@ Durante minha gradução, a cadeira de probabilidade foi dada de forma muito mec
 
 Esse material foi construido com base em minhas notas de estudos do livro do Sheldon Ross, "Probabilidade, Um curso moderno com aplicações". Os conteudos aqui apresentados serão com base nos capitulos 1 a 4 do livro, alguns problemas nesse post serão de problemas famosos, e outros serão releitura de alguns exercicios do livro. Recomendo fortemente a leitura dele para quem quiser se aprofundar mais em probabilidade a nível de graduação. Não usarei necessáriamente a mesma notação do livro, e nem as mesmas demonstrações, mas a ideia é a mesma, apenas de uma forma mais resumida e com exemplos mais simples. Na seção de contagem, trarei uma abordagem diferente da do livro que considero mais intuitiva.
 
-Pré-requisitos: Não essencial ter feito uma cadeira de probabilidade, ainda que seja interesante. O pré-requisito real aqui é ter uma noçaõ miníma de teoria dos conjuntos. Também é bom ter uma noção combinatória bascia e sobre limites, ainda que não seja essencial.
+Pré-requisitos: Não é essencial ter feito uma cadeira de probabilidade, ainda que seja interesante. O pré-requisito real aqui é ter uma noção miníma de teoria dos conjuntos. Também é bom ter uma noção de combinatória básica e sobre limites, ainda que não seja essencial.
 
 ## O básico sobre contar
 
@@ -118,3 +118,38 @@ $$
 Agora já temos um básico da ideia de como contar coisas, então podemos partir para o que realmente interessa, a probabilidade.
 
 ## Axiomas da Probabilidade
+
+Antes de irmos para os axiomas, apenas notem que não irei dispor uma definição rigorosa sobre o que é uma probabilidade, apesar de tratarmos dela com rigor. Não fiz isso, pois depende de Teoria da Medida para uma definição formal, matéria essa que ainda não sou versado, e para além disso, esse post tem como objetivo ser uma primeiro vislumbre sobre probabilidade formal nível de graduação, enquanto Teoria da Medida geralmente só é estudada em Pós-Graduação. Porém, caso queira dar uma olhada em uma definição rigorosa de probabilidade, recomendo o video [Aula 01 Probabilidades](https://www.youtube.com/watch?v=mS0hak04rZs&list=PLjCdqxwexy0kE8UNSqoyOqyKGvx9fFWHH) do exclente professor da USP, Cláudio Possani. Para seguirmos, simplesmente consideraremos probabilidade como uma funçâo sobre um evento (Um conjunto) que representa a chance desse evento acontecer.
+
+Um axioma nada mais é do que o conjunto de regras básicas que irá regir como usamos probabilidades, dessa forma, eles não envolvem demonstrar algo, nós simplesmente acreditamos/aceitamos que eles sejam verdade. Esses são conhecidos como os axiomas de Kolmogorov:
+
+1) $0 \le P(E) \le 1$,    onde E é um evento (usaremos E como evento geralmente)
+
+2) $P(S) = 1$,   S é o espaço amostral inteiro, isso é, o cojunto de todos os eventos possiveis.
+
+3) $P\left(\bigcup_{i=1}^{\infty} E_i\right)=\sum_{i=1}^{\infty} P(E_i)$
+
+Todos os 3 axiomas são bastante razoaveis, o primeiros diz que uma probabilidade é um valor entre 0 e 1, caso não esteja acostumado a ver probabilidade como por exemplo 0.55, e sim como 55%, saiba que é a mesma coisa, pois % é utilizado como sinonimo de divisão por 100.
+
+O segundo axioma nos diz, que a probabilidade de algo no espaço amostral ocorrer é de 100%. Como exemplo, pense em jogar um dado de 6 lados, digamos que definimos os eventos como o numero que cair no dado, então teremos $E_1, E_2, E_3, E_4,E_5,E_6$. Onde cada um desses é representado abaixo
+$$
+\begin{aligned}
+E_1 &= \{1\} \\
+E_2 &= \{2\} \\
+E_3 &= \{3\} \\
+E_4 &= \{4\} \\
+E_5 &= \{5\} \\
+E_6 &= \{6\}
+\end{aligned}
+$$
+
+Assim, dizemos que o evento $E_1$ aconteceu quando o dado caiu 1, mas e o evento S? Simples, ele é representado como $S = \{1,2,3,4,5,6\}$, ou seja, para qualquer valor que o dado cair, cai em algum valor de S, portanto S ocorre. Logicamente, o axioma diz para nos que a probabilidade de *algo* acontecer é igual a 1.
+
+O terceiro parece muito mais assustador, mas ele não é complicado, ele apenas diz que se os eventos são mutuamente exclusivos, isso é $A \cap B = \varnothing$, a probabilidade da união deles é igual a soma das probabilidades. Vamos novamente para o lançamento de um dado, ele necessariamente vai cair no valor de 1 a 6, a probabilidade de cair em cada valor é de 1/6, eles são mutamente exclusivos pois se cair x no dado, não pode ter caido nenhum outro valor. Então, via o axioma 3, temos que a probabilidade de cair 1 ou 2, é equivalente a 2/6, veja a conta abaixo: 
+$$
+\begin{aligned}
+P(E_1 \cup E_2) &= P(E_1) + P(E_2) \\
+P(E_1 \cup E_2) &= \frac{1}{6} + \frac{1}{6} \\
+P(E_1 \cup E_2) &= \frac{2}{6} = \frac{1}{3}
+\end{aligned}
+$$

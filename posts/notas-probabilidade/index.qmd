@@ -5,6 +5,8 @@ author: "Luca WB"
 date: "2026-05-28"         
 date-modified: last-modified 
 categories: [scratch, pt, math, probability]
+toc: true
+toc-location: right
 ---
 
 ## Breve introdução
@@ -119,7 +121,7 @@ Agora já temos um básico da ideia de como contar coisas, então podemos partir
 
 ## Axiomas da Probabilidade
 
-Antes de irmos para os axiomas, apenas notem que não irei dispor uma definição rigorosa sobre o que é uma probabilidade, apesar de tratarmos dela com rigor. Não fiz isso, pois depende de Teoria da Medida para uma definição formal, matéria essa que ainda não sou versado, e para além disso, esse post tem como objetivo ser uma primeiro vislumbre sobre probabilidade formal nível de graduação, enquanto Teoria da Medida geralmente só é estudada em Pós-Graduação. Porém, caso queira dar uma olhada em uma definição rigorosa de probabilidade, recomendo o video [Aula 01 Probabilidades](https://www.youtube.com/watch?v=mS0hak04rZs&list=PLjCdqxwexy0kE8UNSqoyOqyKGvx9fFWHH) do exclente professor da USP, Cláudio Possani. Para seguirmos, simplesmente consideraremos probabilidade como uma funçâo sobre um evento (Um conjunto) que representa a chance desse evento acontecer.
+Antes de irmos para os axiomas, apenas notem que não irei dispor uma definição rigorosa sobre o que é uma probabilidade, apesar de tratarmos dela com rigor. Não fiz isso, pois depende de Teoria da Medida para uma definição formal, matéria essa que ainda não sou versado, e para além disso, esse post tem como objetivo ser uma primeiro vislumbre sobre probabilidade formal nível de graduação, enquanto Teoria da Medida geralmente só é estudada em Pós-Graduação. Porém, caso queira dar uma olhada em uma definição rigorosa de probabilidade, recomendo o video [Aula 01 Probabilidades](https://www.youtube.com/watch?v=mS0hak04rZs&list=PLjCdqxwexy0kE8UNSqoyOqyKGvx9fFWHH) do exclente professor da USP, Cláudio Possani. Para seguirmos, simplesmente consideraremos probabilidade como uma função sobre um evento (Um conjunto) que representa a chance desse evento acontecer.
 
 Um axioma nada mais é do que o conjunto de regras básicas que irá regir como usamos probabilidades, dessa forma, eles não envolvem demonstrar algo, nós simplesmente acreditamos/aceitamos que eles sejam verdade. Esses são conhecidos como os axiomas de Kolmogorov:
 
@@ -153,3 +155,25 @@ P(E_1 \cup E_2) &= \frac{1}{6} + \frac{1}{6} \\
 P(E_1 \cup E_2) &= \frac{2}{6} = \frac{1}{3}
 \end{aligned}
 $$
+
+
+Com isso temos a base das regras de como a probabilidade funciona. Entretanto, essas regras por si só não são muito poderosas, por isso, vamos provar dois teoremas simples e intuitivos antes de irmos resolver alguns exemplos.
+
+### Teorema 1
+Definição:
+$$
+P(E^c) = 1 - P(E)
+$$
+
+Prova:
+
+$$
+\begin{aligned}
+&E^c \cup E = S \\
+&P(E^c) + P(E) = P(S) \quad \text{(via Axioma 3)} \\
+&P(E^c) + P(E) = 1 \quad \text{(via Axioma 2)} \\
+&P(E^c) = 1 - P(E)
+\end{aligned}
+$$ 
+
+Esse teorema basicamente permite que calculemos a probabilidade do complementar de um evento, então se sabemos por exemplo que a probabilidade de dar cara em determinada moeda é de 0.6, sabemos agora que a de não dar cara é de 0.4. Note que não posso afirmar que a probabilidade de dar coroa é de 0.4 sem fazer a suposição de que é impossivel que a moeda caia de pé (por mais que seja razoavel desprezar essa probabilidade na maior parte dos casos).

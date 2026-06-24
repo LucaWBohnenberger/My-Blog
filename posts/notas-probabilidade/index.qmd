@@ -58,16 +58,16 @@ $$
 
 As combinações possíveis: ABC, ACB, BAC, BCA, CAB e CBA.
 
-Note que o calculo assima, é o mesmo que calcular o fatorial de 3, ou seja, $3!$. Dessa forma, se temos n objetos distintos, o número de formas diferentes de organizá-los é dado por $n!$.
+Note que o calculo acima, é o mesmo que calcular o fatorial de 3, ou seja, $3!$. Dessa forma, se temos n objetos distintos, o número de formas diferentes de organizá-los é dado por $n!$.
 
 Ex.1: Quantas formas diferentes podemos organizar as letras da palavra "Claudio"?
 
 Via a formula da permutação, temos que o número de formas diferentes de organizar as letras é dado por $7!$
 
 
-Agora vamos complicar um pouco as coisas, assima o raciocineo é valido porque todas as letras são distintas, mas e se tivermos letras repetidas? 
+Agora vamos complicar um pouco as coisas, acima o raciocineo é valido porque todas as letras são distintas, mas e se tivermos letras repetidas? 
 
-Ex.2: Quantas formas diferentes podemos organizar as letras da palavra "Claudia"?
+Ex.2: De quantas formas diferentes podemos organizar as letras da palavra "Claudia"?
 
 A formula da permutação, não é mais valida, pois a letra a é repetida, se usarmos a formula da permutação, contaremos por exemplo Claudia duas vezes, pois consideramos cada "a" diferente um do outro, ainda que não sejam. Então como resolver? 
 
@@ -88,7 +88,7 @@ $$
 \frac{n!}{n_1! \times n_2! \times ... \times n_k!} \quad \text{(PM)}
 $$
 
-Mas porque é assim? No exercicio anterior, o pensamento de quantas vezes estamos contando a mesma coisa, pode ser pensado sob a ótica de "De quantasformas posssiveis podemos trocar de lugar as letras repetidas sem mudar o arranjo?" Se temos uma letra repetida n vezes, pela permutação, sabemos que há $n!$ formas de trocar de lugar as letras repetidas sem mudar o arranjo. E caso tenhamos mais de uma letra repetida, sabemos pelo PM (pois é um processo sequencial) que o número total de formas de trocar de lugar as letras repetidas sem mudar o arranjo é dado por $n_1! \times n_2! \times ... \times n_k!$. Assim, para corrigir a contagem, basta dividir a permutação total por esse número.
+Mas porque é assim? No exercicio anterior, o pensamento de quantas vezes estamos contando a mesma coisa, pode ser pensado sob a ótica de "De quantas formas posssiveis podemos trocar de lugar as letras repetidas sem mudar o arranjo?" Se temos uma letra repetida n vezes, pela permutação, sabemos que há $n!$ formas de trocar de lugar as letras repetidas sem mudar o arranjo. E caso tenhamos mais de uma letra repetida, sabemos pelo PM (pois é um processo sequencial) que o número total de formas de trocar de lugar as letras repetidas sem mudar o arranjo é dado por $n_1! \times n_2! \times ... \times n_k!$. Assim, para corrigir a contagem, basta dividir a permutação total por esse número.
 
 ### Combinação
 
@@ -131,9 +131,9 @@ Um axioma nada mais é do que o conjunto de regras básicas que irá regir como 
 
 3) $P\left(\bigcup_{i=1}^{\infty} E_i\right)=\sum_{i=1}^{\infty} P(E_i)$
 
-Todos os 3 axiomas são bastante razoaveis, o primeiros diz que uma probabilidade é um valor entre 0 e 1, caso não esteja acostumado a ver probabilidade como por exemplo 0.55, e sim como 55%, saiba que é a mesma coisa, pois % é utilizado como sinonimo de divisão por 100.
+Todos os 3 axiomas são bastante razoaveis, o primeiro diz que uma probabilidade é um valor entre 0 e 1, caso não esteja acostumado a ver probabilidade como por exemplo 0.55, e sim como 55%, saiba que é a mesma coisa, pois % é utilizado como sinonimo de divisão por 100.
 
-O segundo axioma nos diz, que a probabilidade de algo no espaço amostral ocorrer é de 100%. Como exemplo, pense em jogar um dado de 6 lados, digamos que definimos os eventos como o numero que cair no dado, então teremos $E_1, E_2, E_3, E_4,E_5,E_6$. Onde cada um desses é representado abaixo
+O segundo axioma nos diz, que a probabilidade de algo no espaço amostral ocorrer é igual a 1. Como exemplo, pense em jogar um dado de 6 lados, digamos que definimos os eventos como o numero que cair no dado, então teremos $E_1, E_2, E_3, E_4,E_5,E_6$. Onde cada um desses é representado abaixo
 $$
 \begin{aligned}
 E_1 &= \{1\} \\
@@ -147,7 +147,7 @@ $$
 
 Assim, dizemos que o evento $E_1$ aconteceu quando o dado caiu 1, mas e o evento S? Simples, ele é representado como $S = \{1,2,3,4,5,6\}$, ou seja, para qualquer valor que o dado cair, cai em algum valor de S, portanto S ocorre. Logicamente, o axioma diz para nos que a probabilidade de *algo* acontecer é igual a 1.
 
-O terceiro parece muito mais assustador, mas ele não é complicado, ele apenas diz que se os eventos são mutuamente exclusivos, isso é $A \cap B = \varnothing$, a probabilidade da união deles é igual a soma das probabilidades. Vamos novamente para o lançamento de um dado, ele necessariamente vai cair no valor de 1 a 6, a probabilidade de cair em cada valor é de 1/6, eles são mutamente exclusivos pois se cair x no dado, não pode ter caido nenhum outro valor. Então, via o axioma 3, temos que a probabilidade de cair 1 ou 2, é equivalente a 2/6, veja a conta abaixo: 
+O terceiro parece muito mais assustador, mas ele não é complicado, ele apenas diz que se os eventos são mutuamente exclusivos, isso é $A \cap B = \varnothing$, a probabilidade da união deles é igual a soma das probabilidades. Vamos novamente para o lançamento de um dado, ele necessariamente vai cair no valor de 1 a 6, a probabilidade de cair em cada valor é de 1/6, eles são mutamente exclusivos pois se cair x no dado não pode ter caido nenhum outro valor. Então, via o axioma 3, temos que a probabilidade de cair 1 ou 2, é equivalente a 2/6, veja a conta abaixo: 
 $$
 \begin{aligned}
 P(E_1 \cup E_2) &= P(E_1) + P(E_2) \\
@@ -211,3 +211,51 @@ Agora que está provado, temos mais uma regra bem poderosa, que nos permite calc
 ![Diagrama de Venn](diagrama_venn.png){#fig-vein width=70%}
 
 Se quisermos cacular a área de $A \cup B$  teriamos que somar a área de A, a área de B e subtrair a intersecção deles ( $A \cap B$ ), pois teriamos somado aquela área duas vezes, estamos apenas retirando o que contamos a mais. Esse é exatamente a mesma lógica da nossa formula, cálculamos a probabilidade de A ocorrer mais a de B, mas nisso estariamos "contando" duas vezes os casos onde A e B ocorrem juntos, por isso subtraímos $P(A \cap B)$
+
+### Alguns problemas
+
+Temos em uma linha, 4 bolas vermelhas, 8 azuis e 5 verdes alinhadas aleatóriamente
+
+A) Qual a probabilidade de que as primeiras 5 bolas sejam azuis?
+
+A = Evento em que as 5 primeiras sejam azuis
+
+A estratégia mais simples para esse problema, envolve pensar em um problema equivalente. Vamos supor que eu vá retirar 5 bolas de uma urna que contem as mesmas bolas da linha, qual a probabilidade de tirar as 5 primeiras como azuis? Note que é exatamente o mesmo problema, pois podemos pensar que toda vez que eu tiro da urna, eu posso colocar na linha, portanto a quantidade de combinações na linha é igual as de retirada da urna.
+
+Dessa forma, podemos usar combinatória para calcular quantidade de termos tanto do denominador, quanto do numerador:
+
+$$
+P(A) = \frac{\binom{8}{5}}{\binom{17}{5}} = \frac{2}{221}
+$$
+
+Uma duvida completamente justa que você pode estar tendo é, porque usamos combinação se o problema claramente depende de ordem, sendo que combinação (como demonstrado anteriormente) é para casos onde a ordem dos termos é irrelevante?
+
+Embora a ordem das bolas na linha importe, podemos usar combinações porque contar diretamente todas as configurações da linha exigiria lidar com repetições (bolas da mesma cor são indistinguíveis).
+
+Por exemplo, o número total de linhas possíveis seria:
+
+$$
+\frac{17!}{4!8!5!}
+$$
+
+e o número de casos favoráveis, onde as 5 primeiras bolas são azuis, seria:
+
+$$
+\frac{12!}{4!3!5!}
+$$
+
+Logo,
+
+$$
+P(A)=
+\frac{\frac{12!}{4!3!5!}}
+{\frac{17!}{4!8!5!}}
+$$
+
+que, após simplificar, é equivalente a:
+
+$$
+P(A)=\frac{\binom{8}{5}}{\binom{17}{5}}.
+$$
+
+Portanto, usar combinações é apenas uma forma mais simples de fazer essa contagem, pois os fatores relacionados à ordem e às repetições já são considerados automaticamente.

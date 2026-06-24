@@ -177,3 +177,37 @@ $$
 $$ 
 
 Esse teorema basicamente permite que calculemos a probabilidade do complementar de um evento, então se sabemos por exemplo que a probabilidade de dar cara em determinada moeda é de 0.6, sabemos agora que a de não dar cara é de 0.4. Note que não posso afirmar que a probabilidade de dar coroa é de 0.4 sem fazer a suposição de que é impossivel que a moeda caia de pé (por mais que seja razoavel desprezar essa probabilidade na maior parte dos casos).
+
+
+### Teorema 2
+Definição:
+$$
+P(A \cup B) = P(A) + P(B) - P(A \cap B)
+$$
+
+Prova:
+
+$$
+\begin{aligned}
+&B = (A \cap B)\cup (A^c \cap B) \\
+&P(B) = P(A \cap B) + P(A^c \cap B) \quad \text{Via axioma 3}\\
+&P(A^c \cap B) = P(B) - P(A \cap B)\\
+\end{aligned}
+$$
+
+Do resultado acima obtemos: $P(A^c \cap B) = P(B) - P(A \cap B)$
+Com ele agora podemos finalizar a prova
+
+$$
+\begin{aligned}
+&A \cup B = A \cup (A^c \cap B) \\
+&P(A \cup B) = P(A) + P(A^c \cap B) \quad \text{Via axioma 3} \\
+&P(A \cup B) = P(A) + P(B) - P(A \cap B) \quad \text{Usando o resultado acima}\\
+\end{aligned}
+$$
+
+Agora que está provado, temos mais uma regra bem poderosa, que nos permite calcular probabilidade de união de eventos que não são mutuamente exclusivos. A intuição do porque essa formula funciona é bastante simples, veja o diagrama abaixo
+
+![Diagrama de Venn](diagrama_venn.png){#fig-vein width=70%}
+
+Se quisermos cacular a área de $A \cup B$  teriamos que somar a área de A, a área de B e subtrair a intersecção deles ( $A \cap B$ ), pois teriamos somado aquela área duas vezes, estamos apenas retirando o que contamos a mais. Esse é exatamente a mesma lógica da nossa formula, cálculamos a probabilidade de A ocorrer mais a de B, mas nisso estariamos "contando" duas vezes os casos onde A e B ocorrem juntos, por isso subtraímos $P(A \cap B)$

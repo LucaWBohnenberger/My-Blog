@@ -259,3 +259,61 @@ P(A)=\frac{\binom{8}{5}}{\binom{17}{5}}.
 $$
 
 Portanto, usar combinações é apenas uma forma mais simples de fazer essa contagem, pois os fatores relacionados à ordem e às repetições já são considerados automaticamente.
+
+B) Qual a probabilidade de que nenhuma das 5 primeiras seja azul?
+
+A = Evento em que nenhuma das 5 primeiras sejam azuis
+
+De forma equivalente a última, ao inves de calcular considerando o conjunto das azuis, consideramos todas menos as azuis
+
+$$
+P(A) = \frac{\binom{9}{5}}{\binom{17}{5}} = \frac{9}{442}
+$$
+
+
+C) Qual a probabilidade de que as três últimas bolas tenham cores diferentes?
+
+A = Evento em que as três últimas bolas tenham cores diferentes
+
+Nesse caso, é mais simples utilizar diretamente os princípios de contagem. 
+
+$$
+P(A) = \frac{8 \cdot 5 \cdot 4}{17 \cdot 16 \cdot 15} \cdot 3! = \frac{4}{17}  \quad \text{via PM}
+$$
+
+Note que multiplicamos por $3!$ porque, ao calcular
+
+$$
+\frac{8}{17}\cdot\frac{5}{16}\cdot\frac{4}{15},
+$$
+
+estamos considerando apenas uma ordem específica das cores nas três últimas posições, por exemplo: azul, verde e vermelha.
+
+Entretanto, o evento de interesse não exige uma ordem específica, apenas que as três últimas bolas tenham cores diferentes. Como as três cores podem aparecer em qualquer uma das
+
+$$
+3! = 6
+$$
+
+ordens possíveis, e essas ordens são mutuamente exclusivas, basta multiplicar a probabilidade de uma ordem específica por $3!$.
+
+Se não fizéssemos essa multiplicação, estaríamos calculando apenas a probabilidade de uma única sequência de cores, e não a probabilidade de que as três últimas bolas tenham cores diferentes em qualquer ordem.
+
+Além disso, gaste um tempo para se convencer de porque esse problema é identico a calcular a probabilidade considerando as 3 primeiras, e não as 3 últimas
+
+
+D) Qual é a probabilidadde de que todas as bolas vermelhas estejam juntas?
+
+A = Evento em que todas as bolas vermelhas estejam juntas
+
+Para esse problema, podemos usar um raciocínio diferente, podemos pensar que as bolas vermelhas, são uma unica entidade, vamos pensar nas 4 vermelhas como uma unica bola vermelha, afinal só estamos interessados em cálcular a chance de estarem juntas
+
+$$
+P(A) = \frac{14!}{17!} \cdot 4! = \frac{7}{120}  \quad \text{via PM}
+$$
+
+Da mesma forma que no exemplo C, temos que multiplicar o numerador pela quantidade de permutações possiveis entre os próprios vermelhos.
+
+
+Note que nesses exemplos, sempre me dei ao trabalho de definir claramente qual era o evento em que eu estava cálculando, sempre define o A. Para esses exemplos, isso pode parecer preciosimo matemático, e realmente é. Entretanto, para problemas mais complexos, é muito fácil se perder nos cálculos se não definir direito seus eventos. Por tanto, mesmo que seja chato, SEMPRE defina claramente seus eventos. A importancia disso ficará mais clara quando chegarmos em probabilidade condicional, mas já é bom tornar isso um hábito.
+
